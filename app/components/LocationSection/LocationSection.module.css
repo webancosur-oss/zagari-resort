@@ -1,0 +1,192 @@
+.section {
+  padding: 140px 70px;
+
+  background: var(--color-white);
+}
+
+.container {
+  width: 1240px;
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns:
+    minmax(340px, 0.85fr)
+    minmax(0, 1.15fr);
+
+  gap: 90px;
+
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+
+  margin-bottom: 16px;
+
+  color: var(--color-primary);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.content > p {
+  margin-top: 22px;
+}
+
+.points {
+  margin: 30px 0;
+
+  display: grid;
+  gap: 13px;
+}
+
+.points span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: var(--text-secondary);
+
+  font-size: 0.84rem;
+}
+
+.points svg {
+  flex-shrink: 0;
+
+  color: var(--color-primary);
+}
+
+.button {
+  min-height: 52px;
+  padding: 0 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-round);
+
+  background: var(--color-primary);
+  color: var(--color-white);
+
+  font-size: 0.74rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  transition:
+    background var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.button:hover {
+  background: var(--color-primary-dark);
+
+  transform: translateY(-2px);
+}
+
+.media {
+  position: relative;
+
+  min-height: 640px;
+
+  overflow: hidden;
+
+  border-radius: var(--radius-2xl);
+
+  background: var(--color-gray-200);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.tag {
+  position: absolute;
+
+  left: 24px;
+  bottom: 24px;
+
+  padding: 15px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  border-radius: var(--radius-md);
+
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--color-primary-deep);
+
+  backdrop-filter: blur(15px);
+}
+
+.tag span,
+.tag strong {
+  display: block;
+}
+
+.tag span {
+  color: var(--text-muted);
+
+  font-size: 0.58rem;
+}
+
+.tag strong {
+  margin-top: 3px;
+
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .media {
+    min-height: 580px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 80px 16px;
+  }
+
+  .media {
+    order: -1;
+
+    min-height: 480px;
+
+    border-radius: var(--radius-xl);
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .section {
+    padding: 68px 13px;
+  }
+
+  .media {
+    min-height: 410px;
+  }
+
+  .tag {
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+  }
+}

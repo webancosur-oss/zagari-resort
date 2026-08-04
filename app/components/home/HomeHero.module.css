@@ -1,0 +1,784 @@
+/*==================================================
+  HERO
+==================================================*/
+
+.hero {
+  position: relative;
+
+  width: 100%;
+  height: 100svh;
+  min-height: 720px;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  border: 0;
+  border-radius: 0;
+
+  background: #06271c;
+  color: #ffffff;
+
+  isolation: isolate;
+}
+
+/*==================================================
+  IMAGEN
+==================================================*/
+
+.image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform-origin: center center;
+
+  will-change:
+    transform,
+    filter;
+}
+
+/*==================================================
+  OVERLAY
+==================================================*/
+
+.overlay {
+  position: absolute;
+  z-index: 1;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 34, 24, 0.92) 0%,
+      rgba(3, 34, 24, 0.7) 38%,
+      rgba(3, 34, 24, 0.24) 72%,
+      rgba(3, 34, 24, 0.1) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.24) 0%,
+      rgba(0, 0, 0, 0.02) 42%,
+      rgba(0, 0, 0, 0.64) 100%
+    );
+
+  pointer-events: none;
+
+  will-change: opacity;
+}
+
+/*==================================================
+  TEXTURA
+==================================================*/
+
+.texture {
+  position: absolute;
+  z-index: 2;
+
+  inset: 0;
+
+  opacity: 0.08;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.08) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    90px 90px;
+}
+
+/*==================================================
+  CONTENEDOR
+==================================================*/
+
+.container {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  height: 100%;
+
+  padding:
+    135px
+    74px
+    48px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/*==================================================
+  CONTENIDO PRINCIPAL
+==================================================*/
+
+.content {
+  width: 830px;
+  max-width: 64%;
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 22px;
+
+  color: #a6efc2;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+}
+
+.eyebrow::before {
+  content: "";
+
+  width: 38px;
+  height: 1px;
+
+  background: #a6efc2;
+}
+
+.content h1 {
+  max-width: 920px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 5.7rem;
+  line-height: 0.91;
+  letter-spacing: -0.056em;
+
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 570px;
+
+  margin-top: 27px;
+
+  color:
+    rgba(255, 255, 255, 0.74);
+
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+/*==================================================
+  BOTONES
+==================================================*/
+
+.actions {
+  margin-top: 32px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 11px;
+}
+
+.primaryButton,
+.secondaryButton {
+  min-height: 52px;
+
+  padding:
+    0
+    21px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  border-radius: 999px;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.055em;
+
+  transition:
+    background 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease,
+    transform 260ms ease;
+}
+
+.primaryButton {
+  border:
+    1px solid
+    var(--color-primary-light);
+
+  background:
+    var(--color-primary-light);
+
+  color:
+    var(--color-primary-deep);
+}
+
+.primaryButton:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+
+  transform:
+    translateY(-2px);
+}
+
+.secondaryButton {
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.35);
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  color: #ffffff;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.secondaryButton:hover {
+  border-color:
+    rgba(255, 255, 255, 0.8);
+
+  background:
+    rgba(255, 255, 255, 0.14);
+
+  transform:
+    translateY(-2px);
+}
+
+/*==================================================
+  INFORMACIÓN INFERIOR
+==================================================*/
+
+.meta {
+  width: 750px;
+  max-width: 72%;
+
+  margin-left: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.24);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.meta > div {
+  min-width: 0;
+
+  padding:
+    18px
+    22px
+    0;
+}
+
+.meta > div:first-child {
+  padding-left: 0;
+}
+
+.meta > div + div {
+  border-left:
+    1px solid
+    rgba(255, 255, 255, 0.2);
+}
+
+.meta span,
+.meta strong {
+  display: block;
+}
+
+.meta span {
+  margin-bottom: 5px;
+
+  color:
+    rgba(255, 255, 255, 0.52);
+
+  font-size: 0.57rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.meta strong {
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 0.74rem;
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*==================================================
+  ETIQUETA LATERAL
+==================================================*/
+
+.sideLabel {
+  position: absolute;
+  z-index: 6;
+
+  top: 50%;
+  right: 21px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  color:
+    rgba(255, 255, 255, 0.5);
+
+  transform:
+    translateY(-50%)
+    rotate(90deg);
+
+  transform-origin: center;
+
+  pointer-events: none;
+}
+
+.sideLabel span {
+  font-size: 0.54rem;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+
+  white-space: nowrap;
+}
+
+.sideLabel i {
+  width: 1px;
+  height: 72px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.65),
+      transparent
+    );
+}
+
+/*==================================================
+  INDICADOR DE SCROLL
+==================================================*/
+
+.scrollIndicator {
+  position: absolute;
+  z-index: 8;
+
+  left: 74px;
+  bottom: 45px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 12px;
+
+  color:
+    rgba(255, 255, 255, 0.78);
+
+  will-change:
+    transform,
+    opacity;
+}
+
+.scrollIndicator > span:first-child {
+  font-size: 0.59rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.scrollIcon {
+  width: 39px;
+  height: 39px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.3);
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background 260ms ease,
+    transform 260ms ease;
+}
+
+.scrollIndicator:hover
+.scrollIcon {
+  background:
+    rgba(255, 255, 255, 0.16);
+
+  transform:
+    translateY(4px);
+}
+
+/*==================================================
+  LAPTOP
+==================================================*/
+
+@media (max-width: 1280px) {
+  .container {
+    padding:
+      120px
+      48px
+      40px;
+  }
+
+  .content {
+    max-width: 70%;
+  }
+
+  .content h1 {
+    font-size: 4.8rem;
+  }
+
+  .meta {
+    width: 680px;
+  }
+
+  .scrollIndicator {
+    left: 48px;
+    bottom: 38px;
+  }
+}
+
+/*==================================================
+  TABLET HORIZONTAL
+==================================================*/
+
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 680px;
+  }
+
+  .container {
+    padding:
+      105px
+      30px
+      34px;
+  }
+
+  .content {
+    width: 720px;
+    max-width: 78%;
+  }
+
+  .content h1 {
+    font-size: 4rem;
+  }
+
+  .description {
+    max-width: 500px;
+
+    font-size: 0.86rem;
+  }
+
+  .meta {
+    width: 610px;
+    max-width: 78%;
+  }
+
+  .sideLabel {
+    display: none;
+  }
+
+  .scrollIndicator {
+    left: 30px;
+    bottom: 32px;
+  }
+}
+
+/*==================================================
+  MÓVIL
+==================================================*/
+
+@media (max-width: 768px) {
+  .hero {
+    height: 100svh;
+    min-height: 700px;
+  }
+
+  .image {
+    object-position: 58% center;
+  }
+
+  .overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(2, 28, 19, 0.38) 0%,
+        rgba(2, 28, 19, 0.24) 28%,
+        rgba(2, 28, 19, 0.76) 67%,
+        rgba(2, 28, 19, 0.97) 100%
+      );
+  }
+
+  .texture {
+    background-size:
+      64px 64px;
+  }
+
+  .container {
+    padding:
+      105px
+      18px
+      28px;
+
+    justify-content: flex-end;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 100%;
+
+    margin:
+      0
+      0
+      118px;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+
+    font-size: 0.61rem;
+  }
+
+  .eyebrow::before {
+    width: 26px;
+  }
+
+  .content h1 {
+    max-width: 620px;
+
+    font-size: 3.35rem;
+    line-height: 0.95;
+  }
+
+  .description {
+    max-width: 500px;
+
+    margin-top: 18px;
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .actions {
+    margin-top: 23px;
+
+    display: grid;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    min-height: 48px;
+
+    padding:
+      0
+      16px;
+
+    font-size: 0.63rem;
+  }
+
+  .meta {
+    position: absolute;
+
+    right: 18px;
+    bottom: 27px;
+    left: 18px;
+
+    width: auto;
+    max-width: none;
+  }
+
+  .meta > div {
+    padding:
+      12px
+      10px
+      0;
+  }
+
+  .meta > div:first-child {
+    padding-left: 0;
+  }
+
+  .meta span {
+    font-size: 0.5rem;
+  }
+
+  .meta strong {
+    font-size: 0.62rem;
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+}
+
+/*==================================================
+  MÓVIL PEQUEÑO
+==================================================*/
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 680px;
+  }
+
+  .container {
+    padding:
+      94px
+      14px
+      24px;
+  }
+
+  .content {
+    margin-bottom: 112px;
+  }
+
+  .content h1 {
+    font-size: 2.85rem;
+  }
+
+  .description {
+    font-size: 0.77rem;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .primaryButton,
+  .secondaryButton {
+    min-height: 45px;
+
+    font-size: 0.59rem;
+  }
+
+  .meta {
+    right: 14px;
+    bottom: 22px;
+    left: 14px;
+  }
+
+  .meta > div {
+    padding:
+      10px
+      7px
+      0;
+  }
+
+  .meta span {
+    letter-spacing: 0.07em;
+  }
+
+  .meta strong {
+    font-size: 0.57rem;
+  }
+}
+
+/*==================================================
+  PANTALLAS BAJAS
+==================================================*/
+
+@media (max-height: 760px)
+and (min-width: 769px) {
+  .hero {
+    min-height: 650px;
+  }
+
+  .container {
+    padding-top: 95px;
+  }
+
+  .content h1 {
+    font-size: 4.2rem;
+  }
+
+  .description {
+    margin-top: 18px;
+  }
+
+  .actions {
+    margin-top: 22px;
+  }
+}
+
+/*==================================================
+  ACCESIBILIDAD
+==================================================*/
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .image,
+  .content,
+  .meta,
+  .scrollIndicator,
+  .sideLabel i {
+    transform: none !important;
+  }
+
+  .primaryButton,
+  .secondaryButton,
+  .scrollIcon {
+    transition: none;
+  }
+}

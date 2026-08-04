@@ -1,0 +1,157 @@
+.section {
+  position: relative;
+
+  min-height: 760px;
+
+  overflow: hidden;
+
+  background: var(--background-dark);
+}
+
+.background {
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 31, 22, 0.92) 0%,
+      rgba(3, 31, 22, 0.66) 50%,
+      rgba(3, 31, 22, 0.16) 100%
+    );
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+
+  width: 1240px;
+  max-width: calc(100% - 80px);
+  min-height: 760px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+}
+
+.content {
+  max-width: 670px;
+}
+
+.eyebrow {
+  display: inline-flex;
+
+  margin-bottom: 16px;
+
+  color: #9cffc5;
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.content h2 {
+  color: var(--color-white);
+}
+
+.content p {
+  max-width: 580px;
+
+  margin-top: 24px;
+
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.types {
+  margin: 30px 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.types span {
+  padding: 9px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-round);
+
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-white);
+
+  font-size: 0.7rem;
+}
+
+.button {
+  min-height: 52px;
+  padding: 0 22px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: 1px solid var(--color-white);
+  border-radius: var(--radius-round);
+
+  background: var(--color-white);
+  color: var(--color-primary-deep);
+
+  font-size: 0.74rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  transition:
+    transform var(--transition-normal),
+    background var(--transition-normal);
+}
+
+.button:hover {
+  background: var(--color-sand);
+
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .section,
+  .container {
+    min-height: 690px;
+  }
+
+  .overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(3, 31, 22, 0.18) 0%,
+        rgba(3, 31, 22, 0.92) 72%,
+        #031f16 100%
+      );
+  }
+
+  .container {
+    max-width: calc(100% - 32px);
+
+    align-items: flex-end;
+
+    padding-bottom: 54px;
+  }
+
+  .button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    max-width: calc(100% - 26px);
+  }
+}
