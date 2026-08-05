@@ -309,8 +309,7 @@
 
   font-family:
     var(--font-display),
-    Georgia,
-    serif;
+    Georgia;
 
   font-size: 1.7rem;
   font-weight: 500;
@@ -404,8 +403,7 @@
 
   font-family:
     var(--font-display),
-    Georgia,
-    serif;
+    Georgia;
 
   font-size: 1.8rem;
   font-weight: 500;

@@ -352,9 +352,7 @@
 
   font-family:
     var(--font-display),
-    Georgia,
-    serif;
-
+    Georgia;
   font-size: 1.15rem;
   font-weight: 500;
 }

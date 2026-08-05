@@ -1,6 +1,6 @@
-/*==================================================
-  VARIABLES
-==================================================*/
+/* =========================================================
+   VARIABLES
+========================================================= */
 
 :root {
   /* Marca */
@@ -49,23 +49,42 @@
 
   /* Texto */
 
-  --text-primary: var(--color-ink);
-  --text-secondary: var(--color-gray-700);
-  --text-muted: var(--color-gray-500);
-  --text-light: #f8faf8;
+  --text-primary:
+    var(--color-ink);
+
+  --text-secondary:
+    var(--color-gray-700);
+
+  --text-muted:
+    var(--color-gray-500);
+
+  --text-light:
+    #f8faf8;
 
   /* Fondos */
 
-  --background-page: var(--color-ivory);
-  --background-white: var(--color-white);
-  --background-soft: #f4f8f5;
-  --background-dark: var(--color-primary-deep);
+  --background-page:
+    var(--color-ivory);
+
+  --background-white:
+    var(--color-white);
+
+  --background-soft:
+    #f4f8f5;
+
+  --background-dark:
+    var(--color-primary-deep);
 
   /* Bordes */
 
-  --border-soft: rgba(23, 33, 28, 0.08);
-  --border-medium: rgba(23, 33, 28, 0.14);
-  --border-light: rgba(255, 255, 255, 0.16);
+  --border-soft:
+    rgba(23, 33, 28, 0.08);
+
+  --border-medium:
+    rgba(23, 33, 28, 0.14);
+
+  --border-light:
+    rgba(255, 255, 255, 0.16);
 
   /* Radios */
 
@@ -92,8 +111,11 @@
 
   /* Transiciones */
 
-  --transition-fast: 160ms ease;
-  --transition-normal: 260ms ease;
+  --transition-fast:
+    160ms ease;
+
+  --transition-normal:
+    260ms ease;
 
   --transition-slow:
     520ms
@@ -113,9 +135,9 @@
   --z-modal: 1000;
 }
 
-/*==================================================
-  RESET
-==================================================*/
+/* =========================================================
+   RESET
+========================================================= */
 
 *,
 *::before,
@@ -129,7 +151,8 @@ html {
   margin: 0;
   padding: 0;
 
-  background: var(--background-page);
+  background:
+    var(--background-page);
 
   text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -142,15 +165,13 @@ body {
   margin: 0;
   padding: 0;
 
-  /*
-   * No usar overflow-x: hidden.
-   * Puede crear un contenedor de desplazamiento
-   * que rompa position: sticky.
-   */
   overflow-x: clip;
 
-  background: var(--background-page);
-  color: var(--text-primary);
+  background:
+    var(--background-page);
+
+  color:
+    var(--text-primary);
 
   font-family:
     var(--font-sans),
@@ -160,10 +181,19 @@ body {
 
   line-height: 1.6;
 
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering:
+    optimizeLegibility;
+
+  -webkit-font-smoothing:
+    antialiased;
+
+  -moz-osx-font-smoothing:
+    grayscale;
 }
+
+/* =========================================================
+   MÁRGENES BASE
+========================================================= */
 
 h1,
 h2,
@@ -177,6 +207,10 @@ blockquote {
   margin: 0;
 }
 
+/* =========================================================
+   TÍTULOS — AKROBAT
+========================================================= */
+
 h1,
 h2,
 h3,
@@ -185,40 +219,79 @@ h5,
 h6 {
   font-family:
     var(--font-display),
-    Georgia,
-    "Times New Roman",
-    serif;
+    "Arial Narrow",
+    Arial,
+    Helvetica,
+    sans-serif;
 
   font-weight: 500;
 
   text-wrap: balance;
+  font-synthesis: none;
 }
+
+/*
+ * Akrobat suele visualizarse más compacta que
+ * Cormorant Garamond, por eso se reduce ligeramente
+ * el espaciado negativo.
+ */
 
 h1 {
   font-size: 6rem;
-  line-height: 0.92;
-  letter-spacing: -0.055em;
+
+  line-height: 0.94;
+
+  letter-spacing:
+    -0.035em;
 }
 
 h2 {
   font-size: 4.7rem;
-  line-height: 0.96;
-  letter-spacing: -0.045em;
+
+  line-height: 0.97;
+
+  letter-spacing:
+    -0.03em;
 }
 
 h3 {
   font-size: 2rem;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+
+  line-height: 1.06;
+
+  letter-spacing:
+    -0.018em;
 }
 
+h4 {
+  line-height: 1.15;
+
+  letter-spacing:
+    -0.012em;
+}
+
+h5,
+h6 {
+  line-height: 1.2;
+
+  letter-spacing:
+    -0.008em;
+}
+
+/* =========================================================
+   TEXTO
+========================================================= */
+
 p {
-  color: var(--text-secondary);
+  color:
+    var(--text-secondary);
+
   line-height: 1.7;
 }
 
 a {
   color: inherit;
+
   text-decoration: none;
 }
 
@@ -229,6 +302,10 @@ ol {
 
   list-style: none;
 }
+
+/* =========================================================
+   FORMULARIOS
+========================================================= */
 
 button,
 input,
@@ -246,10 +323,14 @@ button {
 
   border: 0;
 
-  background: transparent;
-  color: inherit;
+  background:
+    transparent;
 
-  cursor: pointer;
+  color:
+    inherit;
+
+  cursor:
+    pointer;
 }
 
 input,
@@ -259,8 +340,13 @@ select {
 }
 
 textarea {
-  resize: vertical;
+  resize:
+    vertical;
 }
+
+/* =========================================================
+   MULTIMEDIA
+========================================================= */
 
 img,
 picture,
@@ -278,18 +364,19 @@ video {
 }
 
 table {
-  border-collapse: collapse;
+  border-collapse:
+    collapse;
 }
+
+/* =========================================================
+   ESTRUCTURA
+========================================================= */
 
 main {
   display: block;
 
   width: 100%;
   min-height: 100vh;
-
-  /*
-   * No añadir overflow aquí.
-   */
 }
 
 section {
@@ -298,9 +385,9 @@ section {
   width: 100%;
 }
 
-/*==================================================
-  LENIS
-==================================================*/
+/* =========================================================
+   LENIS
+========================================================= */
 
 html.lenis,
 html.lenis body {
@@ -308,11 +395,14 @@ html.lenis body {
 }
 
 .lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+  scroll-behavior:
+    auto !important;
 }
 
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
+.lenis.lenis-smooth
+[data-lenis-prevent] {
+  overscroll-behavior:
+    contain;
 }
 
 .lenis.lenis-stopped {
@@ -320,16 +410,20 @@ html.lenis body {
 }
 
 .lenis.lenis-smooth iframe {
-  pointer-events: none;
+  pointer-events:
+    none;
 }
 
-/*==================================================
-  SELECCIÓN Y FOCO
-==================================================*/
+/* =========================================================
+   SELECCIÓN Y FOCO
+========================================================= */
 
 ::selection {
-  background: var(--color-primary);
-  color: var(--color-white);
+  background:
+    var(--color-primary);
+
+  color:
+    var(--color-white);
 }
 
 :focus-visible {
@@ -337,45 +431,60 @@ html.lenis body {
     3px solid
     rgba(13, 107, 71, 0.42);
 
-  outline-offset: 3px;
+  outline-offset:
+    3px;
 }
 
-/*==================================================
-  UTILIDADES
-==================================================*/
+/* =========================================================
+   UTILIDADES
+========================================================= */
 
 .noScroll {
-  overflow: hidden;
+  overflow:
+    hidden;
 }
 
 .visuallyHidden {
-  position: absolute;
+  position:
+    absolute;
 
-  width: 1px;
-  height: 1px;
+  width:
+    1px;
 
-  padding: 0;
-  margin: -1px;
+  height:
+    1px;
 
-  overflow: hidden;
+  padding:
+    0;
 
-  clip: rect(0, 0, 0, 0);
+  margin:
+    -1px;
 
-  white-space: nowrap;
+  overflow:
+    hidden;
 
-  border: 0;
+  clip:
+    rect(0, 0, 0, 0);
+
+  white-space:
+    nowrap;
+
+  border:
+    0;
 }
 
-/*==================================================
-  SCROLLBAR
-==================================================*/
+/* =========================================================
+   SCROLLBAR
+========================================================= */
 
 ::-webkit-scrollbar {
-  width: 9px;
+  width:
+    9px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-gray-100);
+  background:
+    var(--color-gray-100);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -383,78 +492,97 @@ html.lenis body {
     2px solid
     var(--color-gray-100);
 
-  border-radius: var(--radius-round);
+  border-radius:
+    var(--radius-round);
 
-  background: var(--color-primary);
+  background:
+    var(--color-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-dark);
+  background:
+    var(--color-primary-dark);
 }
 
-/*==================================================
-  TABLET
-==================================================*/
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1024px) {
   h1 {
-    font-size: 4.8rem;
+    font-size:
+      4.8rem;
   }
 
   h2 {
-    font-size: 3.8rem;
+    font-size:
+      3.8rem;
   }
 
   h3 {
-    font-size: 1.8rem;
+    font-size:
+      1.8rem;
   }
 }
 
-/*==================================================
-  MÓVIL
-==================================================*/
+/* =========================================================
+   MÓVIL
+========================================================= */
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 3.7rem;
-    line-height: 0.96;
+    font-size:
+      3.7rem;
+
+    line-height:
+      0.97;
   }
 
   h2 {
-    font-size: 3rem;
-    line-height: 1;
+    font-size:
+      3rem;
+
+    line-height:
+      1;
   }
 
   h3 {
-    font-size: 1.65rem;
+    font-size:
+      1.65rem;
   }
 }
 
-/*==================================================
-  MÓVIL PEQUEÑO
-==================================================*/
+/* =========================================================
+   MÓVIL PEQUEÑO
+========================================================= */
 
 @media (max-width: 420px) {
   h1 {
-    font-size: 3.1rem;
+    font-size:
+      3.1rem;
   }
 
   h2 {
-    font-size: 2.55rem;
+    font-size:
+      2.55rem;
   }
 
   h3 {
-    font-size: 1.5rem;
+    font-size:
+      1.5rem;
   }
 }
 
-/*==================================================
-  ACCESIBILIDAD
-==================================================*/
+/* =========================================================
+   ACCESIBILIDAD
+========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (
+  prefers-reduced-motion: reduce
+) {
   html {
-    scroll-behavior: auto;
+    scroll-behavior:
+      auto;
   }
 
   *,

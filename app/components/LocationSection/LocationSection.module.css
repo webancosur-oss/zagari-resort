@@ -1,192 +1,1113 @@
-.section {
-  padding: 140px 70px;
+/* =========================================================
+   SECCIÓN
+========================================================= */
 
-  background: var(--color-white);
+.section {
+  position: relative;
+
+  width: 100%;
+
+  padding:
+    110px
+    0;
+
+  overflow: hidden;
+
+  background:
+    var(
+      --background-page,
+      #fbf8f1
+    );
+
+  color:
+    var(
+      --text-primary,
+      #17211c
+    );
 }
 
 .container {
-  width: 1240px;
-  max-width: 100%;
+  width:
+    min(
+      1580px,
+      calc(100% - 56px)
+    );
 
   margin: 0 auto;
+}
+
+/* =========================================================
+   CABECERA
+========================================================= */
+
+.header {
+  margin-bottom:
+    42px;
 
   display: grid;
+
   grid-template-columns:
-    minmax(340px, 0.85fr)
-    minmax(0, 1.15fr);
+    minmax(0, 1.15fr)
+    minmax(320px, 0.55fr);
 
-  gap: 90px;
+  align-items: end;
 
-  align-items: center;
+  gap: 64px;
+}
+
+.headerText {
+  min-width: 0;
 }
 
 .eyebrow {
   display: inline-flex;
+  align-items: center;
 
-  margin-bottom: 16px;
+  gap: 12px;
 
-  color: var(--color-primary);
+  margin-bottom:
+    16px;
 
-  font-size: 0.7rem;
+  color:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+
   font-weight: 700;
 
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.14em;
 }
 
-.content > p {
-  margin-top: 22px;
+.eyebrow::before {
+  content: "";
+
+  width: 38px;
+  height: 1px;
+
+  background:
+    currentColor;
 }
 
-.points {
-  margin: 30px 0;
+.header h2 {
+  max-width:
+    920px;
 
-  display: grid;
-  gap: 13px;
+  color:
+    var(
+      --text-primary,
+      #17211c
+    );
 }
 
-.points span {
+.headerAside p {
+  max-width:
+    520px;
+
+  color:
+    var(
+      --text-secondary,
+      #4b5650
+    );
+}
+
+/* =========================================================
+   LEYENDA
+========================================================= */
+
+.legend {
+  margin-top:
+    19px;
+
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
 
-  color: var(--text-secondary);
-
-  font-size: 0.84rem;
+  gap:
+    12px
+    20px;
 }
 
-.points svg {
-  flex-shrink: 0;
+.legend span {
+  display:
+    inline-flex;
 
-  color: var(--color-primary);
+  align-items:
+    center;
+
+  gap: 8px;
+
+  color:
+    var(
+      --text-secondary,
+      #4b5650
+    );
+
+  font-weight:
+    650;
 }
 
-.button {
-  min-height: 52px;
-  padding: 0 22px;
+.legend i {
+  width:
+    11px;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+  height:
+    11px;
 
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-round);
+  flex-shrink:
+    0;
 
-  background: var(--color-primary);
-  color: var(--color-white);
+  border-radius:
+    50%;
+}
 
-  font-size: 0.74rem;
-  font-weight: 700;
+.availableDot {
+  background:
+    var(
+      --color-primary,
+      #0d6b47
+    );
 
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  box-shadow:
+    0 0 0 5px
+    rgba(13, 107, 71, 0.12);
+}
+
+.soldDot {
+  background:
+    var(
+      --color-gray-500,
+      #7f8983
+    );
+
+  box-shadow:
+    0 0 0 5px
+    rgba(127, 137, 131, 0.13);
+}
+
+/* =========================================================
+   CONTENEDOR DEL MAPA
+========================================================= */
+
+.mapViewport {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    var(
+      --border-medium,
+      rgba(23, 33, 28, 0.14)
+    );
+
+  border-radius:
+    28px;
+
+  background:
+    #dce7df;
+
+  box-shadow:
+    var(
+      --shadow-medium,
+      0 20px 60px
+      rgba(13, 42, 29, 0.1)
+    );
+}
+
+.mapCanvas {
+  position:
+    relative;
+
+  width:
+    100%;
+
+  aspect-ratio:
+    1191 / 596;
+
+  min-height:
+    620px;
+
+  overflow:
+    hidden;
+}
+
+/* =========================================================
+   IMAGEN DEL MAPA
+========================================================= */
+
+.mapImage {
+  object-fit:
+    cover;
+
+  object-position:
+    center;
+
+  user-select:
+    none;
+
+  -webkit-user-drag:
+    none;
+}
+
+.mapShade {
+  position:
+    absolute;
+
+  inset:
+    0;
+
+  z-index:
+    1;
+
+  pointer-events:
+    none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 45, 32, 0.04),
+      rgba(3, 45, 32, 0.1)
+    );
+}
+
+/* =========================================================
+   MARCADORES
+========================================================= */
+
+.marker {
+  position:
+    absolute;
+
+  z-index:
+    4;
+
+  width:
+    54px;
+
+  height:
+    54px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border:
+    4px solid
+    rgba(255, 255, 255, 0.94);
+
+  border-radius:
+    50%;
+
+  color:
+    #ffffff;
+
+  box-shadow:
+    0 16px 38px
+    rgba(0, 0, 0, 0.3);
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
 
   transition:
-    background var(--transition-normal),
-    transform var(--transition-normal);
+    transform
+      var(
+        --transition-normal,
+        260ms ease
+      ),
+    box-shadow
+      var(
+        --transition-normal,
+        260ms ease
+      ),
+    background
+      var(
+        --transition-normal,
+        260ms ease
+      );
+}
+
+.marker span {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  font-weight:
+    800;
+}
+
+.markerAvailable {
+  background:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+}
+
+.markerSold {
+  background:
+    var(
+      --color-gray-600,
+      #66716b
+    );
+}
+
+.marker:hover,
+.markerSelected {
+  z-index:
+    6;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    scale(1.16);
+
+  box-shadow:
+    0 22px 48px
+    rgba(0, 0, 0, 0.38);
+}
+
+.markerAvailable:hover,
+.markerAvailable.markerSelected {
+  background:
+    var(
+      --color-primary-light,
+      #42b979
+    );
+
+  color:
+    var(
+      --color-primary-deep,
+      #032d20
+    );
+}
+
+.markerSold:hover,
+.markerSold.markerSelected {
+  background:
+    var(
+      --color-gray-800,
+      #313b35
+    );
+}
+
+/* =========================================================
+   TARJETA SOBRE EL MAPA
+========================================================= */
+
+.card {
+  position:
+    absolute;
+
+  z-index:
+    10;
+
+  top:
+    28px;
+
+  right:
+    28px;
+
+  width:
+    min(
+      390px,
+      calc(100% - 56px)
+    );
+
+  padding:
+    26px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.5);
+
+  border-radius:
+    22px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  color:
+    var(
+      --text-primary,
+      #17211c
+    );
+
+  box-shadow:
+    0 26px 70px
+    rgba(0, 0, 0, 0.22);
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+
+  animation:
+    cardIn
+    320ms
+    ease
+    both;
+}
+
+.close,
+.mobileClose {
+  position:
+    absolute;
+
+  top:
+    13px;
+
+  right:
+    13px;
+
+  width:
+    36px;
+
+  height:
+    36px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    var(
+      --color-gray-100,
+      #f3f5f4
+    );
+
+  color:
+    var(
+      --text-primary,
+      #17211c
+    );
+
+  transition:
+    background
+      var(
+        --transition-normal,
+        260ms ease
+      ),
+    color
+      var(
+        --transition-normal,
+        260ms ease
+      ),
+    transform
+      var(
+        --transition-normal,
+        260ms ease
+      );
+}
+
+.close:hover,
+.mobileClose:hover {
+  background:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+
+  color:
+    #ffffff;
+
+  transform:
+    rotate(90deg);
+}
+
+.cardHeader,
+.mobileCardHeader {
+  padding-right:
+    36px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    14px;
+}
+
+.cardIcon {
+  width:
+    48px;
+
+  height:
+    48px;
+
+  flex-shrink:
+    0;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  border-radius:
+    14px;
+}
+
+.cardIconAvailable {
+  background:
+    var(
+      --color-primary-soft,
+      #dff3e8
+    );
+
+  color:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+}
+
+.cardIconSold {
+  background:
+    var(
+      --color-gray-200,
+      #e2e6e3
+    );
+
+  color:
+    var(
+      --color-gray-700,
+      #4b5650
+    );
+}
+
+.zoneLabel {
+  display:
+    block;
+
+  margin-bottom:
+    3px;
+
+  color:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+
+  font-weight:
+    750;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.1em;
+}
+
+.card h3,
+.mobileCard h3 {
+  color:
+    var(
+      --text-primary,
+      #17211c
+    );
+}
+
+.card > p,
+.mobileCard > p {
+  margin-top:
+    18px;
+
+  color:
+    var(
+      --text-secondary,
+      #4b5650
+    );
+}
+
+.cardStatus {
+  margin-top:
+    18px;
+
+  padding:
+    13px;
+
+  display:
+    flex;
+
+  align-items:
+    flex-start;
+
+  gap:
+    9px;
+
+  border-radius:
+    13px;
+
+  background:
+    var(
+      --background-soft,
+      #f4f8f5
+    );
+
+  color:
+    var(
+      --text-secondary,
+      #4b5650
+    );
+}
+
+.cardStatus svg {
+  flex-shrink:
+    0;
+
+  color:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+}
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.button {
+  width:
+    100%;
+
+  min-height:
+    50px;
+
+  margin-top:
+    20px;
+
+  padding:
+    0
+    17px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  gap:
+    10px;
+
+  border-radius:
+    var(
+      --radius-round,
+      999px
+    );
+
+  background:
+    var(
+      --color-primary,
+      #0d6b47
+    );
+
+  color:
+    #ffffff;
+
+  font-weight:
+    800;
+
+  text-align:
+    center;
+
+  text-transform:
+    uppercase;
+
+  letter-spacing:
+    0.05em;
+
+  transition:
+    background
+      var(
+        --transition-normal,
+        260ms ease
+      ),
+    transform
+      var(
+        --transition-normal,
+        260ms ease
+      ),
+    box-shadow
+      var(
+        --transition-normal,
+        260ms ease
+      );
 }
 
 .button:hover {
-  background: var(--color-primary-dark);
+  background:
+    var(
+      --color-primary-dark,
+      #063f2c
+    );
 
-  transform: translateY(-2px);
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 16px 34px
+    rgba(13, 107, 71, 0.25);
 }
 
-.media {
-  position: relative;
+/* =========================================================
+   TARJETA MÓVIL
+========================================================= */
 
-  min-height: 640px;
-
-  overflow: hidden;
-
-  border-radius: var(--radius-2xl);
-
-  background: var(--color-gray-200);
+.mobileCard {
+  display:
+    none;
 }
 
-.image {
-  object-fit: cover;
+.mobileHint {
+  display:
+    none;
 }
 
-.tag {
-  position: absolute;
-
-  left: 24px;
-  bottom: 24px;
-
-  padding: 15px 18px;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  border-radius: var(--radius-md);
-
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--color-primary-deep);
-
-  backdrop-filter: blur(15px);
-}
-
-.tag span,
-.tag strong {
-  display: block;
-}
-
-.tag span {
-  color: var(--text-muted);
-
-  font-size: 0.58rem;
-}
-
-.tag strong {
-  margin-top: 3px;
-
-  font-size: 0.8rem;
-}
+/* =========================================================
+   TABLET
+========================================================= */
 
 @media (max-width: 1024px) {
+  .section {
+    padding:
+      90px
+      0;
+  }
+
   .container {
-    grid-template-columns: 1fr;
-    gap: 50px;
+    width:
+      calc(100% - 36px);
   }
 
-  .media {
-    min-height: 580px;
+  .header {
+    grid-template-columns:
+      1fr;
+
+    align-items:
+      start;
+
+    gap:
+      24px;
+  }
+
+  .headerAside {
+    max-width:
+      680px;
+  }
+
+  .mapCanvas {
+    min-height:
+      560px;
+  }
+
+  .marker {
+    width:
+      48px;
+
+    height:
+      48px;
+
+    border-width:
+      3px;
+  }
+
+  .card {
+    top:
+      20px;
+
+    right:
+      20px;
   }
 }
 
-@media (max-width: 768px) {
+/* =========================================================
+   MÓVIL
+========================================================= */
+
+@media (max-width: 700px) {
   .section {
-    padding: 80px 16px;
+    padding:
+      70px
+      0;
   }
 
-  .media {
-    order: -1;
-
-    min-height: 480px;
-
-    border-radius: var(--radius-xl);
+  .container {
+    width:
+      calc(100% - 24px);
   }
 
-  .button {
-    width: 100%;
+  .header {
+    margin-bottom:
+      28px;
+  }
+
+  .legend {
+    gap:
+      12px;
+  }
+
+  /*
+   * El mapa conserva su tamaño y se puede desplazar
+   * horizontalmente sin comprimir los marcadores.
+   */
+
+  .mapViewport {
+    overflow-x:
+      auto;
+
+    overflow-y:
+      hidden;
+
+    border-radius:
+      20px;
+
+    scroll-snap-type:
+      x proximity;
+
+    overscroll-behavior-inline:
+      contain;
+
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+  .mapCanvas {
+    width:
+      1050px;
+
+    height:
+      525px;
+
+    min-height:
+      525px;
+
+    aspect-ratio:
+      auto;
+
+    scroll-snap-align:
+      start;
+  }
+
+  .mapImage {
+    object-fit:
+      cover;
+  }
+
+  .marker {
+    width:
+      46px;
+
+    height:
+      46px;
+  }
+
+  /*
+   * En móvil la tarjeta sale debajo para no tapar
+   * la imagen del mapa.
+   */
+
+  .card {
+    display:
+      none;
+  }
+
+  .mobileCard {
+    position:
+      relative;
+
+    display:
+      block;
+
+    margin-top:
+      14px;
+
+    padding:
+      22px
+      17px
+      17px;
+
+    border:
+      1px solid
+      var(
+        --border-soft,
+        rgba(23, 33, 28, 0.08)
+      );
+
+    border-radius:
+      19px;
+
+    background:
+      #ffffff;
+
+    box-shadow:
+      var(
+        --shadow-small,
+        0 10px 30px
+        rgba(13, 42, 29, 0.06)
+      );
+
+    animation:
+      cardIn
+      300ms
+      ease
+      both;
+  }
+
+  .mobileCardHeader {
+    padding-right:
+      32px;
+  }
+
+  .mobileHint {
+    display:
+      block;
+
+    margin-top:
+      13px;
+
+    color:
+      var(
+        --text-muted,
+        #7f8983
+      );
+
+    text-align:
+      center;
   }
 }
 
-@media (max-width: 420px) {
-  .section {
-    padding: 68px 13px;
+/* =========================================================
+   MÓVIL PEQUEÑO
+========================================================= */
+
+@media (max-width: 430px) {
+  .container {
+    width:
+      calc(100% - 18px);
   }
 
-  .media {
-    min-height: 410px;
+  .mapCanvas {
+    width:
+      950px;
+
+    height:
+      476px;
+
+    min-height:
+      476px;
   }
 
-  .tag {
-    right: 14px;
-    bottom: 14px;
-    left: 14px;
+  .marker {
+    width:
+      43px;
+
+    height:
+      43px;
+  }
+
+  .mobileCard {
+    padding-inline:
+      14px;
+  }
+}
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+@keyframes cardIn {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(
+        12px
+      );
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      translateY(
+        0
+      );
+  }
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+========================================================= */
+
+.marker:focus-visible,
+.close:focus-visible,
+.mobileClose:focus-visible,
+.button:focus-visible {
+  outline:
+    3px solid
+    rgba(13, 107, 71, 0.4);
+
+  outline-offset:
+    4px;
+}
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .marker,
+  .close,
+  .mobileClose,
+  .button,
+  .card,
+  .mobileCard {
+    animation:
+      none;
+
+    transition:
+      none;
   }
 }

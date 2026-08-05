@@ -13,7 +13,7 @@ export default function CabinsSection() {
       aria-labelledby="cabins-title"
     >
       <Image
-        src="/assets/cabins/zagari-cabins.webp"
+        src="/assets/amenities/miradores-senderos.png"
         alt=""
         fill
         sizes="100vw"

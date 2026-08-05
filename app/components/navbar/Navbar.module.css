@@ -877,8 +877,7 @@
 .panelNavigation strong {
   font-family:
     var(--font-display),
-    Georgia,
-    serif;
+    Georgia;
 
   font-size: 1.55rem;
   font-weight: 500;

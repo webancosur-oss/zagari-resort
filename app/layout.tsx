@@ -2,24 +2,27 @@ import type {
   Metadata,
   Viewport,
 } from "next";
-import type {
-  ReactNode,
-} from "react";
+import type { ReactNode } from "react";
 
 import {
-  Cormorant_Garamond,
+  Barlow_Condensed,
   Manrope,
 } from "next/font/google";
 
 import { siteConfig } from "@/data/site";
 
 import "./globals.css";
+
 import SmoothScroll from "./components/SmoothScroll";
 
-/*==================================================
-  TIPOGRAFÍAS
-==================================================*/
+/* =========================================================
+   TIPOGRAFÍAS
+========================================================= */
 
+/*
+ * Manrope:
+ * párrafos, botones, formularios, navegación y textos generales.
+ */
 const manrope = Manrope({
   variable: "--font-sans",
 
@@ -34,9 +37,11 @@ const manrope = Manrope({
     "700",
   ],
 
-  display: "swap",
+  display:
+    "swap",
 
-  preload: true,
+  preload:
+    true,
 
   fallback: [
     "Arial",
@@ -45,8 +50,15 @@ const manrope = Manrope({
   ],
 });
 
-const cormorant =
-  Cormorant_Garamond({
+/*
+ * Barlow Condensed:
+ * títulos h1, h2, h3, h4, h5 y h6.
+ *
+ * Es una alternativa de Google Fonts
+ * similar al estilo condensado de Akrobat.
+ */
+const barlowCondensed =
+  Barlow_Condensed({
     variable:
       "--font-display",
 
@@ -61,20 +73,27 @@ const cormorant =
       "700",
     ],
 
-    display: "swap",
+    style: [
+      "normal",
+    ],
 
-    preload: true,
+    display:
+      "swap",
+
+    preload:
+      true,
 
     fallback: [
-      "Georgia",
-      "Times New Roman",
-      "serif",
+      "Arial Narrow",
+      "Arial",
+      "Helvetica",
+      "sans-serif",
     ],
   });
 
-/*==================================================
-  METADATA
-==================================================*/
+/* =========================================================
+   METADATA
+========================================================= */
 
 const defaultTitle =
   "Zagari Resort Club | Lotes en San Ramón";
@@ -102,10 +121,9 @@ export const metadata: Metadata = {
   description:
     defaultDescription,
 
-  keywords:
-    [
-      ...siteConfig.keywords,
-    ],
+  keywords: [
+    ...siteConfig.keywords,
+  ],
 
   authors: [
     {
@@ -133,9 +151,14 @@ export const metadata: Metadata = {
     "origin-when-cross-origin",
 
   formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
+    email:
+      false,
+
+    address:
+      false,
+
+    telephone:
+      false,
   },
 
   alternates: {
@@ -169,6 +192,22 @@ export const metadata: Metadata = {
 
     type:
       "website",
+
+    images: [
+      {
+        url:
+          "/opengraph-image.png",
+
+        width:
+          1200,
+
+        height:
+          630,
+
+        alt:
+          "Zagari Resort Club, lotes en San Ramón rodeados de naturaleza",
+      },
+    ],
   },
 
   twitter: {
@@ -180,16 +219,28 @@ export const metadata: Metadata = {
 
     description:
       defaultDescription,
+
+    images: [
+      "/twitter-image.png",
+    ],
   },
 
   robots: {
-    index: true,
-    follow: true,
-    nocache: false,
+    index:
+      true,
+
+    follow:
+      true,
+
+    nocache:
+      false,
 
     googleBot: {
-      index: true,
-      follow: true,
+      index:
+        true,
+
+      follow:
+        true,
 
       noimageindex:
         false,
@@ -213,6 +264,9 @@ export const metadata: Metadata = {
 
         sizes:
           "any",
+
+        type:
+          "image/x-icon",
       },
 
       {
@@ -238,16 +292,19 @@ export const metadata: Metadata = {
       },
     ],
 
+    shortcut:
+      "/favicon.ico",
+
     apple: [
       {
         url:
-          "/icon-192.png",
+          "/apple-icon.png",
 
         type:
           "image/png",
 
         sizes:
-          "192x192",
+          "180x180",
       },
     ],
   },
@@ -267,9 +324,9 @@ export const metadata: Metadata = {
   },
 };
 
-/*==================================================
-  VIEWPORT
-==================================================*/
+/* =========================================================
+   VIEWPORT
+========================================================= */
 
 export const viewport: Viewport = {
   width:
@@ -303,17 +360,18 @@ export const viewport: Viewport = {
   ],
 };
 
-/*==================================================
-  TIPOS
-==================================================*/
+/* =========================================================
+   TIPOS
+========================================================= */
 
 type RootLayoutProps = {
-  children: ReactNode;
+  children:
+    ReactNode;
 };
 
-/*==================================================
-  ROOT LAYOUT
-==================================================*/
+/* =========================================================
+   ROOT LAYOUT
+========================================================= */
 
 export default function RootLayout({
   children,
@@ -528,14 +586,11 @@ export default function RootLayout({
 
   return (
     <html
-      lang={
-        siteConfig.language
-      }
-      className={`${manrope.variable} ${cormorant.variable}`}
+      lang={siteConfig.language}
+      className={`${manrope.variable} ${barlowCondensed.variable}`}
       suppressHydrationWarning
     >
       <body>
-        
         <SmoothScroll>
           {children}
         </SmoothScroll>
