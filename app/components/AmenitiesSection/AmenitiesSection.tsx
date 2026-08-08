@@ -1123,8 +1123,7 @@ export default function AmenitiesSection() {
               </span>
 
               <p>
-                Más que amenidades,
-                espacios creados para
+                Espacios creados para
                 disfrutar cada momento
                 de tu experiencia en
                 Zagari.
