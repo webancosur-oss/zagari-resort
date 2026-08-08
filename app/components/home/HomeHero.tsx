@@ -1,215 +1,225 @@
 "use client";
 
-import {
-  ArrowDown,
-  ArrowRight,
-  MapPin,
-} from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 import styles from "./HomeHero.module.css";
 
-const projectInformation = [
+const cabins = [
   {
-    id: "project",
-    label: "Proyecto",
-    value: "Zagari Resort Club",
-    detail: "Conecta con lo esencial",
+    id: "01",
+    title: "Cabaña",
+    highlight: "1 Habitación",
+    eyebrow: "SEGUNDA ETAPA",
+    description:
+      "Un refugio íntimo rodeado de naturaleza, diseñado para desconectarte y vivir la selva de una manera diferente.",
+    image: "/assets/cabins/cabania-1-habitacion.png",
   },
   {
-    id: "stage",
-    label: "Etapa",
-    value: "Segunda etapa",
-    detail: "Preventa de lotes",
+    id: "02",
+    title: "Cabaña",
+    highlight: "2 Habitaciones",
+    eyebrow: "SEGUNDA ETAPA",
+    description:
+      "Espacios que conectan comodidad, naturaleza y descanso para compartir una experiencia inolvidable.",
+    image: "/assets/cabins/cabania-2-habitaciones.png",
   },
   {
-    id: "location",
-    label: "Ubicación",
-    value: "San Ramón",
-    detail: "Selva Central",
-  },
-  {
-    id: "areas",
-    label: "Áreas",
-    value: "234 – 525 m²",
-    detail: "Lotes disponibles",
+    id: "03",
+    title: "Cabaña",
+    highlight: "3 Habitaciones",
+    eyebrow: "SEGUNDA ETAPA",
+    description:
+      "Más espacio para disfrutar juntos. Una experiencia premium integrada al paisaje natural de San Ramón.",
+    image: "/assets/cabins/cabania-3-habitaciones.png",
   },
 ];
 
+const CHANGE_TIME = 6500;
+
 export default function HomeHero() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % cabins.length);
+    }, CHANGE_TIME);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const handleChange = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  const activeCabin = cabins[activeIndex];
+
   return (
-    <section
-      className={styles.hero}
-      aria-labelledby="zagari-home-title"
-    >
-      {/* =====================================================
-          IMÁGENES
-      ====================================================== */}
+    <section className={styles.hero}>
+      {/* =====================================
+          BACKGROUND SLIDES
+      ====================================== */}
 
-      <div className={styles.imageLayer}>
-        <Image
-          src="/assets/hero/zagari-hero-desktop.png"
-          alt="Piscina, naturaleza y áreas de descanso de Zagari Resort Club en San Ramón"
-          fill
-          priority
-          sizes="100vw"
-          className={`${styles.image} ${styles.desktopImage}`}
-        />
-
-        <Image
-          src="/assets/hero/zagari-hero-desktop.png"
-          alt="Naturaleza y espacios de Zagari Resort Club en San Ramón"
-          fill
-          priority
-          sizes="100vw"
-          className={`${styles.image} ${styles.mobileImage}`}
-        />
-
-        <div
-          className={styles.imageOverlay}
-          aria-hidden="true"
-        />
-
-        <div
-          className={styles.mobileImageLabel}
-          aria-hidden="true"
-        >
-          <MapPin
-            size={15}
-            weight="fill"
-          />
-
-          <span>
-            San Ramón · Selva Central
-          </span>
-        </div>
+      <div className={styles.background}>
+        {cabins.map((cabin, index) => (
+          <div
+            key={cabin.id}
+            className={`${styles.slide} ${
+              index === activeIndex ? styles.slideActive : ""
+            }`}
+          >
+            <Image
+              src={cabin.image}
+              alt={`${cabin.title} ${cabin.highlight}`}
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className={styles.image}
+            />
+          </div>
+        ))}
       </div>
 
-      <div
-        className={styles.overlay}
-        aria-hidden="true"
-      />
+      {/* Overlay */}
+      <div className={styles.overlay} />
 
-      <div
-        className={styles.texture}
-        aria-hidden="true"
-      />
+      {/* =====================================
+          DECORACIÓN
+      ====================================== */}
 
-      {/* =====================================================
+      <div className={styles.noise} />
+
+      {/* =====================================
           CONTENIDO
-      ====================================================== */}
+      ====================================== */}
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.eyebrow}>
-            <MapPin
-              size={14}
-              weight="fill"
-              aria-hidden="true"
-            />
+          <span
+            key={`eyebrow-${activeIndex}`}
+            className={styles.eyebrow}
+          >
+            {activeCabin.eyebrow}
+          </span>
 
-            <span>
-              San Ramón · Selva Central
-            </span>
+          <div
+            key={`title-${activeIndex}`}
+            className={styles.titleWrapper}
+          >
+            <h1 className={styles.title}>
+              <span>{activeCabin.title}</span>
+
+              <strong>
+                {activeCabin.highlight}
+              </strong>
+            </h1>
           </div>
 
-          <h1
-            id="zagari-home-title"
-            className={styles.title}
+          <p
+            key={`description-${activeIndex}`}
+            className={styles.description}
           >
-            Donde la naturaleza se convierte en una nueva forma
-            de vivir
-          </h1>
-
-          <p className={styles.description}>
-            Una experiencia que une naturaleza, descanso e
-            inversión en la segunda etapa de Zagari Resort Club.
+            {activeCabin.description}
           </p>
 
           <div className={styles.actions}>
             <Link
-              href="/lotes"
+              href="/cabanas"
               className={styles.primaryButton}
             >
-              <span>
-                Conoce nuestros lotes
-              </span>
+              <span>Descubrir cabañas</span>
 
-              <ArrowRight
-                size={17}
-                weight="bold"
+              <span
+                className={styles.buttonArrow}
                 aria-hidden="true"
-              />
-            </Link>
-
-            <Link
-              href="#experiencia"
-              className={styles.secondaryButton}
-            >
-              <span>
-                Descubre la experiencia
+              >
+                ↗
               </span>
-
-              <ArrowDown
-                size={17}
-                weight="bold"
-                aria-hidden="true"
-              />
             </Link>
           </div>
         </div>
 
-        {/* ===================================================
-            INFORMACIÓN INFERIOR
-        ==================================================== */}
+        {/* =====================================
+            SELECTOR DE CABAÑAS
+        ====================================== */}
 
-        <div
-          className={styles.meta}
-          aria-label="Información de Zagari Resort Club"
-        >
-          {projectInformation.map((item) => (
-            <article
-              key={item.id}
-              className={styles.metaItem}
-            >
-              <span className={styles.metaLabel}>
-                {item.label}
-              </span>
+        <div className={styles.navigation}>
+          <div className={styles.navigationLine} />
 
-              <strong className={styles.metaValue}>
-                {item.value}
-              </strong>
+          <div className={styles.navigationItems}>
+            {cabins.map((cabin, index) => {
+              const isActive =
+                index === activeIndex;
 
-              <small className={styles.metaDetail}>
-                {item.detail}
-              </small>
-            </article>
-          ))}
+              return (
+                <button
+                  key={cabin.id}
+                  type="button"
+                  onClick={() =>
+                    handleChange(index)
+                  }
+                  className={`${styles.navItem} ${
+                    isActive
+                      ? styles.navItemActive
+                      : ""
+                  }`}
+                  aria-label={`Ver cabaña de ${
+                    index + 1
+                  } habitación${
+                    index === 0 ? "" : "es"
+                  }`}
+                >
+
+                  <span
+                    className={
+                      styles.navLabel
+                    }
+                  >
+                    {cabin.highlight}
+                  </span>
+
+                  <span
+                    className={
+                      styles.progress
+                    }
+                  >
+                    <span
+                      className={
+                        styles.progressBar
+                      }
+                    />
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* =====================================
+            SCROLL INDICATOR
+        ====================================== */}
+
+        <div className={styles.scroll}>
+          <span>Scroll</span>
+
+          <div className={styles.scrollLine}>
+            <span />
+          </div>
         </div>
       </div>
 
-      {/* =====================================================
-          INDICADOR DE SCROLL
-      ====================================================== */}
+      {/* =====================================
+          NÚMERO GRANDE
+      ====================================== */}
 
-      <a
-        href="#experiencia"
-        className={styles.scrollIndicator}
-        aria-label="Deslizar para descubrir Zagari Resort Club"
+      <div
+        key={`number-${activeIndex}`}
+        className={styles.bigNumber}
+        aria-hidden="true"
       >
-        <span>
-          Desliza para descubrir
-        </span>
-
-        <i aria-hidden="true" />
-
-        <ArrowDown
-          size={15}
-          weight="bold"
-          aria-hidden="true"
-        />
-      </a>
+        {activeCabin.id}
+      </div>
     </section>
   );
 }

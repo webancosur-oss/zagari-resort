@@ -14,6 +14,7 @@ import { siteConfig } from "@/data/site";
 import "./globals.css";
 
 import SmoothScroll from "./components/SmoothScroll";
+import Navbar from "./components/navbar/Navbar";
 
 /* =========================================================
    TIPOGRAFÍAS
@@ -594,6 +595,7 @@ export default function RootLayout({
         <SmoothScroll>
           {children}
         </SmoothScroll>
+        <Navbar />
 
         <script
           type="application/ld+json"

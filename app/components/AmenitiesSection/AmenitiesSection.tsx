@@ -1,375 +1,1150 @@
 "use client";
 
-import {
-  ArrowRight,
-  Fire,
-  Leaf,
-  Waves,
-  Wind,
-} from "@phosphor-icons/react";
 import Image from "next/image";
-import Link from "next/link";
+
 import {
+  useLayoutEffect,
+  useRef,
   useState,
-  type FocusEvent,
-  type MouseEvent,
 } from "react";
 
+import gsap from "gsap";
+import {
+  ScrollTrigger,
+} from "gsap/ScrollTrigger";
+
+import {
+  ArrowUpRight,
+  Barbell,
+  Campfire,
+  CookingPot,
+  FlowerLotus,
+  ForkKnife,
+  GameController,
+  Leaf,
+  Mountains,
+  PersonSimpleRun,
+  ShoppingBag,
+  Sparkle,
+  SwimmingPool,
+  Tree,
+  UsersThree,
+  Volleyball,
+  Waves,
+} from "@phosphor-icons/react";
+
+
 import styles from "./AmenitiesSection.module.css";
+import ActionButton from "../buttons/ActionButton/ActionButton";
 
-/*==================================================
-  TIPOS
-==================================================*/
+gsap.registerPlugin(ScrollTrigger);
 
-type AmenityTheme =
-  | "air"
-  | "fire"
-  | "earth"
-  | "water";
+/* ============================================================
+   AMENITIES
+============================================================ */
 
-type AmenityItem = {
-  id: string;
-  number: string;
-  name: string;
-  eyebrow: string;
-  title: string;
-  description: string;
-  image: string;
-  alt: string;
-  href: string;
-  theme: AmenityTheme;
-};
-
-/*==================================================
-  DATOS
-==================================================*/
-
-const amenities: AmenityItem[] = [
+const amenities = [
   {
-    id: "aire",
-    number: "01",
-    name: "Aire",
-    eyebrow: "Contemplación",
-    title: "Miradores y senderos",
-    description:
-      "Recorre caminos rodeados de naturaleza, contempla el paisaje de San Ramón y encuentra espacios creados para respirar, caminar y desconectarte.",
+    id: "01",
+    title: "Piscina infinita",
+    category: "Agua · Descanso",
     image:
-      "/assets/amenities/domo.png",
-    alt:
-      "Mirador y senderos naturales de Zagari Resort Club",
-    href: "/amenidades#aire",
-    theme: "air",
+      "/assets/amenities/piscina-infinity.png",
+    icon: SwimmingPool,
   },
+
   {
-    id: "fuego",
-    number: "02",
-    name: "Fuego",
-    eyebrow: "Encuentro",
-    title: "Fogatas y zonas sociales",
-    description:
-      "Comparte noches especiales alrededor del fuego en espacios diseñados para conversar, celebrar y crear recuerdos con familia y amigos.",
+    id: "02",
+    title: "Bar piscina",
+    category: "Agua · Experiencia",
     image:
-      "/assets/amenities/fogata-zona-social.png",
-    alt:
-      "Zona de fogata y encuentro social de Zagari Resort Club",
-    href: "/amenidades#fuego",
-    theme: "fire",
+      "/assets/amenities/bar-piscina.png",
+    icon: Waves,
   },
+
   {
-    id: "tierra",
-    number: "03",
-    name: "Tierra",
-    eyebrow: "Conexión",
-    title: "Naturaleza y aventura",
-    description:
-      "Vive experiencias integradas al paisaje mediante jardines, circuitos naturales y ambientes que respetan la identidad de la Selva Central.",
+    id: "03",
+    title: "Spa",
+    category: "Bienestar",
     image:
-      "/assets/amenities/naturaleza-aventura.png",
-    alt:
-      "Espacios naturales y de aventura de Zagari Resort Club",
-    href: "/amenidades#tierra",
-    theme: "earth",
+      "/assets/amenities/spa.png",
+    icon: FlowerLotus,
   },
+
   {
-    id: "agua",
-    number: "04",
-    name: "Agua",
-    eyebrow: "Bienestar",
-    title: "Piscinas y descanso",
-    description:
-      "Disfruta piscinas, zonas de relajación y espacios de bienestar creados para refrescarte, descansar y vivir el presente.",
+    id: "04",
+    title: "Yoga",
+    category: "Bienestar · Aire",
     image:
-      "/assets/amenities/piscinas-descanso.png",
-    alt:
-      "Piscinas y espacios de descanso de Zagari Resort Club",
-    href: "/amenidades#agua",
-    theme: "water",
+      "/assets/amenities/yoga.png",
+    icon: FlowerLotus,
+  },
+
+  {
+    id: "05",
+    title: "Gimnasio",
+    category: "Deporte",
+    image:
+      "/assets/amenities/gimnasio.png",
+    icon: Barbell,
+  },
+
+  {
+    id: "06",
+    title: "Camping",
+    category: "Naturaleza",
+    image:
+      "/assets/amenities/camping.png",
+    icon: Campfire,
+  },
+
+  {
+    id: "07",
+    title: "Zona de niños",
+    category: "Familia",
+    image:
+      "/assets/amenities/zona-ninos.png",
+    icon: GameController,
+  },
+
+  {
+    id: "08",
+    title: "Mirador",
+    category: "Naturaleza · Aire",
+    image:
+      "/assets/amenities/mirador.png",
+    icon: Mountains,
+  },
+
+  {
+    id: "09",
+    title: "Biohuerto",
+    category: "Naturaleza · Tierra",
+    image:
+      "/assets/amenities/biohuerto.png",
+    icon: Leaf,
+  },
+
+  {
+    id: "10",
+    title: "Frontón",
+    category: "Deporte",
+    image:
+      "/assets/amenities/fronton.png",
+    icon: PersonSimpleRun,
+  },
+
+  {
+    id: "11",
+    title: "Zona de parrillas",
+    category: "Gastronomía",
+    image:
+      "/assets/amenities/parrillas.png",
+    icon: CookingPot,
+  },
+
+  {
+    id: "12",
+    title: "Mini golf",
+    category: "Entretenimiento",
+    image:
+      "/assets/amenities/mini-golf.png",
+    icon: Sparkle,
+  },
+
+  {
+    id: "13",
+    title: "Muro escalable",
+    category: "Aventura",
+    image:
+      "/assets/amenities/muro-escalable.png",
+    icon: Mountains,
+  },
+
+  {
+    id: "14",
+    title: "Market Zagari",
+    category: "Servicios",
+    image:
+      "/assets/amenities/market-zagari.png",
+    icon: ShoppingBag,
+  },
+
+  {
+    id: "15",
+    title: "Zona instagrameable",
+    category: "Experiencia",
+    image:
+      "/assets/amenities/zona-instagram.png",
+    icon: Sparkle,
+  },
+
+  {
+    id: "16",
+    title: "Zona espiritual",
+    category: "Conexión · Fuego",
+    image:
+      "/assets/amenities/zona-espiritual.png",
+    icon: Tree,
+  },
+
+  {
+    id: "17",
+    title: "Explanada de eventos",
+    category: "Eventos",
+    image:
+      "/assets/amenities/explanada-eventos.png",
+    icon: UsersThree,
+  },
+
+  {
+    id: "18",
+    title: "Restaurante Bar",
+    category: "Gastronomía",
+    image:
+      "/assets/amenities/restaurante-bar.png",
+    icon: ForkKnife,
+  },
+
+  {
+    id: "19",
+    title: "Fútbol y vóley",
+    category: "Deporte",
+    image:
+      "/assets/amenities/futbol-voley.png",
+    icon: Volleyball,
+  },
+
+  {
+    id: "20",
+    title: "Mini tenis",
+    category: "Deporte",
+    image:
+      "/assets/amenities/mini-tenis.png",
+    icon: PersonSimpleRun,
   },
 ];
 
-/*==================================================
-  ICONOS Y TEMAS
-==================================================*/
-
-const icons = {
-  air: Wind,
-  fire: Fire,
-  earth: Leaf,
-  water: Waves,
-};
-
-const themeClasses = {
-  air: styles.air,
-  fire: styles.fire,
-  earth: styles.earth,
-  water: styles.water,
-};
-
-/*==================================================
-  COMPONENTE
-==================================================*/
+/* ============================================================
+   COMPONENT
+============================================================ */
 
 export default function AmenitiesSection() {
-  const [activeId, setActiveId] =
-    useState<string>("aire");
+  const sectionRef =
+    useRef<HTMLElement | null>(
+      null
+    );
 
-  const activatePanel = (
-    id: string,
-  ): void => {
-    setActiveId(id);
-  };
+  const listRef =
+    useRef<HTMLDivElement | null>(
+      null
+    );
 
-  const handleMouseEnter = (
-    event: MouseEvent<HTMLElement>,
-    id: string,
-  ): void => {
-    event.currentTarget.focus({
-      preventScroll: true,
+  const previewRef =
+    useRef<HTMLDivElement | null>(
+      null
+    );
+
+  const rowRefs =
+    useRef<
+      Array<HTMLButtonElement | null>
+    >([]);
+
+  const [activeIndex, setActiveIndex] =
+    useState<number | null>(
+      null
+    );
+
+  const [mobileOpen, setMobileOpen] =
+    useState<number | null>(
+      null
+    );
+
+  /* ==========================================================
+     GSAP ENTRY
+  =========================================================== */
+
+  useLayoutEffect(() => {
+    const section =
+      sectionRef.current;
+
+    if (!section) return;
+
+    const mm =
+      gsap.matchMedia();
+
+    const ctx =
+      gsap.context(() => {
+        /* ====================================================
+           DESKTOP / TABLET
+        ===================================================== */
+
+        mm.add(
+          "(min-width: 768px)",
+          () => {
+            const heading =
+              section.querySelector(
+                "[data-heading]"
+              );
+
+            const description =
+              section.querySelector(
+                "[data-description]"
+              );
+
+            if (heading) {
+              gsap.fromTo(
+                heading,
+                {
+                  opacity: 0,
+                  y: 30,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+
+                  duration: 0.85,
+
+                  ease:
+                    "power3.out",
+
+                  scrollTrigger: {
+                    trigger:
+                      section,
+
+                    start:
+                      "top 75%",
+
+                    once: true,
+                  },
+                }
+              );
+            }
+
+            if (description) {
+              gsap.fromTo(
+                description,
+                {
+                  opacity: 0,
+                  y: 22,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+
+                  duration: 0.8,
+
+                  delay: 0.05,
+
+                  ease:
+                    "power3.out",
+
+                  scrollTrigger: {
+                    trigger:
+                      section,
+
+                    start:
+                      "top 75%",
+
+                    once: true,
+                  },
+                }
+              );
+            }
+
+            rowRefs.current.forEach(
+              (
+                row,
+                index
+              ) => {
+                if (!row) return;
+
+                gsap.fromTo(
+                  row,
+                  {
+                    opacity: 0,
+                    y: 16,
+                  },
+                  {
+                    opacity: 1,
+                    y: 0,
+
+                    duration: 0.5,
+
+                    delay:
+                      Math.min(
+                        index *
+                          0.018,
+                        0.18
+                      ),
+
+                    ease:
+                      "power2.out",
+
+                    scrollTrigger: {
+                      trigger:
+                        row,
+
+                      start:
+                        "top 94%",
+
+                      once: true,
+                    },
+                  }
+                );
+              }
+            );
+          }
+        );
+
+        /* ====================================================
+           MOBILE
+        ===================================================== */
+
+        mm.add(
+          "(max-width: 767px)",
+          () => {
+            rowRefs.current.forEach(
+              (
+                row,
+                index
+              ) => {
+                if (!row) return;
+
+                gsap.fromTo(
+                  row,
+                  {
+                    opacity: 0,
+                    y: 14,
+                  },
+                  {
+                    opacity: 1,
+                    y: 0,
+
+                    duration:
+                      0.55,
+
+                    delay:
+                      Math.min(
+                        index *
+                          0.015,
+                        0.12
+                      ),
+
+                    ease:
+                      "power2.out",
+
+                    scrollTrigger: {
+                      trigger:
+                        row,
+
+                      start:
+                        "top 94%",
+
+                      once: true,
+                    },
+                  }
+                );
+              }
+            );
+          }
+        );
+      }, section);
+
+    return () => {
+      ctx.revert();
+      mm.revert();
+    };
+  }, []);
+
+  /* ==========================================================
+     DESKTOP PREVIEW
+  =========================================================== */
+
+  const handleEnter = (
+    index: number
+  ) => {
+    setActiveIndex(index);
+
+    const preview =
+      previewRef.current;
+
+    if (!preview) return;
+
+    gsap.killTweensOf(
+      preview
+    );
+
+    gsap.set(preview, {
+      visibility:
+        "visible",
     });
 
-    activatePanel(id);
+    gsap.fromTo(
+      preview,
+      {
+        opacity: 0,
+        scale: 0.88,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+
+        duration: 0.35,
+
+        ease:
+          "power3.out",
+      }
+    );
   };
 
-  const handleFocus = (
-    _event: FocusEvent<HTMLElement>,
-    id: string,
-  ): void => {
-    activatePanel(id);
+  const handleLeave =
+    () => {
+      const preview =
+        previewRef.current;
+
+      if (!preview) {
+        setActiveIndex(
+          null
+        );
+
+        return;
+      }
+
+      gsap.to(preview, {
+        opacity: 0,
+        scale: 0.93,
+
+        duration: 0.2,
+
+        ease:
+          "power2.out",
+
+        onComplete: () => {
+          setActiveIndex(
+            null
+          );
+        },
+      });
+    };
+
+  /* ==========================================================
+     CURSOR FOLLOW
+  =========================================================== */
+
+  const handlePointerMove = (
+    event:
+      React.PointerEvent<HTMLDivElement>
+  ) => {
+    if (
+      activeIndex === null
+    ) {
+      return;
+    }
+
+    const list =
+      listRef.current;
+
+    const preview =
+      previewRef.current;
+
+    if (
+      !list ||
+      !preview
+    ) {
+      return;
+    }
+
+    const bounds =
+      list.getBoundingClientRect();
+
+    const previewWidth =
+      preview.offsetWidth;
+
+    const previewHeight =
+      preview.offsetHeight;
+
+    const x =
+      event.clientX -
+      bounds.left -
+      previewWidth *
+        0.48;
+
+    const y =
+      event.clientY -
+      bounds.top -
+      previewHeight *
+        0.52;
+
+    const safeX =
+      Math.max(
+        70,
+        Math.min(
+          x,
+          bounds.width -
+            previewWidth -
+            60
+        )
+      );
+
+    const safeY =
+      Math.max(
+        8,
+        Math.min(
+          y,
+          bounds.height -
+            previewHeight -
+            8
+        )
+      );
+
+    gsap.to(preview, {
+      x: safeX,
+      y: safeY,
+
+      duration: 0.45,
+
+      ease:
+        "power3.out",
+
+      overwrite:
+        "auto",
+    });
+  };
+
+  /* ==========================================================
+     MOBILE
+  =========================================================== */
+
+  const toggleMobile = (
+    index: number
+  ) => {
+    setMobileOpen(
+      mobileOpen === index
+        ? null
+        : index
+    );
   };
 
   return (
     <section
-      id="amenidades"
-      className={styles.section}
-      aria-labelledby="amenities-title"
+      ref={sectionRef}
+      className={
+        styles.section
+      }
     >
-      {/*================================================
-        CABECERA
-      ================================================*/}
+      {/* ====================================================
+          MOBILE STICKY BAR
 
-      <header className={styles.header}>
-        <div className={styles.headerContent}>
-          <span className={styles.mainEyebrow}>
-            Experiencias Zagari
-          </span>
+          Solo aparece en móvil.
+      ===================================================== */}
 
-          <h2 id="amenities-title">
-            Amenidades inspiradas
-            <br />
-            en los cuatro elementos
-          </h2>
+      <div
+        className={
+          styles.mobileSticky
+        }
+      >
+        <div
+          className={
+            styles.mobileStickyInner
+          }
+        >
+          <div>
+            <span>
+              04
+            </span>
+
+            <strong>
+              Amenidades
+            </strong>
+          </div>
+
+          <div
+            className={
+              styles.mobileStickyRight
+            }
+          >
+            <span>
+              +20
+            </span>
+
+            <i />
+          </div>
         </div>
 
-        <div className={styles.headerAside}>
-          <p>
-            Espacios creados para contemplar,
-            compartir, conectar con la naturaleza
-            y renovar tu bienestar.
-          </p>
+        <div
+          className={
+            styles.mobileColorLine
+          }
+        />
+      </div>
 
-          <span className={styles.interactionHint}>
-            Explora cada experiencia
-          </span>
-        </div>
-      </header>
+      {/* ====================================================
+          MAIN
+      ===================================================== */}
 
-      {/*================================================
-        PANELES
-      ================================================*/}
+      <div
+        className={
+          styles.inner
+        }
+      >
+        {/* ==================================================
+            STICKY LEFT
+        =================================================== */}
 
-      <div className={styles.panels}>
-        {amenities.map((amenity) => {
-          const Icon =
-            icons[amenity.theme];
+        <aside
+          className={
+            styles.headingColumn
+          }
+        >
+          <div
+            className={
+              styles.desktopMeta
+            }
+          >
+            <span>
+              04 — Amenidades
+            </span>
 
-          const isActive =
-            activeId === amenity.id;
+            <span>
+              Zagari Resort Club
+            </span>
+          </div>
 
-          return (
-            <article
-              key={amenity.id}
-              className={`${styles.panel} ${
-                themeClasses[amenity.theme]
-              } ${
-                isActive
-                  ? styles.panelActive
-                  : ""
-              }`}
-              tabIndex={0}
-              onMouseEnter={(event) =>
-                handleMouseEnter(
-                  event,
-                  amenity.id,
-                )
+          <div
+            data-heading
+            className={
+              styles.stickyContent
+            }
+          >
+            <span
+              className={
+                styles.eyebrow
               }
-              onFocus={(event) =>
-                handleFocus(
-                  event,
-                  amenity.id,
-                )
-              }
-              onClick={() =>
-                activatePanel(amenity.id)
-              }
-              aria-labelledby={`${amenity.id}-amenity-title`}
             >
-              {/*========================================
-                IMAGEN
-              ========================================*/}
+              Resort Club
+            </span>
 
-              <Image
-                src={amenity.image}
-                alt={amenity.alt}
-                fill
-                sizes="
-                  (max-width: 768px) 100vw,
-                  (max-width: 1100px) 50vw,
-                  35vw
-                "
-                className={styles.image}
-              />
+            <h2>
+              Amenidades
+              <span>
+                para cada
+                momento.
+              </span>
+            </h2>
 
-              <div
-                className={styles.overlay}
-                aria-hidden="true"
-              />
+            <p
+              className={
+                styles.leftDescription
+              }
+            >
+              Espacios que
+              transforman cada
+              estadía en una
+              experiencia de
+              descanso, conexión,
+              diversión y
+              naturaleza.
+            </p>
 
-              <div
-                className={styles.ambient}
-                aria-hidden="true"
-              />
+            <div
+              className={
+                styles.count
+              }
+            >
+              <strong>
+                +20
+              </strong>
 
-              {/*========================================
-                CONTENIDO SUPERIOR
-              ========================================*/}
+              <span>
+                amenidades y
+                experiencias
+              </span>
+            </div>
 
-              <div className={styles.panelTop}>
-                <span className={styles.number}>
-                  {amenity.number}
-                </span>
+            <div
+              className={
+                styles.zagariLine
+              }
+            />
+          </div>
+        </aside>
 
-                <div className={styles.elementBadge}>
-                  <Icon
-                    size={18}
-                    weight="light"
-                    aria-hidden="true"
-                  />
+        {/* ==================================================
+            CONTENT
+        =================================================== */}
 
-                  <span>{amenity.name}</span>
-                </div>
-              </div>
+        <div
+          className={
+            styles.content
+          }
+        >
+          {/* =================================================
+              INTRO
+          ================================================== */}
 
-              {/*========================================
-                CONTENIDO PRINCIPAL
-              ========================================*/}
+          <div
+            data-description
+            className={
+              styles.contentIntro
+            }
+          >
+            <span>
+              Todo dentro de
+              Zagari
+            </span>
 
-              <div className={styles.panelContent}>
-                <span className={styles.eyebrow}>
-                  {amenity.eyebrow}
-                </span>
+            <p>
+              Empieza el día
+              contemplando el paisaje,
+              disfruta la piscina,
+              conecta con tu bienestar,
+              practica deporte o
+              comparte una experiencia
+              gastronómica. En Zagari,
+              cada momento tiene su
+              propio espacio.
+            </p>
+          </div>
 
-                <h3
-                  id={`${amenity.id}-amenity-title`}
-                >
-                  {amenity.title}
-                </h3>
+          {/* =================================================
+              LIST
+          ================================================== */}
 
-                <div
-                  className={
-                    styles.revealContent
-                  }
-                >
-                  <p>
-                    {amenity.description}
-                  </p>
+          <div
+            ref={listRef}
+            className={
+              styles.list
+            }
+            onPointerMove={
+              handlePointerMove
+            }
+            onPointerLeave={
+              handleLeave
+            }
+          >
+            <div
+              className={
+                styles.listHeader
+              }
+            >
+              <span>
+                Nº
+              </span>
 
-                  <Link
-                    href={amenity.href}
-                    className={styles.panelLink}
-                    aria-label={`Conocer más sobre ${amenity.title}`}
+              <span>
+                Experiencia
+              </span>
+
+              <span>
+                Amenidad
+              </span>
+
+              <span />
+            </div>
+
+            {amenities.map(
+              (
+                amenity,
+                index
+              ) => {
+                const Icon =
+                  amenity.icon;
+
+                const active =
+                  activeIndex ===
+                  index;
+
+                const open =
+                  mobileOpen ===
+                  index;
+
+                return (
+                  <button
+                    key={
+                      amenity.id
+                    }
+                    ref={(
+                      node
+                    ) => {
+                      rowRefs.current[
+                        index
+                      ] = node;
+                    }}
+                    type="button"
+                    className={`${styles.row} ${
+                      active
+                        ? styles.rowActive
+                        : ""
+                    } ${
+                      open
+                        ? styles.rowOpen
+                        : ""
+                    }`}
+                    onPointerEnter={() =>
+                      handleEnter(
+                        index
+                      )
+                    }
+                    onClick={() =>
+                      toggleMobile(
+                        index
+                      )
+                    }
+                    aria-expanded={
+                      open
+                    }
                   >
-                    <span>
-                      Conocer experiencia
-                    </span>
+                    {/* =============================
+                        NUMBER
+                    ============================== */}
 
                     <span
                       className={
-                        styles.linkIcon
+                        styles.number
                       }
                     >
-                      <ArrowRight
-                        size={17}
-                        weight="bold"
-                        aria-hidden="true"
+                      {
+                        amenity.id
+                      }
+                    </span>
+
+                    {/* =============================
+                        CATEGORY
+                    ============================== */}
+
+                    <span
+                      className={
+                        styles.category
+                      }
+                    >
+                      {
+                        amenity.category
+                      }
+                    </span>
+
+                    {/* =============================
+                        NAME
+                    ============================== */}
+
+                    <span
+                      className={
+                        styles.name
+                      }
+                    >
+                      {
+                        amenity.title
+                      }
+                    </span>
+
+                    {/* =============================
+                        ICON
+                    ============================== */}
+
+                    <span
+                      className={
+                        styles.icon
+                      }
+                    >
+                      <Icon
+                        size={18}
+                        weight="light"
+                        aria-hidden={
+                          true
+                        }
                       />
                     </span>
-                  </Link>
-                </div>
-              </div>
 
-              {/*========================================
-                LÍNEA INFERIOR
-              ========================================*/}
+                    {/* =============================
+                        MOBILE CONTENT
+                    ============================== */}
 
-              <div
-                className={styles.progress}
-                aria-hidden="true"
-              >
-                <span />
-              </div>
-            </article>
-          );
-        })}
+                    <span
+                      className={`${styles.mobileReveal} ${
+                        open
+                          ? styles.mobileRevealOpen
+                          : ""
+                      }`}
+                    >
+                      <span
+                        className={
+                          styles.mobileVisual
+                        }
+                      >
+                        <Image
+                          src={
+                            amenity.image
+                          }
+                          alt={
+                            amenity.title
+                          }
+                          fill
+                          sizes="calc(100vw - 30px)"
+                          className={
+                            styles.mobileImage
+                          }
+                        />
+
+                        <span
+                          className={
+                            styles.mobileShade
+                          }
+                        />
+
+                        <span
+                          className={
+                            styles.mobileVisualTop
+                          }
+                        >
+                          <span>
+                            Zagari
+                          </span>
+
+                          <span>
+                            {
+                              amenity.id
+                            }
+                          </span>
+                        </span>
+
+                        <span
+                          className={
+                            styles.mobileVisualBottom
+                          }
+                        >
+                          <span>
+                            {
+                              amenity.category
+                            }
+                          </span>
+
+                          <strong>
+                            {
+                              amenity.title
+                            }
+                          </strong>
+                        </span>
+                      </span>
+                    </span>
+                  </button>
+                );
+              }
+            )}
+
+            {/* =================================================
+                DESKTOP FLOATING IMAGE
+            ================================================== */}
+
+            <div
+              ref={previewRef}
+              className={
+                styles.preview
+              }
+              aria-hidden="true"
+            >
+              {activeIndex !==
+                null && (
+                <>
+                  <Image
+                    key={
+                      amenities[
+                        activeIndex
+                      ].image
+                    }
+                    src={
+                      amenities[
+                        activeIndex
+                      ].image
+                    }
+                    alt=""
+                    fill
+                    sizes="240px"
+                    className={
+                      styles.previewImage
+                    }
+                  />
+
+                  <div
+                    className={
+                      styles.previewShade
+                    }
+                  />
+
+                  <div
+                    className={
+                      styles.previewTop
+                    }
+                  >
+                    <span>
+                      {
+                        amenities[
+                          activeIndex
+                        ].id
+                      }
+                    </span>
+
+                    <span>
+                      Zagari
+                    </span>
+                  </div>
+
+                  <div
+                    className={
+                      styles.previewBottom
+                    }
+                  >
+                    {
+                      amenities[
+                        activeIndex
+                      ].title
+                    }
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* =================================================
+              FOOTER
+          ================================================== */}
+
+          <div
+            className={
+              styles.footer
+            }
+          >
+            <div
+              className={
+                styles.footerText
+              }
+            >
+              <span>
+                Vive diferente
+              </span>
+
+              <p>
+                Más que amenidades,
+                espacios creados para
+                disfrutar cada momento
+                de tu experiencia en
+                Zagari.
+              </p>
+            </div>
+
+            <ActionButton
+              href="#contacto"
+              variant="primary"
+              size="md"
+              icon={
+                ArrowUpRight
+              }
+              iconPosition="right"
+            >
+              Conocer Zagari
+            </ActionButton>
+          </div>
+        </div>
       </div>
-
-      {/*================================================
-        PIE
-      ================================================*/}
-
-      <footer className={styles.footer}>
-        <span>
-          Zagari Resort Club
-        </span>
-
-        <Link
-          href="/amenidades"
-          className={styles.allAmenitiesLink}
-        >
-          <span>
-            Descubre todas las amenidades
-          </span>
-
-          <ArrowRight
-            size={17}
-            weight="bold"
-            aria-hidden="true"
-          />
-        </Link>
-
-        <span>
-          San Ramón · Selva Central
-        </span>
-      </footer>
     </section>
   );
 }

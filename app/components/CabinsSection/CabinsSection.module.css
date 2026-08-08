@@ -1,157 +1,1607 @@
+/* ============================================================
+   ZAGARI RESORT CLUB
+   FULLSCREEN OVERLAP
+   SMALLER EDITORIAL IMAGE
+============================================================ */
+
 .section {
+  /* =========================================================
+     ZAGARI
+  ========================================================= */
+
+  --zagari-pink:
+    #ec3476;
+
+  --zagari-orange:
+    #f18a38;
+
+  --zagari-yellow:
+    #efca36;
+
+  --zagari-lime:
+    #8cc348;
+
+  --zagari-green:
+    #43a86f;
+
+  --zagari-aqua:
+    #31b6b3;
+
+  --zagari-blue:
+    #3b9ece;
+
+  --surface:
+    #f8f7f3;
+
+  --surface-soft:
+    #efeee8;
+
+  --text:
+    #171915;
+
+  --muted:
+    rgba(
+      23,
+      25,
+      21,
+      0.55
+    );
+
+  --soft:
+    rgba(
+      23,
+      25,
+      21,
+      0.39
+    );
+
+  --line:
+    rgba(
+      23,
+      25,
+      21,
+      0.12
+    );
+
+  --zagari-gradient:
+    linear-gradient(
+      90deg,
+      var(--zagari-pink)
+        0%,
+      var(--zagari-orange)
+        18%,
+      var(--zagari-yellow)
+        35%,
+      var(--zagari-lime)
+        51%,
+      var(--zagari-green)
+        65%,
+      var(--zagari-aqua)
+        81%,
+      var(--zagari-blue)
+        100%
+    );
+
   position: relative;
 
-  min-height: 760px;
+  width: 100%;
+
+  background:
+    var(--surface);
+
+  color:
+    var(--text);
+}
+
+/* ============================================================
+   PINNED STAGE
+============================================================ */
+
+.stage {
+  position: relative;
+
+  width: 100%;
+
+  height: 100svh;
+
+  min-height: 650px;
 
   overflow: hidden;
 
-  background: var(--background-dark);
-}
-
-.background {
-  object-fit: cover;
-}
-
-.overlay {
-  position: absolute;
-  inset: 0;
+  isolation: isolate;
 
   background:
-    linear-gradient(
-      90deg,
-      rgba(3, 31, 22, 0.92) 0%,
-      rgba(3, 31, 22, 0.66) 50%,
-      rgba(3, 31, 22, 0.16) 100%
+    var(--surface);
+
+  transform:
+    translateZ(0);
+
+  backface-visibility:
+    hidden;
+}
+
+/* ============================================================
+   PANEL
+============================================================ */
+
+.panel {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  opacity: 1;
+
+  visibility: visible;
+
+  background:
+    var(--surface);
+
+  transform:
+    translate3d(
+      0,
+      0,
+      0
+    );
+
+  backface-visibility:
+    hidden;
+
+  will-change:
+    transform;
+}
+
+/* ============================================================
+   SOLID BACKGROUND
+============================================================ */
+
+.panel::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background:
+    var(--surface);
+}
+
+/* ============================================================
+   BRAND LINE
+============================================================ */
+
+.brandLine {
+  position: absolute;
+
+  z-index: 30;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 3px;
+
+  background:
+    var(
+      --zagari-gradient
+    );
+
+  pointer-events: none;
+}
+
+/* ============================================================
+   INNER
+
+   IMAGEN AHORA OCUPA MENOS ESPACIO.
+============================================================ */
+
+.panelInner {
+  position: relative;
+
+  z-index: 2;
+
+  width:
+    min(
+      calc(
+        100% - 96px
+      ),
+      1540px
+    );
+
+  height: 100%;
+
+  margin-inline: auto;
+
+  display: grid;
+
+  /*
+   * Antes la imagen ocupaba
+   * ~54%.
+   *
+   * Ahora:
+   * contenido 56%
+   * visual 44%
+   */
+
+  grid-template-columns:
+    minmax(
+      0,
+      56%
+    )
+    minmax(
+      340px,
+      44%
+    );
+
+  align-items: stretch;
+
+  gap:
+    clamp(
+      45px,
+      6vw,
+      90px
+    );
+
+  background:
+    var(--surface);
+}
+
+/* ============================================================
+   CONTENT
+============================================================ */
+
+.content {
+  position: relative;
+
+  z-index: 3;
+
+  min-width: 0;
+
+  height: 100%;
+
+  padding:
+    clamp(
+      32px,
+      4.5vh,
+      50px
+    )
+    0
+    clamp(
+      34px,
+      4.5vh,
+      50px
+    );
+
+  display: flex;
+
+  flex-direction: column;
+
+  background:
+    var(--surface);
+}
+
+/* ============================================================
+   META
+============================================================ */
+
+.meta {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+
+  width:
+    min(
+      680px,
+      100%
+    );
+
+  padding-bottom:
+    13px;
+
+  border-bottom:
+    1px solid
+    var(--line);
+
+  color:
+    var(--soft);
+
+  font-size:
+    7px;
+
+  font-weight: 500;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+}
+
+/* ============================================================
+   COPY
+============================================================ */
+
+.copy {
+  max-width: 680px;
+
+  padding-top:
+    clamp(
+      36px,
+      5.2vh,
+      58px
     );
 }
 
-.container {
-  position: relative;
-  z-index: 2;
-
-  width: 1240px;
-  max-width: calc(100% - 80px);
-  min-height: 760px;
-
-  margin: 0 auto;
-
-  display: flex;
-  align-items: center;
-}
-
-.content {
-  max-width: 670px;
-}
+/* ============================================================
+   EYEBROW
+============================================================ */
 
 .eyebrow {
   display: inline-flex;
 
-  margin-bottom: 16px;
+  align-items: center;
 
-  color: #9cffc5;
+  gap: 9px;
 
-  font-size: 0.7rem;
-  font-weight: 700;
+  margin-bottom:
+    14px;
 
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+  color:
+    var(--accent);
+
+  font-size:
+    7px;
+
+  font-weight: 600;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
 }
 
-.content h2 {
-  color: var(--color-white);
+.eyebrow::before {
+  content: "";
+
+  width: 16px;
+
+  height: 2px;
+
+  flex: 0 0 auto;
+
+  border-radius:
+    999px;
+
+  background:
+    var(--accent);
 }
 
-.content p {
-  max-width: 580px;
+/* ============================================================
+   TITLE
 
-  margin-top: 24px;
+   TAMAÑO NORMAL.
+============================================================ */
 
-  color: rgba(255, 255, 255, 0.74);
+.copy h2 {
+  max-width: 640px;
+
+  margin: 0;
+
+  font-size:
+    clamp(
+      2.25rem,
+      3.25vw,
+      3.85rem
+    );
+
+  font-weight: 400;
+
+  line-height: 0.99;
+
+  letter-spacing:
+    -0.043em;
 }
 
-.types {
-  margin: 30px 0;
+/* ============================================================
+   DESCRIPTION
+============================================================ */
+
+.description {
+  max-width: 570px;
+
+  margin:
+    20px
+    0
+    0;
+
+  color:
+    rgba(
+      23,
+      25,
+      21,
+      0.71
+    );
+
+  font-size:
+    clamp(
+      0.85rem,
+      0.92vw,
+      0.97rem
+    );
+
+  font-weight: 300;
+
+  line-height: 1.62;
+}
+
+/* ============================================================
+   EXPERIENCE
+============================================================ */
+
+.experience {
+  max-width: 515px;
+
+  margin:
+    13px
+    0
+    0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    clamp(
+      0.73rem,
+      0.78vw,
+      0.83rem
+    );
+
+  font-weight: 300;
+
+  line-height: 1.55;
+}
+
+/* ============================================================
+   INFO
+============================================================ */
+
+.info {
+  width:
+    min(
+      570px,
+      100%
+    );
+
+  margin-top:
+    clamp(
+      27px,
+      3.8vh,
+      39px
+    );
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+}
+
+/* ============================================================
+   INFO ITEM
+============================================================ */
+
+.info > div {
+  min-height: 59px;
+
+  padding:
+    10px
+    13px;
 
   display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
+
+  flex-direction: column;
+
+  justify-content:
+    center;
+
+  gap: 5px;
+
+  border-right:
+    1px solid
+    var(--line);
 }
 
-.types span {
-  padding: 9px 13px;
-
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius-round);
-
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--color-white);
-
-  font-size: 0.7rem;
+.info
+> div:first-child {
+  padding-left: 0;
 }
 
-.button {
-  min-height: 52px;
-  padding: 0 22px;
+.info
+> div:last-child {
+  border-right: 0;
+}
 
-  display: inline-flex;
+.info span {
+  color:
+    var(--soft);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.1em;
+
+  text-transform:
+    uppercase;
+}
+
+.info strong {
+  color:
+    var(--text);
+
+  font-size:
+    0.73rem;
+
+  font-weight: 400;
+}
+
+/* ============================================================
+   BOTTOM CONTENT
+
+   AQUÍ SUBIMOS EL BOTÓN.
+============================================================ */
+
+.bottomContent {
+  width:
+    min(
+      570px,
+      100%
+    );
+
+  margin-top:
+    clamp(
+      19px,
+      2.8vh,
+      28px
+    );
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items:
+    flex-start;
+}
+
+/* ============================================================
+   AMENITIES
+============================================================ */
+
+.amenities {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    105px
+    minmax(
+      0,
+      1fr
+    );
+
+  gap: 25px;
+
+  align-items:
+    center;
+}
+
+/* ============================================================
+   +20
+============================================================ */
+
+.amenitiesTitle {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.amenitiesTitle strong {
+  color:
+    var(--accent);
+
+  font-size:
+    clamp(
+      1.55rem,
+      1.8vw,
+      1.9rem
+    );
+
+  font-weight: 500;
+
+  line-height: 1;
+}
+
+.amenitiesTitle span {
+  color:
+    var(--soft);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+}
+
+.amenities p {
+  max-width: 410px;
+
+  margin: 0;
+
+  color:
+    var(--muted);
+
+  font-size:
+    0.67rem;
+
+  font-weight: 300;
+
+  line-height: 1.48;
+}
+
+/* ============================================================
+   ACTION BUTTON
+
+   YA NO ESTÁ PEGADO ABAJO.
+============================================================ */
+
+.actionWrap {
+  /*
+   * Lo colocamos justo debajo
+   * de amenidades.
+   */
+
+  margin-top:
+    clamp(
+      18px,
+      2.4vh,
+      25px
+    );
+
+  /*
+   * Nada de margin-top:auto.
+   * Por eso queda más arriba.
+   */
+}
+
+/* ============================================================
+   VISUAL AREA
+
+   La columna existe,
+   pero la foto NO llena toda
+   la columna ni toda la pantalla.
+============================================================ */
+
+.visualArea {
+  position: relative;
+
+  min-width: 0;
+
+  height: 100%;
+
+  padding:
+    clamp(
+      42px,
+      6vh,
+      68px
+    )
+    0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content:
+    center;
+}
+
+/* ============================================================
+   VISUAL HEADER
+============================================================ */
+
+.visualHeader {
+  display: flex;
+
   align-items: center;
-  justify-content: center;
-  gap: 10px;
 
-  border: 1px solid var(--color-white);
-  border-radius: var(--radius-round);
+  justify-content:
+    space-between;
 
-  background: var(--color-white);
-  color: var(--color-primary-deep);
+  gap: 20px;
 
-  font-size: 0.74rem;
-  font-weight: 700;
+  margin-bottom:
+    13px;
 
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  color:
+    var(--soft);
 
-  transition:
-    transform var(--transition-normal),
-    background var(--transition-normal);
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
 }
 
-.button:hover {
-  background: var(--color-sand);
+/* ============================================================
+   VISUAL
 
-  transform: translateY(-2px);
+   IMAGEN MÁS PEQUEÑA.
+============================================================ */
+
+.visual {
+  position: relative;
+
+  width: 100%;
+
+  /*
+   * Antes:
+   * height: 100%
+   *
+   * Ahora es una foto editorial
+   * dentro de la pantalla.
+   */
+
+  height:
+    min(
+      67vh,
+      610px
+    );
+
+  min-height:
+    440px;
+
+  overflow: hidden;
+
+  background:
+    #d9ddd7;
+
+  isolation: isolate;
 }
 
-@media (max-width: 768px) {
-  .section,
-  .container {
-    min-height: 690px;
-  }
+/* ============================================================
+   IMAGE
+============================================================ */
 
-  .overlay {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(3, 31, 22, 0.18) 0%,
-        rgba(3, 31, 22, 0.92) 72%,
-        #031f16 100%
+.image {
+  z-index: 1 !important;
+
+  object-fit: cover;
+
+  object-position:
+    center center;
+
+  transform:
+    translateZ(0);
+
+  backface-visibility:
+    hidden;
+
+  will-change:
+    transform;
+}
+
+/* ============================================================
+   OVERLAY
+============================================================ */
+
+.overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        5,
+        12,
+        8,
+        0.01
+      )
+      38%,
+      rgba(
+        5,
+        12,
+        8,
+        0.03
+      )
+      62%,
+      rgba(
+        5,
+        12,
+        8,
+        0.42
+      )
+      100%
+    );
+}
+
+/* ============================================================
+   IMAGE TOP
+============================================================ */
+
+.imageTop {
+  position: absolute;
+
+  z-index: 5;
+
+  top: 17px;
+
+  left: 18px;
+
+  right: 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.88
+    );
+
+  font-size:
+    6px;
+
+  font-weight: 500;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+}
+
+/* ============================================================
+   IMAGE BOTTOM
+============================================================ */
+
+.imageBottom {
+  position: absolute;
+
+  z-index: 5;
+
+  left: 18px;
+
+  right: 18px;
+
+  bottom: 16px;
+}
+
+/* ============================================================
+   ZAGARI BRAND LINE
+============================================================ */
+
+.imageBrandLine {
+  width: 82px;
+
+  height: 2px;
+
+  margin-bottom:
+    10px;
+
+  border-radius:
+    999px;
+
+  background:
+    var(
+      --zagari-gradient
+    );
+}
+
+.imageBottomMeta {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.86
+    );
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+}
+
+/* ============================================================
+   VISUAL FOOTER
+============================================================ */
+
+.visualFooter {
+  min-height: 37px;
+
+  padding-top:
+    12px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  color:
+    var(--soft);
+
+  font-size:
+    6px;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+}
+
+.visualFooterLine {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    var(--line);
+}
+
+/* ============================================================
+   LARGE DESKTOP
+============================================================ */
+
+@media (
+  min-width: 1500px
+) {
+  .panelInner {
+    grid-template-columns:
+      minmax(
+        0,
+        57%
+      )
+      minmax(
+        350px,
+        43%
       );
   }
 
-  .container {
-    max-width: calc(100% - 32px);
-
-    align-items: flex-end;
-
-    padding-bottom: 54px;
-  }
-
-  .button {
-    width: 100%;
+  .visual {
+    height:
+      min(
+        66vh,
+        620px
+      );
   }
 }
 
-@media (max-width: 420px) {
-  .container {
-    max-width: calc(100% - 26px);
+/* ============================================================
+   LAPTOP
+============================================================ */
+
+@media (
+  max-width: 1250px
+) {
+  .panelInner {
+    width:
+      calc(
+        100% - 64px
+      );
+
+    grid-template-columns:
+      minmax(
+        0,
+        55%
+      )
+      minmax(
+        310px,
+        45%
+      );
+
+    gap: 45px;
+  }
+
+  .copy h2 {
+    font-size:
+      clamp(
+        2.1rem,
+        3.2vw,
+        3.55rem
+      );
+  }
+
+  .visual {
+    height:
+      min(
+        64vh,
+        570px
+      );
+
+    min-height:
+      420px;
+  }
+}
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media
+  (max-width: 1024px)
+  and
+  (min-width: 768px) {
+
+  .panelInner {
+    width:
+      calc(
+        100% - 48px
+      );
+
+    grid-template-columns:
+      53%
+      47%;
+
+    gap: 30px;
+  }
+
+  .content {
+    padding:
+      25px
+      0;
+  }
+
+  .copy {
+    padding-top:
+      28px;
+  }
+
+  .copy h2 {
+    font-size:
+      clamp(
+        1.95rem,
+        3.7vw,
+        2.9rem
+      );
+  }
+
+  .description {
+    margin-top:
+      14px;
+
+    font-size:
+      0.76rem;
+
+    line-height:
+      1.52;
+  }
+
+  .experience {
+    font-size:
+      0.66rem;
+  }
+
+  .info {
+    margin-top:
+      21px;
+  }
+
+  .info > div {
+    min-height:
+      50px;
+
+    padding:
+      7px
+      8px;
+  }
+
+  .info strong {
+    font-size:
+      0.62rem;
+  }
+
+  .bottomContent {
+    margin-top:
+      15px;
+  }
+
+  .amenities {
+    grid-template-columns:
+      78px
+      1fr;
+
+    gap: 13px;
+  }
+
+  .amenities p {
+    font-size:
+      0.59rem;
+  }
+
+  .actionWrap {
+    margin-top:
+      15px;
+  }
+
+  .visualArea {
+    padding:
+      40px
+      0;
+  }
+
+  .visual {
+    height:
+      min(
+        60vh,
+        500px
+      );
+
+    min-height:
+      390px;
+  }
+}
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (
+  max-width: 767px
+) {
+  .stage {
+    height:
+      100svh;
+
+    min-height:
+      650px;
+  }
+
+  /* ========================================================
+     LAYOUT
+  ======================================================== */
+
+  .panelInner {
+    width: 100%;
+
+    height: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr;
+
+    /*
+     * Imagen más pequeña también
+     * en mobile.
+     */
+
+    grid-template-rows:
+      39%
+      61%;
+
+    gap: 0;
+  }
+
+  /* ========================================================
+     VISUAL
+  ======================================================== */
+
+  .visualArea {
+    order: 1;
+
+    width: 100%;
+
+    height: 100%;
+
+    padding: 0;
+
+    display: block;
+  }
+
+  .visualHeader,
+  .visualFooter {
+    display: none;
+  }
+
+  .visual {
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 0;
+  }
+
+  .imageTop {
+    top: 13px;
+
+    left: 15px;
+
+    right: 15px;
+
+    font-size: 5px;
+  }
+
+  .imageBottom {
+    left: 15px;
+
+    right: 15px;
+
+    bottom: 12px;
+  }
+
+  .imageBrandLine {
+    width: 62px;
+
+    height: 2px;
+
+    margin-bottom:
+      7px;
+  }
+
+  .imageBottomMeta {
+    font-size:
+      5px;
+  }
+
+  /* ========================================================
+     CONTENT
+  ======================================================== */
+
+  .content {
+    order: 2;
+
+    width: 100%;
+
+    height: 100%;
+
+    padding:
+      16px
+      18px
+      17px;
+
+    overflow: hidden;
+  }
+
+  .meta {
+    width: 100%;
+
+    padding-bottom:
+      7px;
+
+    font-size:
+      5px;
+  }
+
+  .copy {
+    padding-top:
+      11px;
+  }
+
+  .eyebrow {
+    margin-bottom:
+      6px;
+
+    font-size:
+      5px;
+  }
+
+  .eyebrow::before {
+    width: 10px;
+  }
+
+  .copy h2 {
+    font-size:
+      clamp(
+        1.6rem,
+        6.8vw,
+        2.15rem
+      );
+
+    line-height: 1;
+  }
+
+  .description {
+    margin-top:
+      8px;
+
+    font-size:
+      0.64rem;
+
+    line-height:
+      1.4;
+  }
+
+  .experience {
+    margin-top:
+      5px;
+
+    font-size:
+      0.56rem;
+
+    line-height:
+      1.35;
+  }
+
+  /* ========================================================
+     INFO
+  ======================================================== */
+
+  .info {
+    width: 100%;
+
+    margin-top:
+      10px;
+  }
+
+  .info > div {
+    min-height:
+      37px;
+
+    padding:
+      4px
+      5px;
+  }
+
+  .info
+  > div:first-child {
+    padding-left: 0;
+  }
+
+  .info span {
+    font-size:
+      4px;
+  }
+
+  .info strong {
+    font-size:
+      0.52rem;
+  }
+
+  /* ========================================================
+     BOTTOM
+  ======================================================== */
+
+  .bottomContent {
+    width: 100%;
+
+    margin-top:
+      9px;
+  }
+
+  .amenities {
+    grid-template-columns:
+      63px
+      1fr;
+
+    gap: 8px;
+  }
+
+  .amenitiesTitle strong {
+    font-size:
+      1.15rem;
+  }
+
+  .amenitiesTitle span {
+    font-size:
+      4px;
+  }
+
+  .amenities p {
+    font-size:
+      0.49rem;
+
+    line-height:
+      1.3;
+  }
+
+  /*
+   * Botón más arriba.
+   */
+
+  .actionWrap {
+    margin-top:
+      11px;
+  }
+}
+
+/* ============================================================
+   MOBILE SMALL
+============================================================ */
+
+@media (
+  max-width: 430px
+) {
+  .panelInner {
+    grid-template-rows:
+      37%
+      63%;
+  }
+
+  .content {
+    padding-left:
+      15px;
+
+    padding-right:
+      15px;
+  }
+}
+
+/* ============================================================
+   VERY SMALL
+============================================================ */
+
+@media (
+  max-width: 360px
+) {
+  .stage {
+    min-height:
+      620px;
+  }
+
+  .panelInner {
+    grid-template-rows:
+      36%
+      64%;
+  }
+
+  .experience {
+    display: none;
+  }
+}
+
+/* ============================================================
+   SHORT DESKTOP
+============================================================ */
+
+@media
+  (min-width: 768px)
+  and
+  (max-height: 720px) {
+
+  .stage {
+    min-height:
+      610px;
+  }
+
+  .content {
+    padding-top:
+      22px;
+
+    padding-bottom:
+      22px;
+  }
+
+  .copy {
+    padding-top:
+      24px;
+  }
+
+  .copy h2 {
+    font-size:
+      clamp(
+        1.9rem,
+        2.9vw,
+        2.95rem
+      );
+  }
+
+  .description {
+    margin-top:
+      12px;
+  }
+
+  .experience {
+    margin-top:
+      7px;
+  }
+
+  .info {
+    margin-top:
+      17px;
+  }
+
+  .bottomContent {
+    margin-top:
+      13px;
+  }
+
+  .actionWrap {
+    margin-top:
+      13px;
+  }
+
+  .visualArea {
+    padding:
+      32px
+      0;
+  }
+
+  .visual {
+    height:
+      min(
+        68vh,
+        500px
+      );
+
+    min-height:
+      390px;
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .image {
+    transform:
+      none !important;
   }
 }
