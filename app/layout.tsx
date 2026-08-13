@@ -15,6 +15,7 @@ import "./globals.css";
 
 import SmoothScroll from "./components/SmoothScroll";
 import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 /* =========================================================
    TIPOGRAFÍAS
@@ -596,6 +597,7 @@ export default function RootLayout({
           {children}
         </SmoothScroll>
         <Navbar />
+        <Footer />
 
         <script
           type="application/ld+json"

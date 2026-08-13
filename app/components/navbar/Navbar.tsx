@@ -2,24 +2,29 @@
 
 import {
   ArrowRight,
+  ArrowUp,
   List,
+  WhatsappLogo,
   X,
 } from "@phosphor-icons/react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import {
   useEffect,
+  useRef,
   useState,
 } from "react";
 
 import styles from "./Navbar.module.css";
 
-/*==================================================
-  ENLACES
-==================================================*/
+/* ==========================================================
+   NAVIGATION
+========================================================== */
 
-const navigationItems = [
+const leftNavigation = [
   {
     label: "Inicio",
     href: "/",
@@ -32,13 +37,16 @@ const navigationItems = [
     label: "Lotes",
     href: "/lotes",
   },
+] as const;
+
+const rightNavigation = [
   {
     label: "Experiencias",
     href: "/#experiencia",
   },
   {
     label: "Amenidades",
-    href: "/#amenidades",
+    href: "/#amenities",
   },
   {
     label: "Ubicación",
@@ -46,64 +54,234 @@ const navigationItems = [
   },
 ] as const;
 
-/*==================================================
-  COMPONENTE
-==================================================*/
+const navigationItems = [
+  ...leftNavigation,
+  ...rightNavigation,
+] as const;
+
+/* ==========================================================
+   COMPONENT
+========================================================== */
 
 export default function Navbar() {
-  const pathname = usePathname();
+  const pathname =
+    usePathname();
 
-  const [isMenuOpen, setIsMenuOpen] =
-    useState(false);
+  const frameRef =
+    useRef<number | null>(
+      null
+    );
 
-  const [isScrolled, setIsScrolled] =
-    useState(false);
+  const [
+    isScrolled,
+    setIsScrolled,
+  ] = useState(false);
 
-  /*================================================
-    DETECTAR SCROLL
-  ================================================*/
+  const [
+    isMenuOpen,
+    setIsMenuOpen,
+  ] = useState(false);
+
+  const [
+    activeHash,
+    setActiveHash,
+  ] = useState("");
+
+  const [
+    isFooterDocked,
+    setIsFooterDocked,
+  ] = useState(false);
+
+  /* ========================================================
+     WHATSAPP
+  ======================================================== */
+
+  const whatsappNumber =
+    process.env
+      .NEXT_PUBLIC_ZAGARI_WHATSAPP ||
+    "519XXXXXXXX";
+
+  const whatsappUrl =
+    `https://wa.me/${whatsappNumber}` +
+    `?text=${encodeURIComponent(
+      "Hola Zagari Resort Club, quisiera recibir más información."
+    )}`;
+
+  /* ========================================================
+     NORMAL SCROLL
+  ======================================================== */
 
   useEffect(() => {
-    const handleScroll = (): void => {
+    const update = () => {
       setIsScrolled(
-        window.scrollY > 90,
+        window.scrollY > 70
       );
     };
 
-    handleScroll();
+    update();
 
     window.addEventListener(
       "scroll",
-      handleScroll,
+      update,
       {
         passive: true,
-      },
+      }
     );
 
     return () => {
       window.removeEventListener(
         "scroll",
-        handleScroll,
+        update
       );
     };
   }, []);
 
-  /*================================================
-    CERRAR AL CAMBIAR DE RUTA
-  ================================================*/
+  /* ========================================================
+     FOOTER DOCK
+
+     IMPORTANTE:
+
+     El navbar NO SE MUEVE.
+
+     El footer sube normalmente.
+
+     Cuando el top del footer llega
+     prácticamente al top del viewport,
+     cambiamos el diseño del navbar.
+  ======================================================== */
+
+  useEffect(() => {
+    const updateFooterDock =
+      () => {
+        const footer =
+          document.querySelector<HTMLElement>(
+            "[data-zagari-footer]"
+          );
+
+        if (!footer) {
+          setIsFooterDocked(
+            false
+          );
+
+          return;
+        }
+
+        const rect =
+          footer.getBoundingClientRect();
+
+        /*
+         * 12 px evita problemas de
+         * subpíxeles / zoom del navegador.
+         */
+
+        const reachedTop =
+          rect.top <= 12;
+
+        const footerVisible =
+          rect.bottom > 0;
+
+        setIsFooterDocked(
+          reachedTop &&
+            footerVisible
+        );
+      };
+
+    const requestUpdate =
+      () => {
+        if (
+          frameRef.current !==
+          null
+        ) {
+          cancelAnimationFrame(
+            frameRef.current
+          );
+        }
+
+        frameRef.current =
+          requestAnimationFrame(
+            updateFooterDock
+          );
+      };
+
+    updateFooterDock();
+
+    window.addEventListener(
+      "scroll",
+      requestUpdate,
+      {
+        passive: true,
+      }
+    );
+
+    window.addEventListener(
+      "resize",
+      requestUpdate
+    );
+
+    return () => {
+      if (
+        frameRef.current !==
+        null
+      ) {
+        cancelAnimationFrame(
+          frameRef.current
+        );
+      }
+
+      window.removeEventListener(
+        "scroll",
+        requestUpdate
+      );
+
+      window.removeEventListener(
+        "resize",
+        requestUpdate
+      );
+    };
+  }, []);
+
+  /* ========================================================
+     HASH
+  ======================================================== */
+
+  useEffect(() => {
+    const updateHash = () => {
+      setActiveHash(
+        window.location.hash
+      );
+    };
+
+    updateHash();
+
+    window.addEventListener(
+      "hashchange",
+      updateHash
+    );
+
+    return () => {
+      window.removeEventListener(
+        "hashchange",
+        updateHash
+      );
+    };
+  }, []);
+
+  /* ========================================================
+     ROUTE
+  ======================================================== */
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
 
-  /*================================================
-    BLOQUEAR SCROLL AL ABRIR MENÚ
-  ================================================*/
+  /* ========================================================
+     BODY LOCK
+  ======================================================== */
 
   useEffect(() => {
     if (!isMenuOpen) {
       document.body.style.removeProperty(
-        "overflow",
+        "overflow"
       );
 
       return;
@@ -114,61 +292,89 @@ export default function Navbar() {
 
     return () => {
       document.body.style.removeProperty(
-        "overflow",
+        "overflow"
       );
     };
   }, [isMenuOpen]);
 
-  /*================================================
-    CERRAR CON ESCAPE
-  ================================================*/
+  /* ========================================================
+     ESC
+  ======================================================== */
 
   useEffect(() => {
     const handleKeyDown = (
-      event: KeyboardEvent,
-    ): void => {
-      if (event.key === "Escape") {
+      event: KeyboardEvent
+    ) => {
+      if (
+        event.key ===
+        "Escape"
+      ) {
         setIsMenuOpen(false);
       }
     };
 
     window.addEventListener(
       "keydown",
-      handleKeyDown,
+      handleKeyDown
     );
 
     return () => {
       window.removeEventListener(
         "keydown",
-        handleKeyDown,
+        handleKeyDown
       );
     };
   }, []);
 
-  /*================================================
-    ESTADO ACTIVO
-  ================================================*/
+  /* ========================================================
+     ACTIVE
+  ======================================================== */
 
   const isActive = (
-    href: string,
-  ): boolean => {
+    href: string
+  ) => {
+    const [
+      route,
+      hash,
+    ] = href.split("#");
+
     if (href === "/") {
-      return pathname === "/";
+      return (
+        pathname === "/" &&
+        !activeHash
+      );
     }
 
-    const route =
-      href.split("#")[0];
-
-    if (!route || route === "/") {
-      return false;
+    if (
+      hash &&
+      (
+        !route ||
+        route === "/"
+      )
+    ) {
+      return (
+        pathname === "/" &&
+        activeHash ===
+          `#${hash}`
+      );
     }
 
-    return pathname.startsWith(route);
+    if (route) {
+      return pathname.startsWith(
+        route
+      );
+    }
+
+    return false;
   };
 
-  const closeMenu = (): void => {
+  const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const showFooterNav =
+    isFooterDocked &&
+    !isMenuOpen;
 
   return (
     <>
@@ -177,136 +383,310 @@ export default function Navbar() {
           isScrolled
             ? styles.headerScrolled
             : styles.headerTop
+        } ${
+          showFooterNav
+            ? styles.footerDocked
+            : ""
         }`}
       >
-        <div className={styles.container}>
-          {/* =========================================
-              LOGO
-          ========================================== */}
+        <div
+          className={
+            styles.notch
+          }
+        >
+          {/* =================================
+              FOOTER NAVBAR
+          ================================== */}
 
-          <Link
-            href="/"
-            className={styles.logo}
-            aria-label="Ir al inicio de Zagari Resort Club"
-          >
-            <Image
-              src="/assets/brand/zagari-logo-light.svg"
-              alt="Zagari Resort Club"
-              width={168}
-              height={58}
-              priority
-              className={styles.logoImage}
-            />
-          </Link>
-
-          {/* =========================================
-              NAVEGACIÓN COMPLETA
-              SOLO ARRIBA Y EN DESKTOP
-          ========================================== */}
-
-          <nav
-            className={`${styles.navigation} ${
-              isScrolled
-                ? styles.navigationHidden
-                : styles.navigationVisible
-            }`}
-            aria-label="Navegación principal"
-          >
-            <div className={styles.glassPanel}>
-              <div
-                className={
-                  styles.navigationLinks
-                }
-              >
-                {navigationItems.map(
-                  (item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`${styles.navigationLink} ${
-                        isActive(
-                          item.href,
-                        )
-                          ? styles.activeLink
-                          : ""
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  ),
-                )}
-              </div>
+          {showFooterNav ? (
+            <div
+              className={
+                styles.footerNav
+              }
+            >
+              {/* ===========================
+                  LOGO
+              ============================ */}
 
               <Link
-                href="/contacto"
+                href="/"
                 className={
-                  styles.contactButton
+                  styles.footerNavLogo
+                }
+                aria-label="Zagari Resort Club"
+              >
+                <Image
+                  src="/assets/brand/zagari-logo-dark.svg"
+                  alt="Zagari Resort Club"
+                  width={150}
+                  height={50}
+                  className={
+                    styles.footerNavLogoImage
+                  }
+                />
+              </Link>
+
+              {/* ===========================
+                  MESSAGE
+              ============================ */}
+
+              <div
+                className={
+                  styles.footerNavMessage
                 }
               >
                 <span>
-                  Solicitar información
+                  Zagari Resort Club
                 </span>
 
-                <span
+                <strong>
+                  Vive diferente.
+                </strong>
+
+                <small>
+                  San Ramón ·
+                  Selva Central
+                </small>
+              </div>
+
+              {/* ===========================
+                  ACTIONS
+              ============================ */}
+
+              <div
+                className={
+                  styles.footerNavActions
+                }
+              >
+                <a
+                  href={
+                    whatsappUrl
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={
-                    styles.contactIcon
+                    styles.footerWhatsapp
                   }
                 >
-                  <ArrowRight
-                    size={15}
-                    weight="bold"
-                    aria-hidden="true"
+                  <WhatsappLogo
+                    size={17}
+                    weight="fill"
                   />
-                </span>
-              </Link>
+
+                  <span>
+                    Hablar por WhatsApp
+                  </span>
+                </a>
+
+                <button
+                  type="button"
+                  className={
+                    styles.footerTop
+                  }
+                  aria-label="Volver arriba"
+                  onClick={() => {
+                    window.scrollTo({
+                      top: 0,
+                      behavior:
+                        "smooth",
+                    });
+                  }}
+                >
+                  <ArrowUp
+                    size={16}
+                    weight="bold"
+                  />
+                </button>
+              </div>
             </div>
-          </nav>
+          ) : (
+            <>
+              {/* =================================
+                  NORMAL LEFT
+              ================================== */}
 
-          {/* =========================================
-              HAMBURGUESA
-              SCROLL + TABLET + MÓVIL
-          ========================================== */}
+              <nav
+                className={
+                  styles.leftNavigation
+                }
+                aria-label="Navegación principal"
+              >
+                {leftNavigation.map(
+                  (item) => {
+                    const active =
+                      isActive(
+                        item.href
+                      );
 
-          <button
-            type="button"
-            className={`${styles.menuButton} ${
-              isScrolled
-                ? styles.menuButtonVisible
-                : ""
-            }`}
-            aria-label={
-              isMenuOpen
-                ? "Cerrar menú"
-                : "Abrir menú"
-            }
-            aria-expanded={isMenuOpen}
-            aria-controls="zagari-menu-panel"
-            onClick={() =>
-              setIsMenuOpen(
-                (current) => !current,
-              )
-            }
-          >
-            {isMenuOpen ? (
-              <X
-                size={22}
-                weight="bold"
-                aria-hidden="true"
-              />
-            ) : (
-              <List
-                size={23}
-                weight="bold"
-                aria-hidden="true"
-              />
-            )}
-          </button>
+                    return (
+                      <Link
+                        key={
+                          item.href
+                        }
+                        href={
+                          item.href
+                        }
+                        className={`${styles.navLink} ${
+                          active
+                            ? styles.navLinkActive
+                            : ""
+                        }`}
+                      >
+                        {
+                          item.label
+                        }
+
+                        <span
+                          className={
+                            styles.navLine
+                          }
+                        />
+                      </Link>
+                    );
+                  }
+                )}
+              </nav>
+
+              {/* =================================
+                  NORMAL LOGO
+              ================================== */}
+
+              <Link
+                href="/"
+                className={
+                  styles.logo
+                }
+                aria-label="Zagari Resort Club"
+              >
+                <Image
+                  src="/assets/brand/zagari-logo-dark.svg"
+                  alt="Zagari Resort Club"
+                  width={160}
+                  height={54}
+                  priority
+                  className={
+                    styles.logoImage
+                  }
+                />
+              </Link>
+
+              {/* =================================
+                  NORMAL RIGHT
+              ================================== */}
+
+              <div
+                className={
+                  styles.rightArea
+                }
+              >
+                <nav
+                  className={
+                    styles.rightNavigation
+                  }
+                  aria-label="Secciones"
+                >
+                  {rightNavigation.map(
+                    (item) => {
+                      const active =
+                        isActive(
+                          item.href
+                        );
+
+                      return (
+                        <Link
+                          key={
+                            item.href
+                          }
+                          href={
+                            item.href
+                          }
+                          className={`${styles.navLink} ${
+                            active
+                              ? styles.navLinkActive
+                              : ""
+                          }`}
+                        >
+                          {
+                            item.label
+                          }
+
+                          <span
+                            className={
+                              styles.navLine
+                            }
+                          />
+                        </Link>
+                      );
+                    }
+                  )}
+                </nav>
+
+                <Link
+                  href="/contacto"
+                  className={
+                    styles.contactButton
+                  }
+                >
+                  <span>
+                    Solicitar información
+                  </span>
+
+                  <span
+                    className={
+                      styles.contactIcon
+                    }
+                  >
+                    <ArrowRight
+                      size={15}
+                      weight="bold"
+                    />
+                  </span>
+                </Link>
+              </div>
+
+              {/* =================================
+                  MOBILE BUTTON
+              ================================== */}
+
+              <button
+                type="button"
+                className={
+                  styles.menuButton
+                }
+                aria-label={
+                  isMenuOpen
+                    ? "Cerrar menú"
+                    : "Abrir menú"
+                }
+                aria-expanded={
+                  isMenuOpen
+                }
+                aria-controls="zagari-menu"
+                onClick={() => {
+                  setIsMenuOpen(
+                    (current) =>
+                      !current
+                  );
+                }}
+              >
+                {isMenuOpen ? (
+                  <X
+                    size={20}
+                  />
+                ) : (
+                  <List
+                    size={22}
+                  />
+                )}
+              </button>
+            </>
+          )}
         </div>
       </header>
 
-      {/* =====================================================
-          FONDO DEL MENÚ
-      ====================================================== */}
+      {/* =====================================
+          BACKDROP
+      ====================================== */}
 
       <button
         type="button"
@@ -316,44 +696,52 @@ export default function Navbar() {
             : ""
         }`}
         aria-label="Cerrar menú"
-        tabIndex={
-          isMenuOpen ? 0 : -1
+        onClick={
+          closeMenu
         }
-        onClick={closeMenu}
+        tabIndex={
+          isMenuOpen
+            ? 0
+            : -1
+        }
       />
 
-      {/* =====================================================
-          PANEL DEL MENÚ
-      ====================================================== */}
+      {/* =====================================
+          MOBILE MENU
+      ====================================== */}
 
       <aside
-        id="zagari-menu-panel"
-        className={`${styles.menuPanel} ${
+        id="zagari-menu"
+        className={`${styles.mobileMenu} ${
           isMenuOpen
-            ? styles.menuPanelOpen
+            ? styles.mobileMenuOpen
             : ""
         }`}
-        aria-hidden={!isMenuOpen}
+        aria-hidden={
+          !isMenuOpen
+        }
       >
         <div
           className={
-            styles.menuPanelHeader
+            styles.mobileHeader
           }
         >
           <Link
             href="/"
             className={
-              styles.panelLogo
+              styles.mobileLogo
             }
-            onClick={closeMenu}
+            onClick={
+              closeMenu
+            }
           >
             <Image
               src="/assets/brand/zagari-logo-light.svg"
               alt="Zagari Resort Club"
-              width={150}
-              height={52}
+              width={140}
+              height={50}
               className={
-                styles.panelLogoImage
+                styles.mobileLogoImage
               }
             />
           </Link>
@@ -363,104 +751,130 @@ export default function Navbar() {
             className={
               styles.closeButton
             }
+            onClick={
+              closeMenu
+            }
             aria-label="Cerrar menú"
-            onClick={closeMenu}
           >
-            <X
-              size={21}
-              weight="bold"
-              aria-hidden="true"
-            />
+            <X size={20} />
           </button>
         </div>
 
         <div
           className={
-            styles.menuPanelContent
-          }
-        >
-          <span
-            className={
-              styles.menuEyebrow
-            }
-          >
-            Explora Zagari
-          </span>
-
-          <nav
-            className={
-              styles.panelNavigation
-            }
-            aria-label="Menú de navegación"
-          >
-            {navigationItems.map(
-              (item, index) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={closeMenu}
-                  className={
-                    isActive(item.href)
-                      ? styles.panelActiveLink
-                      : ""
-                  }
-                >
-                  <span
-                    className={
-                      styles.linkNumber
-                    }
-                  >
-                    {String(
-                      index + 1,
-                    ).padStart(2, "0")}
-                  </span>
-
-                  <strong>
-                    {item.label}
-                  </strong>
-
-                  <ArrowRight
-                    size={19}
-                    weight="bold"
-                    aria-hidden="true"
-                  />
-                </Link>
-              ),
-            )}
-          </nav>
-
-          <Link
-            href="/contacto"
-            className={
-              styles.panelContactButton
-            }
-            onClick={closeMenu}
-          >
-            <span>
-              Solicitar información
-            </span>
-
-            <span
-              className={
-                styles.panelContactIcon
-              }
-            >
-              <ArrowRight
-                size={18}
-                weight="bold"
-                aria-hidden="true"
-              />
-            </span>
-          </Link>
-        </div>
-
-        <div
-          className={
-            styles.menuPanelFooter
+            styles.mobileIntro
           }
         >
           <span>
-            San Ramón · Selva Central
+            Zagari Resort Club
+          </span>
+
+          <h2>
+            Vive diferente
+            en San Ramón.
+          </h2>
+
+          <p>
+            Naturaleza, descanso,
+            lotes y experiencias
+            en la Selva Central.
+          </p>
+        </div>
+
+        <nav
+          className={
+            styles.mobileNavigation
+          }
+        >
+          {navigationItems.map(
+            (
+              item,
+              index
+            ) => (
+              <Link
+                key={
+                  item.href
+                }
+                href={
+                  item.href
+                }
+                onClick={
+                  closeMenu
+                }
+                className={`${styles.mobileLink} ${
+                  isActive(
+                    item.href
+                  )
+                    ? styles.mobileLinkActive
+                    : ""
+                }`}
+              >
+                <span
+                  className={
+                    styles.mobileIndex
+                  }
+                >
+                  {String(
+                    index + 1
+                  ).padStart(
+                    2,
+                    "0"
+                  )}
+                </span>
+
+                <strong>
+                  {
+                    item.label
+                  }
+                </strong>
+
+                <span
+                  className={
+                    styles.mobileArrow
+                  }
+                >
+                  <ArrowRight
+                    size={17}
+                  />
+                </span>
+              </Link>
+            )
+          )}
+        </nav>
+
+        <Link
+          href="/contacto"
+          className={
+            styles.mobileContact
+          }
+          onClick={
+            closeMenu
+          }
+        >
+          <span>
+            Solicitar información
+          </span>
+
+          <span
+            className={
+              styles.mobileContactIcon
+            }
+          >
+            <ArrowRight
+              size={17}
+              weight="bold"
+            />
+          </span>
+        </Link>
+
+        <div
+          className={
+            styles.mobileFooter
+          }
+        >
+          <span>
+            San Ramón ·
+            Selva Central
           </span>
 
           <span>

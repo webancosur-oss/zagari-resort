@@ -49,7 +49,7 @@ const amenities = [
     title: "Piscina infinita",
     category: "Agua · Descanso",
     image:
-      "/assets/amenities/piscina-infinity.png",
+      "/assets/amenities/piscinas-descanso.png",
     icon: SwimmingPool,
   },
 
@@ -58,7 +58,7 @@ const amenities = [
     title: "Bar piscina",
     category: "Agua · Experiencia",
     image:
-      "/assets/amenities/bar-piscina.png",
+      "/assets/amenities/piscinas-descanso.png",
     icon: Waves,
   },
 
@@ -1133,7 +1133,8 @@ export default function AmenitiesSection() {
             <ActionButton
               href="#contacto"
               variant="primary"
-              size="md"
+              size="md" 
+
               icon={
                 ArrowUpRight
               }

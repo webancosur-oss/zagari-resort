@@ -1,0 +1,1601 @@
+/* ==========================================================
+   ZAGARI MANIFESTO
+   ONE SCREEN + PORTAL SCROLL
+========================================================== */
+
+.section {
+  --pink: #d3207f;
+  --orange: #ef762c;
+  --yellow: #f4c63d;
+
+  --green: #17a857;
+  --green-light: #3bce7a;
+
+  --cyan: #21b8c8;
+  --blue: #287fbd;
+
+  position: relative;
+
+  width: 100%;
+
+  /*
+   * UNA PANTALLA +
+   * SOLO 520px DE SCROLL.
+   *
+   * No 180vh.
+   * No 300vh.
+   * No 450vh.
+   */
+
+  height:
+    calc(
+      100vh + 520px
+    );
+
+  height:
+    calc(
+      100dvh + 520px
+    );
+
+  overflow: visible;
+
+  background: #043a27;
+}
+
+/* ==========================================================
+   VISUAL BASE
+
+   Siempre mide EXACTAMENTE
+   un viewport.
+========================================================== */
+
+.visual {
+  width: 100%;
+
+  height: 100vh;
+  height: 100dvh;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  color: #ffffff;
+
+  background: #06482f;
+
+  transform:
+    translateZ(0);
+
+  backface-visibility:
+    hidden;
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   BEFORE
+
+   Antes de llegar a la sección
+   está colocada al inicio.
+========================================================== */
+
+.visualBefore {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* ==========================================================
+   FIXED
+
+   ESTE ELEMENTO ESTÁ EN BODY
+   gracias al createPortal().
+========================================================== */
+
+.visualFixed {
+  position: fixed;
+
+  z-index: 50;
+
+  inset: 0;
+
+  width: 100vw;
+
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* ==========================================================
+   AFTER
+
+   Al terminar queda pegado al
+   final de la misma sección.
+========================================================== */
+
+.visualAfter {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ==========================================================
+   BACKGROUND
+========================================================== */
+
+.background {
+  position: absolute;
+
+  z-index: 0;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   RESPIRA
+========================================================== */
+
+.backgroundOne {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse
+      at
+      50%
+      46%,
+      rgba(
+        67,
+        218,
+        133,
+        0.22
+      ),
+      transparent 42%
+    ),
+
+    linear-gradient(
+      135deg,
+      #03301f 0%,
+      #075b36 31%,
+      #087b48 57%,
+      #075638 78%,
+      #03291d 100%
+    );
+}
+
+/* ==========================================================
+   CONECTA
+========================================================== */
+
+.backgroundTwo {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse
+      at
+      50%
+      46%,
+      rgba(
+        35,
+        197,
+        181,
+        0.18
+      ),
+      transparent 43%
+    ),
+
+    linear-gradient(
+      135deg,
+      #033126 0%,
+      #075d46 31%,
+      #08775b 57%,
+      #07533f 78%,
+      #03291f 100%
+    );
+
+  will-change:
+    opacity;
+}
+
+/* ==========================================================
+   VIVE
+========================================================== */
+
+.backgroundThree {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      ellipse
+      at
+      50%
+      46%,
+      rgba(
+        244,
+        198,
+        61,
+        0.13
+      ),
+      transparent 43%
+    ),
+
+    linear-gradient(
+      135deg,
+      #04301f 0%,
+      #075736 31%,
+      #087244 57%,
+      #075136 78%,
+      #03291c 100%
+    );
+
+  will-change:
+    opacity;
+}
+
+/* ==========================================================
+   GLOW
+========================================================== */
+
+.glow {
+  position: absolute;
+
+  top: -26%;
+  left: 15%;
+
+  width: 72vw;
+  height: 72vw;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        76,
+        226,
+        143,
+        0.16
+      ),
+      rgba(
+        35,
+        164,
+        90,
+        0.045
+      )
+      47%,
+      transparent 70%
+    );
+
+  filter:
+    blur(45px);
+
+  will-change:
+    transform;
+}
+
+/* ==========================================================
+   RINGS
+========================================================== */
+
+.rings {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 64vw;
+  height: 64vw;
+
+  margin:
+    -32vw
+    0
+    0
+    -32vw;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.023
+    );
+
+  border-radius: 50%;
+
+  opacity: 0.68;
+
+  will-change:
+    transform;
+}
+
+.rings::before,
+.rings::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.023
+    );
+
+  border-radius: 50%;
+}
+
+.rings::before {
+  width: 72%;
+  height: 72%;
+}
+
+.rings::after {
+  width: 44%;
+  height: 44%;
+}
+
+/* ==========================================================
+   LEAF LEFT
+========================================================== */
+
+.leafLeft {
+  position: absolute;
+
+  left: -17%;
+  bottom: -47%;
+
+  width: 38vw;
+  height: 100vh;
+
+  border-radius:
+    8%
+    92%
+    8%
+    92%;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        0,
+        30,
+        20,
+        0.66
+      ),
+      rgba(
+        48,
+        193,
+        106,
+        0.045
+      )
+    );
+
+  transform:
+    rotate(-20deg);
+
+  opacity: 0.64;
+}
+
+/* ==========================================================
+   LEAF RIGHT
+========================================================== */
+
+.leafRight {
+  position: absolute;
+
+  top: -44%;
+  right: -17%;
+
+  width: 39vw;
+  height: 100vh;
+
+  border-radius:
+    92%
+    8%
+    92%
+    8%;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        52,
+        198,
+        111,
+        0.05
+      ),
+      rgba(
+        0,
+        30,
+        20,
+        0.66
+      )
+    );
+
+  transform:
+    rotate(20deg);
+
+  opacity: 0.63;
+}
+
+/* ==========================================================
+   NOISE
+========================================================== */
+
+.noise {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.02;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.84' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.45'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================
+   VIGNETTE
+========================================================== */
+
+.vignette {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        0,
+        16,
+        10,
+        0.25
+      ),
+      transparent 29%,
+      transparent 71%,
+      rgba(
+        0,
+        16,
+        10,
+        0.26
+      )
+    ),
+
+    linear-gradient(
+      180deg,
+      rgba(
+        0,
+        12,
+        8,
+        0.1
+      ),
+      transparent 28%,
+      transparent 69%,
+      rgba(
+        0,
+        14,
+        9,
+        0.31
+      )
+    );
+}
+
+/* ==========================================================
+   TOP
+========================================================== */
+
+.top {
+  position: absolute;
+
+  z-index: 30;
+
+  top:
+    clamp(
+      90px,
+      11vh,
+      118px
+    );
+
+  left: 50%;
+
+  width:
+    min(
+      calc(
+        100% - 90px
+      ),
+      1480px
+    );
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.38
+    );
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+}
+
+.brandDot {
+  width: 5px;
+  height: 5px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    var(--green-light);
+
+  box-shadow:
+    0
+    0
+    12px
+    rgba(
+      59,
+      206,
+      122,
+      0.55
+    );
+}
+
+/* ==========================================================
+   TOP COUNTER
+========================================================== */
+
+.topCounter {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.27
+    );
+
+  font-size: 6px;
+}
+
+.topCounter strong {
+  min-width: 17px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.8
+    );
+
+  font-weight: 700;
+}
+
+.topCounter > span {
+  width: 28px;
+  height: 1px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.15
+    );
+}
+
+.topCounter small {
+  font-size: inherit;
+}
+
+/* ==========================================================
+   STAGE
+========================================================== */
+
+.stage {
+  position: absolute;
+
+  z-index: 10;
+
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   SCENE
+
+   Todas ocupan exactamente
+   el mismo centro.
+========================================================== */
+
+.scene {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  transform-origin:
+    center center;
+
+  will-change:
+    opacity,
+    transform;
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   CATEGORY
+========================================================== */
+
+.category {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-bottom:
+    clamp(
+      12px,
+      2vh,
+      18px
+    );
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.49
+    );
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.18em;
+
+  text-transform:
+    uppercase;
+}
+
+.categoryLine {
+  width: 24px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--yellow),
+      var(--green-light)
+    );
+}
+
+.categoryLine:last-child {
+  transform:
+    rotate(180deg);
+}
+
+/* ==========================================================
+   WORD
+========================================================== */
+
+.word {
+  margin: 0;
+
+  max-width: 96%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      5.1rem,
+      12vw,
+      12rem
+    );
+
+  font-weight: 750;
+
+  line-height: 0.81;
+
+  letter-spacing:
+    -0.075em;
+
+  text-transform:
+    uppercase;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0
+    18px
+    50px
+    rgba(
+      0,
+      0,
+      0,
+      0.08
+    );
+}
+
+/* ==========================================================
+   LETTER MASK
+========================================================== */
+
+.letterMask {
+  display: inline-block;
+
+  overflow: hidden;
+
+  padding:
+    0
+    0.006em
+    0.1em;
+
+  margin-bottom:
+    -0.1em;
+}
+
+/* ==========================================================
+   LETTER
+========================================================== */
+
+.letter {
+  display: inline-block;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #fdfbf4 54%,
+      #dceadc 100%
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  color: transparent;
+
+  -webkit-text-fill-color:
+    transparent;
+}
+
+/* ==========================================================
+   DESCRIPTION
+========================================================== */
+
+.description {
+  width:
+    min(
+      500px,
+      82%
+    );
+
+  margin:
+    clamp(
+      16px,
+      2.7vh,
+      24px
+    )
+    0
+    0;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.58
+    );
+
+  font-size:
+    clamp(
+      0.73rem,
+      0.85vw,
+      0.88rem
+    );
+
+  font-weight: 300;
+
+  line-height: 1.58;
+}
+
+/* ==========================================================
+   SIDE TEXT
+========================================================== */
+
+.sideText {
+  position: absolute;
+
+  z-index: 25;
+
+  top: 50%;
+  left: 27px;
+
+  transform:
+    translateY(-50%)
+    rotate(-90deg);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.2
+    );
+
+  font-size: 5px;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.17em;
+
+  text-transform:
+    uppercase;
+
+  pointer-events: none;
+}
+
+.sideText i {
+  width: 28px;
+  height: 1px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.13
+    );
+}
+
+/* ==========================================================
+   BOTTOM
+========================================================== */
+
+.bottom {
+  position: absolute;
+
+  z-index: 30;
+
+  left: 50%;
+
+  bottom:
+    clamp(
+      18px,
+      3.5vh,
+      29px
+    );
+
+  width:
+    min(
+      calc(
+        100% - 90px
+      ),
+      1480px
+    );
+
+  transform:
+    translateX(-50%);
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    auto
+    1fr;
+
+  align-items: center;
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   SCROLL
+========================================================== */
+
+.scrollHint {
+  justify-self: start;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.25
+    );
+
+  font-size: 6px;
+
+  font-weight: 700;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+}
+
+.mouse {
+  position: relative;
+
+  width: 14px;
+  height: 23px;
+
+  display: block;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.28
+    );
+
+  border-radius: 999px;
+}
+
+.mouse i {
+  position: absolute;
+
+  top: 4px;
+  left: 50%;
+
+  width: 2px;
+  height: 4px;
+
+  border-radius: 999px;
+
+  background:
+    var(--green-light);
+
+  animation:
+    mouseWheel
+      1.5s
+      ease-in-out
+      infinite;
+}
+
+/* ==========================================================
+   DOTS
+========================================================== */
+
+.dots {
+  justify-self: center;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.2
+    );
+
+  transition:
+    width
+      300ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
+    background
+      300ms
+      ease;
+}
+
+.dotActive {
+  width: 18px;
+
+  background:
+    var(--green-light);
+}
+
+/* ==========================================================
+   BOTTOM COUNTER
+========================================================== */
+
+.bottomCounter {
+  justify-self: end;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.26
+    );
+
+  font-size: 6px;
+}
+
+.bottomCounter strong {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.8
+    );
+
+  font-weight: 700;
+}
+
+.bottomCounter > span {
+  width: 27px;
+  height: 1px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.14
+    );
+}
+
+.bottomCounter small {
+  font-size: inherit;
+}
+
+/* ==========================================================
+   MOUSE ANIMATION
+========================================================== */
+
+@keyframes mouseWheel {
+  0% {
+    opacity: 0;
+
+    transform:
+      translateX(-50%)
+      translateY(0);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+
+    transform:
+      translateX(-50%)
+      translateY(7px);
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translateX(-50%)
+      translateY(9px);
+  }
+}
+
+/* ==========================================================
+   LAPTOP
+========================================================== */
+
+@media (
+  max-width: 1200px
+) {
+  .section {
+    height:
+      calc(
+        100dvh + 470px
+      );
+  }
+
+  .top,
+  .bottom {
+    width:
+      calc(
+        100% - 60px
+      );
+  }
+
+  .word {
+    font-size:
+      clamp(
+        4.7rem,
+        12vw,
+        9.4rem
+      );
+  }
+
+  .sideText {
+    display: none;
+  }
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (
+  max-width: 900px
+) {
+  .section {
+    /*
+     * SOLO 440px adicionales.
+     */
+
+    height:
+      calc(
+        100dvh + 440px
+      );
+  }
+
+  .top {
+    top: 82px;
+
+    width:
+      calc(
+        100% - 42px
+      );
+  }
+
+  .bottom {
+    width:
+      calc(
+        100% - 42px
+      );
+  }
+
+  .word {
+    font-size:
+      clamp(
+        4rem,
+        13vw,
+        7rem
+      );
+  }
+
+  .description {
+    width: 76%;
+  }
+
+  .rings {
+    width: 90vw;
+    height: 90vw;
+
+    margin:
+      -45vw
+      0
+      0
+      -45vw;
+  }
+
+  .leafLeft {
+    left: -31%;
+
+    width: 62vw;
+  }
+
+  .leafRight {
+    right: -31%;
+
+    width: 62vw;
+  }
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (
+  max-width: 600px
+) {
+  .section {
+    /*
+     * UNA PANTALLA
+     * + 400px DE SCROLL.
+
+     * Suficiente para las tres palabras
+     * sin sentirse como otra página.
+     */
+
+    height:
+      calc(
+        100dvh + 400px
+      );
+  }
+
+  /* ========================================================
+     TOP
+  ======================================================== */
+
+  .top {
+    top:
+      max(
+        70px,
+        calc(
+          env(
+            safe-area-inset-top
+          ) + 61px
+        )
+      );
+
+    width:
+      calc(
+        100% - 28px
+      );
+  }
+
+  .brand {
+    gap: 6px;
+
+    font-size: 5px;
+
+    letter-spacing:
+      0.12em;
+  }
+
+  .brandDot {
+    width: 4px;
+    height: 4px;
+  }
+
+  .topCounter {
+    display: none;
+  }
+
+  /* ========================================================
+     CATEGORY
+  ======================================================== */
+
+  .category {
+    margin-bottom: 11px;
+
+    gap: 7px;
+
+    font-size: 4.8px;
+
+    letter-spacing:
+      0.14em;
+  }
+
+  .categoryLine {
+    width: 17px;
+  }
+
+  /* ========================================================
+     WORD
+  ======================================================== */
+
+  .word {
+    max-width: 98%;
+
+    font-size:
+      clamp(
+        3rem,
+        16.2vw,
+        5.2rem
+      );
+
+    line-height: 0.84;
+
+    letter-spacing:
+      -0.07em;
+  }
+
+  /* ========================================================
+     DESCRIPTION
+  ======================================================== */
+
+  .description {
+    width: 88%;
+
+    max-width: 390px;
+
+    margin-top: 15px;
+
+    font-size: 0.65rem;
+
+    line-height: 1.5;
+  }
+
+  /* ========================================================
+     BACKGROUND
+  ======================================================== */
+
+  .glow {
+    top: -10%;
+    left: -25%;
+
+    width: 150vw;
+    height: 150vw;
+  }
+
+  .rings {
+    width: 125vw;
+    height: 125vw;
+
+    margin:
+      -62.5vw
+      0
+      0
+      -62.5vw;
+  }
+
+  .leafLeft {
+    left: -54%;
+
+    width: 96vw;
+  }
+
+  .leafRight {
+    right: -56%;
+
+    width: 96vw;
+  }
+
+  /* ========================================================
+     BOTTOM
+  ======================================================== */
+
+  .bottom {
+    bottom:
+      max(
+        14px,
+        env(
+          safe-area-inset-bottom
+        )
+      );
+
+    width:
+      calc(
+        100% - 28px
+      );
+  }
+
+  .scrollHint
+  > span:last-child {
+    display: none;
+  }
+
+  .bottomCounter {
+    font-size: 5px;
+  }
+
+  .bottomCounter
+  > span {
+    width: 18px;
+  }
+
+  .dotActive {
+    width: 15px;
+  }
+}
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (
+  max-width: 380px
+) {
+  .section {
+    height:
+      calc(
+        100dvh + 360px
+      );
+  }
+
+  .word {
+    font-size: 15.8vw;
+  }
+
+  .description {
+    width: 91%;
+
+    font-size: 0.61rem;
+  }
+}
+
+/* ==========================================================
+   SHORT MOBILE
+========================================================== */
+
+@media (
+  max-width: 600px
+) and (
+  max-height: 700px
+) {
+  .section {
+    height:
+      calc(
+        100dvh + 350px
+      );
+  }
+
+  .top {
+    top: 60px;
+  }
+
+  .category {
+    margin-bottom: 9px;
+  }
+
+  .word {
+    font-size:
+      clamp(
+        2.7rem,
+        14.7vw,
+        4.15rem
+      );
+  }
+
+  .description {
+    margin-top: 10px;
+
+    font-size: 0.59rem;
+  }
+
+  .bottom {
+    bottom: 9px;
+  }
+}
+
+/* ==========================================================
+   VERY SHORT MOBILE
+========================================================== */
+
+@media (
+  max-width: 600px
+) and (
+  max-height: 580px
+) {
+  .top {
+    top: 54px;
+  }
+
+  .description {
+    width: 82%;
+
+    font-size: 0.55rem;
+  }
+
+  .mouse {
+    display: none;
+  }
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .mouse i {
+    animation: none;
+  }
+
+  .dot {
+    transition: none;
+  }
+}
