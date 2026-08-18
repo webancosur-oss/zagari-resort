@@ -1,0 +1,777 @@
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+
+  overflow: hidden;
+
+  background: #101512;
+  color: #ffffff;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.videoWrapper {
+  position: absolute;
+  inset: 0;
+
+  z-index: -5;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.01);
+}
+
+
+/* =========================================================
+   OVERLAYS
+========================================================= */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: -4;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 15, 12, 0.58) 0%,
+      rgba(10, 15, 12, 0.25) 43%,
+      rgba(10, 15, 12, 0.04) 74%,
+      rgba(10, 15, 12, 0.08) 100%
+    );
+}
+
+.overlayBottom {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 55%;
+
+  z-index: -3;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(7, 11, 8, 0.72) 0%,
+      rgba(7, 11, 8, 0.38) 32%,
+      rgba(7, 11, 8, 0.08) 72%,
+      transparent 100%
+    );
+}
+
+.overlayTop {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 0;
+
+  height: 180px;
+
+  z-index: -3;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(6, 10, 8, 0.42),
+      rgba(6, 10, 8, 0)
+    );
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  width: min(100%, 1600px);
+  height: 100%;
+
+  margin: 0 auto;
+
+  padding:
+    clamp(100px, 12vh, 150px)
+    clamp(28px, 6vw, 96px)
+    38px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+  width: min(780px, 70vw);
+
+  margin-bottom: clamp(60px, 9vh, 110px);
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  margin-bottom: 24px;
+
+  color: rgba(255, 255, 255, 0.88);
+
+  font-size: 11px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.22em;
+}
+
+.eyebrowLine {
+  display: block;
+
+  width: 42px;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title {
+  max-width: 780px;
+
+  margin: 0;
+
+  font-size: clamp(54px, 6.4vw, 104px);
+  font-weight: 300;
+
+  line-height: 0.94;
+
+  letter-spacing: -0.052em;
+
+  text-wrap: balance;
+}
+
+.title span {
+  display: block;
+
+  font-family:
+    "Times New Roman",
+    "Times",
+    serif;
+
+  font-weight: 400;
+  font-style: italic;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description {
+  max-width: 570px;
+
+  margin:
+    clamp(26px, 3vw, 38px)
+    0
+    0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: clamp(15px, 1.2vw, 18px);
+  font-weight: 300;
+
+  line-height: 1.65;
+
+  letter-spacing: -0.01em;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+
+  margin-top: 34px;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.primaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+
+  min-width: 220px;
+
+  padding:
+    7px
+    7px
+    7px
+    23px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  color: #182019;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-decoration: none;
+
+  transition:
+    background 0.35s ease,
+    transform 0.35s ease;
+}
+
+.primaryButton:hover {
+  background: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+.buttonIcon {
+  display: grid;
+  place-items: center;
+
+  width: 39px;
+  height: 39px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #173a28;
+
+  color: #ffffff;
+
+  transition:
+    transform 0.4s
+    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.primaryButton:hover .buttonIcon {
+  transform: rotate(-35deg);
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.secondaryButton {
+  position: relative;
+
+  padding: 9px 0;
+
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 13px;
+  font-weight: 400;
+
+  text-decoration: none;
+
+  letter-spacing: 0.02em;
+}
+
+.secondaryButton::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 3px;
+
+  width: 100%;
+  height: 1px;
+
+  background: rgba(255, 255, 255, 0.45);
+
+  transform-origin: left;
+
+  transition: transform 0.4s ease;
+}
+
+.secondaryButton:hover::after {
+  transform: scaleX(0.35);
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding-top: 27px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.bottomInfo {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.infoNumber {
+  font-family:
+    "Times New Roman",
+    serif;
+
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 400;
+
+  line-height: 1;
+}
+
+.infoLabel {
+  color: rgba(255, 255, 255, 0.64);
+
+  font-size: 10px;
+  font-weight: 500;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.15em;
+}
+
+.separator {
+  display: block;
+
+  width: 1px;
+  height: 18px;
+
+  background: rgba(255, 255, 255, 0.25);
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.scrollButton {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  cursor: pointer;
+
+  font: inherit;
+
+  font-size: 10px;
+  font-weight: 500;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.18em;
+}
+
+.scrollCircle {
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.35);
+
+  border-radius: 50%;
+
+  transition:
+    color 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.scrollButton:hover .scrollCircle {
+  background: #ffffff;
+
+  border-color: #ffffff;
+
+  color: #182019;
+
+  transform: translateY(3px);
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1280px) {
+  .hero {
+    min-height: 680px;
+  }
+
+  .container {
+    padding-left: 52px;
+    padding-right: 52px;
+  }
+
+  .content {
+    width: min(720px, 75vw);
+  }
+
+  .title {
+    font-size: clamp(52px, 6.6vw, 84px);
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .hero {
+    height: 100svh;
+    min-height: 720px;
+  }
+
+  .container {
+    padding:
+      110px
+      30px
+      30px;
+  }
+
+  .content {
+    width: 88%;
+
+    margin-bottom: 65px;
+  }
+
+  .title {
+    max-width: 650px;
+
+    font-size: clamp(52px, 9vw, 78px);
+  }
+
+  .description {
+    max-width: 500px;
+  }
+
+  .bottomInfo {
+    gap: 18px;
+  }
+
+  .separator {
+    height: 16px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .hero {
+    height: 100svh;
+    min-height: 680px;
+    max-height: 980px;
+  }
+
+  .video {
+    /*
+      En móvil normalmente conviene reencuadrar
+      ligeramente hacia el centro.
+    */
+    object-position: 52% center;
+  }
+
+  .overlay {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(7, 12, 9, 0.34) 0%,
+        rgba(7, 12, 9, 0.08) 100%
+      );
+  }
+
+  .overlayBottom {
+    height: 72%;
+
+    background:
+      linear-gradient(
+        to top,
+        rgba(7, 11, 8, 0.9) 0%,
+        rgba(7, 11, 8, 0.62) 34%,
+        rgba(7, 11, 8, 0.22) 70%,
+        transparent 100%
+      );
+  }
+
+  .container {
+    justify-content: flex-end;
+
+    padding:
+      100px
+      20px
+      max(22px, env(safe-area-inset-bottom));
+  }
+
+  .content {
+    width: 100%;
+
+    margin-bottom: 44px;
+  }
+
+  .eyebrow {
+    gap: 11px;
+
+    margin-bottom: 18px;
+
+    font-size: 9px;
+
+    letter-spacing: 0.18em;
+  }
+
+  .eyebrowLine {
+    width: 28px;
+  }
+
+  .title {
+    max-width: 100%;
+
+    font-size: clamp(45px, 14.5vw, 66px);
+
+    line-height: 0.96;
+
+    letter-spacing: -0.055em;
+  }
+
+  .title span {
+    margin-top: 3px;
+  }
+
+  .description {
+    max-width: 92%;
+
+    margin-top: 22px;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+  }
+
+  .actions {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 13px;
+
+    margin-top: 27px;
+  }
+
+  .primaryButton {
+    width: auto;
+    min-width: 205px;
+
+    padding:
+      6px
+      6px
+      6px
+      20px;
+
+    font-size: 12px;
+  }
+
+  .buttonIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .secondaryButton {
+    margin-left: 4px;
+
+    font-size: 12px;
+  }
+
+  .bottom {
+    align-items: center;
+
+    padding-top: 18px;
+  }
+
+  .bottomInfo {
+    gap: 12px;
+  }
+
+  .infoItem {
+    display: block;
+  }
+
+  .infoNumber {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 18px;
+  }
+
+  .infoLabel {
+    display: block;
+
+    font-size: 7px;
+
+    letter-spacing: 0.11em;
+  }
+
+  .separator {
+    height: 27px;
+  }
+
+  .scrollButton {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .scrollCircle {
+    width: 39px;
+    height: 39px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE PEQUEÑO
+========================================================= */
+
+@media (max-width: 390px) {
+  .hero {
+    min-height: 650px;
+  }
+
+  .container {
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  .title {
+    font-size: clamp(42px, 13.8vw, 54px);
+  }
+
+  .description {
+    font-size: 13px;
+  }
+
+  .bottomInfo {
+    gap: 9px;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .infoItem + .infoItem {
+    margin-left: 7px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryButton,
+  .buttonIcon,
+  .scrollCircle,
+  .secondaryButton::after {
+    transition: none;
+  }
+}

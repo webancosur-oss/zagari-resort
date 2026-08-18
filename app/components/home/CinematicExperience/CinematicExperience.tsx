@@ -2,7 +2,6 @@
 
 import {
   ArrowRightIcon,
-  CaretDown,
   CheckCircle,
   Fire,
   Leaf,
@@ -10,6 +9,7 @@ import {
   Waves,
   Wind,
 } from "@phosphor-icons/react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -28,40 +28,56 @@ type ExperienceTheme =
 
 type ExperienceItem = {
   id: string;
-  number: string;
+
   name: string;
+
   eyebrow: string;
+
   title: string;
+
   description: string;
+
   image: string;
+
   alt: string;
+
   href: string;
+
   theme: ExperienceTheme;
+
   amenities: string[];
 };
 
 /* =========================================================
-   INFORMACIÓN
+   DATA
 ========================================================= */
 
 const experiences: ExperienceItem[] = [
   {
     id: "aire",
-    number: "01",
+
     name: "Aire",
-    eyebrow: "Libertad y contemplación",
+
+    eyebrow:
+      "Libertad y contemplación",
+
     title:
       "Respira la tranquilidad de la Selva Central",
+
     description:
       "Espacios abiertos y recorridos naturales para contemplar el paisaje, respirar con calma y disfrutar de una conexión auténtica con San Ramón.",
+
     image:
       "/assets/concept/aire.png",
+
     alt:
       "Mirador natural de Zagari Resort Club representando el elemento aire",
+
     href:
       "/amenidades#aire",
-    theme:
-      "air",
+
+    theme: "air",
+
     amenities: [
       "Mirador panorámico",
       "Senderos naturales",
@@ -69,23 +85,32 @@ const experiences: ExperienceItem[] = [
       "Zonas abiertas de descanso",
     ],
   },
+
   {
     id: "fuego",
-    number: "02",
+
     name: "Fuego",
-    eyebrow: "Energía y encuentro",
+
+    eyebrow:
+      "Energía y encuentro",
+
     title:
       "Momentos que permanecen en la memoria",
+
     description:
       "Ambientes cálidos y sociales creados para compartir, celebrar y disfrutar noches especiales con familia y amigos.",
+
     image:
       "/assets/concept/fuego.png",
+
     alt:
       "Zona social con fuego de Zagari Resort Club",
+
     href:
       "/amenidades#fuego",
-    theme:
-      "fire",
+
+    theme: "fire",
+
     amenities: [
       "Zona de fogatas",
       "Área de parrillas",
@@ -93,23 +118,32 @@ const experiences: ExperienceItem[] = [
       "Zona social nocturna",
     ],
   },
+
   {
     id: "tierra",
-    number: "03",
+
     name: "Tierra",
-    eyebrow: "Origen y conexión",
+
+    eyebrow:
+      "Origen y conexión",
+
     title:
       "Un entorno para construir nuevas raíces",
+
     description:
       "La arquitectura, los jardines y los espacios de aventura se integran al paisaje para conservar la esencia natural del proyecto.",
+
     image:
       "/assets/concept/tierra.png",
+
     alt:
       "Naturaleza y espacios de aventura de Zagari Resort Club",
+
     href:
       "/amenidades#tierra",
-    theme:
-      "earth",
+
+    theme: "earth",
+
     amenities: [
       "Jardines naturales",
       "Circuito de aventura",
@@ -117,23 +151,32 @@ const experiences: ExperienceItem[] = [
       "Zonas para cabañas lodge",
     ],
   },
+
   {
     id: "agua",
-    number: "04",
+
     name: "Agua",
-    eyebrow: "Renovación y bienestar",
+
+    eyebrow:
+      "Renovación y bienestar",
+
     title:
       "Fluye hacia una nueva forma de descansar",
+
     description:
       "Piscinas y espacios de relajación diseñados para refrescarte, recuperar energía y disfrutar cada momento.",
+
     image:
       "/assets/concept/agua.png",
+
     alt:
       "Piscina y zona de bienestar de Zagari Resort Club",
+
     href:
       "/amenidades#agua",
-    theme:
-      "water",
+
+    theme: "water",
+
     amenities: [
       "Piscina principal",
       "Piscina para niños",
@@ -144,20 +187,30 @@ const experiences: ExperienceItem[] = [
 ];
 
 /* =========================================================
-   ICONOS Y ESTILOS
+   ICONOS
 ========================================================= */
 
 const icons = {
   air: Wind,
+
   fire: Fire,
+
   earth: Leaf,
+
   water: Waves,
 };
 
+/* =========================================================
+   CLASES
+========================================================= */
+
 const themeClasses = {
   air: styles.air,
+
   fire: styles.fire,
+
   earth: styles.earth,
+
   water: styles.water,
 };
 
@@ -166,17 +219,22 @@ const themeClasses = {
 ========================================================= */
 
 export default function CinematicExperience() {
-  const [activeId, setActiveId] =
-    useState("aire");
+  const [
+    activeId,
+    setActiveId,
+  ] = useState("aire");
 
   const activeExperience =
     experiences.find(
       (experience) =>
-        experience.id === activeId,
+        experience.id ===
+        activeId
     ) ?? experiences[0];
 
   const ActiveIcon =
-    icons[activeExperience.theme];
+    icons[
+      activeExperience.theme
+    ];
 
   return (
     <section
@@ -184,80 +242,313 @@ export default function CinematicExperience() {
       className={styles.section}
       aria-labelledby="experience-title"
     >
-      {/* ===================================================
-          ENCABEZADO
-      ==================================================== */}
+      <div
+        className={styles.container}
+      >
+        {/* =====================================
+            HEADER
+        ====================================== */}
 
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div className={styles.headerContent}>
-            <span className={styles.mainEyebrow}>
+        <header
+          className={styles.header}
+        >
+          <div>
+            <span
+              className={
+                styles.mainEyebrow
+              }
+            >
               Experiencias Zagari
             </span>
 
-            <h2 id="experience-title">
-              Cuatro elementos.
-              <br />
-              Más de veinte amenidades.
+            <h2
+              id="experience-title"
+            >
+              Cuatro elementos que
+              inspiran una forma
+              diferente de descansar.
             </h2>
           </div>
 
-          <div className={styles.headerAside}>
+          <div
+            className={
+              styles.headerAside
+            }
+          >
             <p>
-              Descubre cómo el aire, el fuego, la tierra y el agua
-              inspiran cada espacio de Zagari Resort Club.
+              Aire, fuego, tierra y
+              agua se integran a los
+              espacios de Zagari para
+              crear experiencias que
+              conectan con la
+              naturaleza.
             </p>
 
             <Link
               href="/amenidades"
-              className={styles.headerButton}
+              className={
+                styles.headerLink
+              }
             >
               <Sparkle
-                size={19}
+                size={17}
                 weight="fill"
                 aria-hidden="true"
               />
 
               <span>
-                Ver todas las amenidades
+                Ver todas las
+                amenidades
               </span>
 
               <ArrowRightIcon
-                size={18}
-                weight="bold"
+                size={16}
+                weight="regular"
                 aria-hidden="true"
               />
             </Link>
           </div>
         </header>
 
-        {/* ===================================================
-            DISEÑO DE ESCRITORIO Y TABLET
-        ==================================================== */}
+        {/* =====================================
+            DESKTOP + TABLET
+        ====================================== */}
 
-        <div className={styles.desktopExperience}>
-          {/* IMAGEN PRINCIPAL */}
+        <div
+          className={`${styles.experience} ${
+            themeClasses[
+              activeExperience.theme
+            ]
+          }`}
+        >
+          {/* ===================================
+              SELECTOR
+          ==================================== */}
 
-          <div
-            className={`${styles.media} ${
-              themeClasses[
-                activeExperience.theme
-              ]
-            }`}
+          <nav
+            className={styles.selector}
+            aria-label="Elementos de Zagari"
           >
             {experiences.map(
-              (experience) => (
+              (experience) => {
+                const Icon =
+                  icons[
+                    experience.theme
+                  ];
+
+                const active =
+                  experience.id ===
+                  activeId;
+
+                return (
+                  <button
+                    key={
+                      experience.id
+                    }
+                    type="button"
+                    className={`${styles.selectorItem} ${
+                      themeClasses[
+                        experience.theme
+                      ]
+                    } ${
+                      active
+                        ? styles.selectorActive
+                        : ""
+                    }`}
+                    onClick={() =>
+                      setActiveId(
+                        experience.id
+                      )
+                    }
+                    aria-pressed={
+                      active
+                    }
+                  >
+                    <span
+                      className={
+                        styles.selectorIcon
+                      }
+                    >
+                      <Icon
+                        size={20}
+                        weight="fill"
+                        aria-hidden="true"
+                      />
+                    </span>
+
+                    <span
+                      className={
+                        styles.selectorText
+                      }
+                    >
+                      {
+                        experience.name
+                      }
+                    </span>
+                  </button>
+                );
+              }
+            )}
+          </nav>
+
+          {/* ===================================
+              INFORMACIÓN
+          ==================================== */}
+
+          <div
+            key={
+              activeExperience.id
+            }
+            className={
+              styles.information
+            }
+          >
+            <div
+              className={
+                styles.elementIdentity
+              }
+            >
+              <span
+                className={
+                  styles.elementIcon
+                }
+              >
+                <ActiveIcon
+                  size={22}
+                  weight="fill"
+                  aria-hidden="true"
+                />
+              </span>
+
+              <span>
+                {
+                  activeExperience.name
+                }
+              </span>
+            </div>
+
+            <span
+              className={
+                styles.eyebrow
+              }
+            >
+              {
+                activeExperience.eyebrow
+              }
+            </span>
+
+            <h3>
+              {
+                activeExperience.title
+              }
+            </h3>
+
+            <p
+              className={
+                styles.description
+              }
+            >
+              {
+                activeExperience.description
+              }
+            </p>
+
+            {/* =================================
+                AMENIDADES
+            ================================== */}
+
+            <div
+              className={
+                styles.amenities
+              }
+            >
+              <span
+                className={
+                  styles.amenitiesLabel
+                }
+              >
+                Puedes encontrar
+              </span>
+
+              <ul>
+                {activeExperience.amenities.map(
+                  (
+                    amenity
+                  ) => (
+                    <li
+                      key={
+                        amenity
+                      }
+                    >
+                      <CheckCircle
+                        size={17}
+                        weight="fill"
+                        aria-hidden="true"
+                      />
+
+                      <span>
+                        {amenity}
+                      </span>
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+
+            <Link
+              href={
+                activeExperience.href
+              }
+              className={
+                styles.elementLink
+              }
+            >
+              <span>
+                Conocer {
+                  activeExperience.name
+                }
+              </span>
+
+              <ArrowRightIcon
+                size={16}
+                weight="regular"
+                aria-hidden="true"
+              />
+            </Link>
+          </div>
+
+          {/* ===================================
+              IMAGEN
+          ==================================== */}
+
+          <div
+            className={
+              styles.media
+            }
+          >
+            {experiences.map(
+              (
+                experience
+              ) => (
                 <Image
-                  key={experience.id}
-                  src={experience.image}
-                  alt={experience.alt}
+                  key={
+                    experience.id
+                  }
+                  src={
+                    experience.image
+                  }
+                  alt={
+                    experience.alt
+                  }
                   fill
                   priority={
-                    experience.id === "aire"
+                    experience.id ===
+                    "aire"
                   }
                   sizes="
-                    (max-width: 1024px) 100vw,
-                    65vw
+                    (max-width: 700px) 100vw,
+                    (max-width: 1100px) 50vw,
+                    48vw
                   "
                   className={`${styles.image} ${
                     experience.id ===
@@ -266,368 +557,195 @@ export default function CinematicExperience() {
                       : ""
                   }`}
                 />
-              ),
+              )
             )}
 
             <div
-              className={styles.mediaOverlay}
+              className={
+                styles.mediaShade
+              }
               aria-hidden="true"
             />
 
-            <div className={styles.mediaTop}>
-              <span>
-                {activeExperience.number}
-                {" / "}
-                04
-              </span>
-
-              <div className={styles.activeBadge}>
-                <span className={styles.activeBadgeIcon}>
-                  <ActiveIcon
-                    size={22}
-                    weight="fill"
-                    aria-hidden="true"
-                  />
-                </span>
-
-                <div>
-                  <small>
-                    Elemento
-                  </small>
-
-                  <strong>
-                    {activeExperience.name}
-                  </strong>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.mediaCaption}>
+            <div
+              className={
+                styles.mediaCaption
+              }
+            >
               <span>
                 Zagari Resort Club
               </span>
 
               <strong>
-                San Ramón · Selva Central
+                San Ramón · Selva
+                Central
               </strong>
-            </div>
-          </div>
-
-          {/* INFORMACIÓN LATERAL */}
-
-          <div
-            className={`${styles.information} ${
-              themeClasses[
-                activeExperience.theme
-              ]
-            }`}
-          >
-            <nav
-              className={styles.tabs}
-              aria-label="Elementos de Zagari Resort Club"
-            >
-              {experiences.map(
-                (experience) => {
-                  const Icon =
-                    icons[
-                      experience.theme
-                    ];
-
-                  const isActive =
-                    experience.id ===
-                    activeId;
-
-                  return (
-                    <button
-                      key={experience.id}
-                      type="button"
-                      className={`${styles.tab} ${
-                        themeClasses[
-                          experience.theme
-                        ]
-                      } ${
-                        isActive
-                          ? styles.tabActive
-                          : ""
-                      }`}
-                      onClick={() =>
-                        setActiveId(
-                          experience.id,
-                        )
-                      }
-                      aria-pressed={
-                        isActive
-                      }
-                    >
-                      <span
-                        className={
-                          styles.tabIcon
-                        }
-                      >
-                        <Icon
-                          size={19}
-                          weight="fill"
-                          aria-hidden="true"
-                        />
-                      </span>
-
-                      <span
-                        className={
-                          styles.tabText
-                        }
-                      >
-                        <small>
-                          {
-                            experience.number
-                          }
-                        </small>
-
-                        <strong>
-                          {
-                            experience.name
-                          }
-                        </strong>
-                      </span>
-                    </button>
-                  );
-                },
-              )}
-            </nav>
-
-            <div
-              key={activeExperience.id}
-              className={styles.activeContent}
-            >
-              <span className={styles.eyebrow}>
-                {activeExperience.eyebrow}
-              </span>
-
-              <h3>
-                {activeExperience.title}
-              </h3>
-
-              <p className={styles.description}>
-                {
-                  activeExperience.description
-                }
-              </p>
-
-              <div className={styles.amenitiesBlock}>
-                <span className={styles.amenitiesTitle}>
-                  Amenidades de este elemento
-                </span>
-
-                <ul className={styles.amenitiesList}>
-                  {activeExperience.amenities.map(
-                    (amenity) => (
-                      <li key={amenity}>
-                        <CheckCircle
-                          size={19}
-                          weight="fill"
-                          aria-hidden="true"
-                        />
-
-                        <span>
-                          {amenity}
-                        </span>
-                      </li>
-                    ),
-                  )}
-                </ul>
-              </div>
-
-              <Link
-                href={activeExperience.href}
-                className={styles.elementButton}
-              >
-                <span>
-                  Ver amenidades de{" "}
-                  {activeExperience.name}
-                </span>
-
-                <ArrowRightIcon
-                  size={18}
-                  weight="bold"
-                  aria-hidden="true"
-                />
-              </Link>
             </div>
           </div>
         </div>
 
-        {/* ===================================================
-            DISEÑO MÓVIL
-        ==================================================== */}
+        {/* =====================================
+            MOBILE
+        ====================================== */}
 
-        <div className={styles.mobileExperience}>
+        <div
+          className={
+            styles.mobileExperience
+          }
+        >
           {experiences.map(
-            (experience) => {
+            (
+              experience
+            ) => {
               const Icon =
                 icons[
                   experience.theme
                 ];
 
-              const isOpen =
-                activeId ===
-                experience.id;
-
               return (
                 <article
-                  key={experience.id}
+                  key={
+                    experience.id
+                  }
                   className={`${styles.mobileCard} ${
                     themeClasses[
                       experience.theme
                     ]
-                  } ${
-                    isOpen
-                      ? styles.mobileCardOpen
-                      : ""
                   }`}
                 >
-                  <button
-                    type="button"
-                    className={styles.mobileTrigger}
-                    onClick={() =>
-                      setActiveId(
-                        experience.id,
-                      )
+                  <div
+                    className={
+                      styles.mobileMedia
                     }
-                    aria-expanded={isOpen}
-                    aria-controls={`${experience.id}-mobile-content`}
                   >
-                    <span className={styles.mobileTriggerIcon}>
+                    <Image
+                      src={
+                        experience.image
+                      }
+                      alt={
+                        experience.alt
+                      }
+                      fill
+                      sizes="100vw"
+                      className={
+                        styles.mobileImage
+                      }
+                    />
+
+                    <div
+                      className={
+                        styles.mobileShade
+                      }
+                    />
+
+                    <span
+                      className={
+                        styles.mobileIcon
+                      }
+                    >
                       <Icon
-                        size={21}
+                        size={20}
                         weight="fill"
                         aria-hidden="true"
                       />
                     </span>
-
-                    <span className={styles.mobileTriggerText}>
-                      <small>
-                        Elemento{" "}
-                        {experience.number}
-                      </small>
-
-                      <strong>
-                        {experience.name}
-                      </strong>
-                    </span>
-
-                    <CaretDown
-                      size={19}
-                      weight="bold"
-                      aria-hidden="true"
-                      className={styles.caret}
-                    />
-                  </button>
+                  </div>
 
                   <div
-                    id={`${experience.id}-mobile-content`}
-                    className={styles.mobileContent}
+                    className={
+                      styles.mobileBody
+                    }
                   >
-                    <div className={styles.mobileMedia}>
-                      <Image
-                        src={experience.image}
-                        alt={experience.alt}
-                        fill
-                        sizes="100vw"
-                        className={styles.mobileImage}
-                      />
-
-                      <div
-                        className={styles.mobileOverlay}
-                        aria-hidden="true"
-                      />
-
+                    <div
+                      className={
+                        styles.mobileHeading
+                      }
+                    >
                       <span>
-                        Zagari Resort Club
-                      </span>
-                    </div>
-
-                    <div className={styles.mobileInformation}>
-                      <span className={styles.eyebrow}>
                         {
                           experience.eyebrow
                         }
                       </span>
 
-                      <h3>
-                        {experience.title}
-                      </h3>
-
-                      <p>
+                      <strong>
                         {
-                          experience.description
+                          experience.name
                         }
-                      </p>
-
-                      <div className={styles.amenitiesBlock}>
-                        <span className={styles.amenitiesTitle}>
-                          Amenidades
-                        </span>
-
-                        <ul className={styles.amenitiesList}>
-                          {experience.amenities.map(
-                            (amenity) => (
-                              <li key={amenity}>
-                                <CheckCircle
-                                  size={18}
-                                  weight="fill"
-                                  aria-hidden="true"
-                                />
-
-                                <span>
-                                  {amenity}
-                                </span>
-                              </li>
-                            ),
-                          )}
-                        </ul>
-                      </div>
-
-                      <Link
-                        href={experience.href}
-                        className={styles.elementButton}
-                      >
-                        <span>
-                          Ver amenidades de{" "}
-                          {experience.name}
-                        </span>
-
-                        <ArrowRightIcon
-                          size={18}
-                          weight="bold"
-                          aria-hidden="true"
-                        />
-                      </Link>
+                      </strong>
                     </div>
+
+                    <h3>
+                      {
+                        experience.title
+                      }
+                    </h3>
+
+                    <p>
+                      {
+                        experience.description
+                      }
+                    </p>
+
+                    <ul
+                      className={
+                        styles.mobileAmenities
+                      }
+                    >
+                      {experience.amenities
+                        .slice(
+                          0,
+                          3
+                        )
+                        .map(
+                          (
+                            amenity
+                          ) => (
+                            <li
+                              key={
+                                amenity
+                              }
+                            >
+                              <CheckCircle
+                                size={
+                                  16
+                                }
+                                weight="fill"
+                                aria-hidden="true"
+                              />
+
+                              <span>
+                                {
+                                  amenity
+                                }
+                              </span>
+                            </li>
+                          )
+                        )}
+                    </ul>
+
+                    <Link
+                      href={
+                        experience.href
+                      }
+                      className={
+                        styles.mobileLink
+                      }
+                    >
+                      <span>
+                        Ver amenidades
+                      </span>
+
+                      <ArrowRightIcon
+                        size={16}
+                        weight="regular"
+                        aria-hidden="true"
+                      />
+                    </Link>
                   </div>
                 </article>
               );
-            },
+            }
           )}
-
-          <Link
-            href="/amenidades"
-            className={styles.mobileAllButton}
-          >
-            <Sparkle
-              size={19}
-              weight="fill"
-              aria-hidden="true"
-            />
-
-            <span>
-              Explorar las +20 amenidades
-            </span>
-
-            <ArrowRightIcon
-              size={18}
-              weight="bold"
-              aria-hidden="true"
-            />
-          </Link>
         </div>
       </div>
     </section>

@@ -7,7 +7,9 @@ import type {
 const nextConfig: NextConfig = {
   allowedDevOrigins: [
     "192.168.18.38",
-    "192.168.18.38:3000",
+    // "192.168.18.38:3000",
+    "192.168.1.43:3000",
+    "192.168.1.43",
   ],
   
   poweredByHeader:

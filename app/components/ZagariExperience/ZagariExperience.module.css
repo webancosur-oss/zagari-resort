@@ -1,0 +1,1254 @@
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 790px;
+
+  overflow: hidden;
+
+  color: #183c29;
+
+  background:
+    linear-gradient(
+      105deg,
+      #f8f3e7 0%,
+      #f4f1e2 28%,
+      #eaeee0 52%,
+      #d8e5cf 74%,
+      #b6ceac 100%
+    );
+
+  isolation: isolate;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 720px;
+  height: 720px;
+
+  right: -320px;
+  top: -300px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        82,
+        137,
+        87,
+        0.17
+      ),
+      transparent 68%
+    );
+
+  pointer-events: none;
+}
+
+.section::after {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  left: -310px;
+  bottom: -340px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(
+        255,
+        250,
+        235,
+        0.95
+      ),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+  position: relative;
+
+  z-index: 2;
+
+  width:
+    min(
+      1480px,
+      calc(100% - 72px)
+    );
+
+  min-height: 790px;
+
+  margin-inline: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      320px,
+      0.72fr
+    )
+    minmax(
+      0,
+      1.48fr
+    );
+
+  gap:
+    clamp(
+      52px,
+      5vw,
+      90px
+    );
+
+  align-items: stretch;
+}
+
+/* =========================================================
+   COPY
+========================================================= */
+
+.copyColumn {
+  display: flex;
+
+  align-items: center;
+
+  min-width: 0;
+}
+
+.copy {
+  width:
+    min(
+      500px,
+      100%
+    );
+
+  padding:
+    70px 0;
+}
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 24px;
+
+  color: #52765b;
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.22em;
+
+  text-transform: uppercase;
+}
+
+.eyebrowLine {
+  width: 28px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ec3071,
+      #ec7e38,
+      #ebc547,
+      #82bb4d,
+      #35aa95,
+      #2b9ed1
+    );
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title {
+  margin: 0;
+
+  color: #173b28;
+
+  font-size:
+    clamp(
+      46px,
+      4.25vw,
+      72px
+    );
+
+  line-height: 0.98;
+
+  font-weight: 400;
+
+  letter-spacing: -0.052em;
+}
+
+.title span {
+  display: block;
+
+  margin-top: 13px;
+
+  color: #5f8265;
+
+  font-weight: 400;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description {
+  width:
+    min(
+      470px,
+      100%
+    );
+
+  margin:
+    28px 0 0;
+
+  color: #5d7362;
+
+  font-size:
+    clamp(
+      13px,
+      0.95vw,
+      15px
+    );
+
+  line-height: 1.72;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.button {
+  display: inline-flex;
+
+  width: fit-content;
+
+  margin-top: 30px;
+
+  padding: 1.5px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ed3070 0%,
+      #ed7d38 19%,
+      #eac546 39%,
+      #80ba4d 59%,
+      #35aa95 79%,
+      #2b9ed1 100%
+    );
+
+  box-shadow:
+    0
+    14px
+    30px
+    rgba(
+      45,
+      85,
+      54,
+      0.1
+    );
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0
+    18px
+    38px
+    rgba(
+      45,
+      85,
+      54,
+      0.17
+    );
+}
+
+.buttonInner {
+  min-height: 47px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding:
+    0
+    10px
+    0
+    19px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(
+      249,
+      246,
+      232,
+      0.98
+    );
+
+  color: #35593f;
+
+  font-size: 9px;
+
+  font-weight: 750;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.buttonArrow {
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  color: #fff;
+
+  background: #3b704c;
+
+  font-size: 14px;
+
+  transition:
+    transform 0.3s ease;
+}
+
+.button:hover
+.buttonArrow {
+  transform:
+    rotate(45deg);
+}
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+.gallery {
+  position: relative;
+
+  min-width: 0;
+
+  min-height: 790px;
+
+  align-self: stretch;
+}
+
+.galleryGlow {
+  position: absolute;
+
+  width: 95%;
+  height: 80%;
+
+  right: -5%;
+  top: 10%;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(
+        97,
+        150,
+        91,
+        0.18
+      ),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD BASE
+========================================================= */
+
+.card {
+  position: absolute;
+
+  z-index: 2;
+
+  transform-origin: center;
+
+  transition:
+    transform
+    0.55s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.imageWrap {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border:
+    6px solid
+    rgba(
+      249,
+      247,
+      235,
+      0.96
+    );
+
+  background: #426b4d;
+
+  box-shadow:
+    0
+    26px
+    58px
+    rgba(
+      35,
+      73,
+      44,
+      0.15
+    );
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform
+    1s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.imageOverlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent 55%,
+      rgba(
+        8,
+        32,
+        18,
+        0.48
+      )
+        100%
+    );
+}
+
+/* =========================================================
+   DESKTOP CARDS
+========================================================= */
+
+.cardOne {
+  width: 27%;
+  height: 55%;
+
+  left: 0;
+  top: 20%;
+
+  transform:
+    rotate(-7deg);
+
+  z-index: 2;
+}
+
+.cardOne
+.imageWrap {
+  border-radius:
+    46px
+    18px
+    24px
+    18px;
+}
+
+.cardTwo {
+  width: 30%;
+  height: 67%;
+
+  left: 22%;
+  top: 10%;
+
+  transform:
+    rotate(4deg);
+
+  z-index: 5;
+}
+
+.cardTwo
+.imageWrap {
+  border-radius:
+    20px
+    48px
+    26px
+    24px;
+}
+
+.cardThree {
+  width: 29%;
+  height: 60%;
+
+  left: 48%;
+  top: 17%;
+
+  transform:
+    rotate(-3deg);
+
+  z-index: 4;
+}
+
+.cardThree
+.imageWrap {
+  border-radius:
+    30px
+    22px
+    46px
+    22px;
+}
+
+.cardFour {
+  width: 26%;
+  height: 52%;
+
+  right: 0;
+  top: 23%;
+
+  transform:
+    rotate(7deg);
+
+  z-index: 2;
+}
+
+.cardFour
+.imageWrap {
+  border-radius:
+    20px
+    48px
+    48px
+    20px;
+}
+
+/* =========================================================
+   CARD META
+========================================================= */
+
+.cardMeta {
+  position: absolute;
+
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #fff;
+}
+
+.cardNumber {
+  width: 29px;
+  height: 29px;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
+
+  border-radius: 50%;
+
+  background:
+    rgba(
+      14,
+      46,
+      26,
+      0.31
+    );
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+
+  font-size: 7px;
+}
+
+.cardCopy {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.cardCopy small {
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.67
+    );
+
+  font-size: 7px;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+.cardCopy strong {
+  margin-top: 2px;
+
+  font-size: 12px;
+
+  font-weight: 500;
+}
+
+/* =========================================================
+   DESKTOP HOVER
+========================================================= */
+
+@media (
+  hover: hover
+) and (
+  pointer: fine
+) {
+  .card:hover {
+    z-index: 10;
+  }
+
+  .cardOne:hover {
+    transform:
+      rotate(-3deg)
+      translateY(-8px);
+  }
+
+  .cardTwo:hover {
+    transform:
+      rotate(1deg)
+      translateY(-11px);
+  }
+
+  .cardThree:hover {
+    transform:
+      rotate(0deg)
+      translateY(-9px);
+  }
+
+  .cardFour:hover {
+    transform:
+      rotate(3deg)
+      translateY(-8px);
+  }
+
+  .card:hover
+  .image {
+    transform:
+      scale(1.045);
+  }
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (
+  min-width: 1101px
+) and (
+  max-width: 1360px
+) {
+  .section {
+    min-height: 700px;
+  }
+
+  .container {
+    min-height: 700px;
+
+    width:
+      calc(
+        100% - 58px
+      );
+
+    gap: 44px;
+  }
+
+  .gallery {
+    min-height: 700px;
+  }
+
+  .title {
+    font-size:
+      clamp(
+        42px,
+        4.1vw,
+        61px
+      );
+  }
+
+  .cardOne {
+    height: 52%;
+
+    top: 22%;
+  }
+
+  .cardTwo {
+    height: 63%;
+
+    top: 12%;
+  }
+
+  .cardThree {
+    height: 56%;
+
+    top: 20%;
+  }
+
+  .cardFour {
+    height: 49%;
+
+    top: 26%;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (
+  min-width: 768px
+) and (
+  max-width: 1100px
+) {
+  .section {
+    min-height: 660px;
+  }
+
+  .container {
+    width:
+      calc(
+        100% - 44px
+      );
+
+    min-height: 660px;
+
+    grid-template-columns:
+      0.78fr
+      1.22fr;
+
+    gap: 26px;
+  }
+
+  .copy {
+    padding:
+      42px 0;
+  }
+
+  .title {
+    font-size:
+      clamp(
+        36px,
+        5.1vw,
+        49px
+      );
+  }
+
+  .description {
+    margin-top: 20px;
+
+    font-size: 11px;
+
+    line-height: 1.62;
+  }
+
+  .button {
+    margin-top: 22px;
+  }
+
+  .buttonInner {
+    min-height: 41px;
+
+    gap: 12px;
+
+    padding:
+      0
+      8px
+      0
+      14px;
+
+    font-size: 7.5px;
+  }
+
+  .buttonArrow {
+    width: 27px;
+    height: 27px;
+  }
+
+  .gallery {
+    min-height: 660px;
+  }
+
+  .imageWrap {
+    border-width: 4px;
+  }
+
+  .cardOne {
+    width: 28%;
+    height: 48%;
+
+    top: 24%;
+  }
+
+  .cardTwo {
+    width: 31%;
+    height: 59%;
+
+    left: 21%;
+    top: 15%;
+  }
+
+  .cardThree {
+    width: 29%;
+    height: 51%;
+
+    left: 48%;
+    top: 23%;
+  }
+
+  .cardFour {
+    width: 27%;
+    height: 45%;
+
+    top: 28%;
+  }
+
+  .cardMeta {
+    left: 9px;
+    right: 9px;
+    bottom: 9px;
+  }
+
+  .cardCopy strong {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   NUEVO DISEÑO - SIN SUPERPOSICIONES
+========================================================= */
+
+@media (
+  max-width: 767px
+) {
+  .section {
+    min-height: auto;
+
+    padding:
+      58px
+      0
+      64px;
+
+    overflow: hidden;
+
+    background:
+      linear-gradient(
+        180deg,
+        #f8f3e7 0%,
+        #f0f2e2 36%,
+        #dce8d2 67%,
+        #a8c2a1 100%
+      );
+  }
+
+  .container {
+    width: 100%;
+
+    min-height: auto;
+
+    padding-inline: 16px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 34px;
+  }
+
+  /* =====================================================
+     COPY MOBILE
+  ===================================================== */
+
+  .copyColumn {
+    display: block;
+  }
+
+  .copy {
+    width: 100%;
+
+    padding: 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+
+    font-size: 8px;
+  }
+
+  .title {
+    max-width: 480px;
+
+    font-size:
+      clamp(
+        36px,
+        11vw,
+        50px
+      );
+
+    line-height: 0.98;
+  }
+
+  .title br {
+    display: none;
+  }
+
+  .title span {
+    margin-top: 7px;
+  }
+
+  .description {
+    max-width: 460px;
+
+    margin-top: 20px;
+
+    font-size: 12.5px;
+
+    line-height: 1.65;
+  }
+
+  .button {
+    margin-top: 23px;
+  }
+
+  .buttonInner {
+    min-height: 44px;
+
+    gap: 14px;
+
+    padding:
+      0
+      9px
+      0
+      15px;
+
+    font-size: 8px;
+  }
+
+  .buttonArrow {
+    width: 29px;
+    height: 29px;
+  }
+
+  /* =====================================================
+     GALERÍA MOBILE
+  ===================================================== */
+
+  .gallery {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    grid-template-rows:
+      auto
+      auto
+      auto;
+
+    gap: 8px;
+  }
+
+  .galleryGlow {
+    display: none;
+  }
+
+  /*
+   * Ya NO usamos absolute.
+   */
+
+  .card {
+    position: relative;
+
+    width: 100%;
+    height: auto;
+
+    left: auto;
+    right: auto;
+    top: auto;
+
+    transform: none;
+
+    z-index: 1;
+  }
+
+  /*
+   * 01 principal.
+   */
+
+  .cardOne {
+    grid-column:
+      1 / -1;
+
+    aspect-ratio: 1.18;
+  }
+
+  .cardOne
+  .imageWrap {
+    border-radius:
+      24px
+      24px
+      52px
+      24px;
+  }
+
+  /*
+   * 02 y 03 mitad y mitad.
+   */
+
+  .cardTwo {
+    grid-column: 1;
+
+    aspect-ratio: 0.88;
+  }
+
+  .cardTwo
+  .imageWrap {
+    border-radius:
+      32px
+      14px
+      14px
+      14px;
+  }
+
+  .cardThree {
+    grid-column: 2;
+
+    aspect-ratio: 0.88;
+  }
+
+  .cardThree
+  .imageWrap {
+    border-radius:
+      14px
+      32px
+      14px
+      14px;
+  }
+
+  /*
+   * 04 horizontal abajo.
+   */
+
+  .cardFour {
+    grid-column:
+      1 / -1;
+
+    aspect-ratio: 1.65;
+  }
+
+  .cardFour
+  .imageWrap {
+    border-radius:
+      16px
+      16px
+      44px
+      16px;
+  }
+
+  .imageWrap {
+    border-width: 4px;
+
+    box-shadow:
+      0
+      16px
+      36px
+      rgba(
+        40,
+        75,
+        48,
+        0.12
+      );
+  }
+
+  .cardMeta {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+
+    gap: 8px;
+  }
+
+  .cardNumber {
+    width: 27px;
+    height: 27px;
+
+    font-size: 6px;
+  }
+
+  .cardCopy small {
+    font-size: 6px;
+  }
+
+  .cardCopy strong {
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   MOBILE PEQUEÑO
+========================================================= */
+
+@media (
+  max-width: 420px
+) {
+  .section {
+    padding:
+      52px
+      0
+      56px;
+  }
+
+  .container {
+    padding-inline: 13px;
+
+    gap: 29px;
+  }
+
+  .title {
+    font-size:
+      clamp(
+        34px,
+        10.8vw,
+        44px
+      );
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .gallery {
+    gap: 6px;
+  }
+
+  .cardMeta {
+    left: 9px;
+    bottom: 9px;
+  }
+
+  .cardNumber {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cardCopy strong {
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .card,
+  .image,
+  .button,
+  .buttonArrow {
+    transition: none;
+  }
+}
