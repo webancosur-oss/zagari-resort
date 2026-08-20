@@ -1,1504 +1,660 @@
 /* =========================================================
-   SECTION
+   BASE
 ========================================================= */
 
 .section {
-  --ink: #193428;
-  --green: #356849;
-
-  --line:
-    rgba(
-      39,
-      70,
-      51,
-      0.12
-    );
+  --ink: #183428;
+  --line: rgba(32, 64, 44, 0.12);
 
   width: 100%;
-
-  padding:
-    clamp(
-      76px,
-      8vw,
-      124px
-    )
-    0;
-
+  padding: clamp(72px, 8vw, 124px) 0;
   overflow: hidden;
+
+  color: var(--ink);
 
   background:
     linear-gradient(
       180deg,
-      #f8f5eb 0%,
-      #f5f5ed 55%,
-      #edf2e8 100%
+      #f9f5ea 0%,
+      #f6f5ec 54%,
+      #edf3e9 100%
     );
-
-  color: var(--ink);
 }
 
-/* =========================================================
-   HEADING
-========================================================= */
+.heading,
+.layout {
+  width: min(1320px, calc(100% - 64px));
+  margin-inline: auto;
+}
 
 .heading {
-  width:
-    min(
-      1320px,
-      calc(100% - 64px)
-    );
-
-  margin:
-    0
-    auto
-    clamp(
-      40px,
-      5vw,
-      64px
-    );
+  margin-bottom: clamp(36px, 5vw, 62px);
 
   display: grid;
-
   grid-template-columns:
     minmax(0, 1fr)
     minmax(280px, 410px);
 
   align-items: end;
+  gap: clamp(42px, 8vw, 120px);
+}
 
-  gap:
-    clamp(
-      44px,
-      8vw,
-      125px
-    );
+.eyebrow,
+.contentLabel {
+  display: block;
+  color: #64806c;
+  font-size: 11px;
+  font-weight: 400;
 }
 
 .eyebrow {
-  display: block;
-
-  margin-bottom: 11px;
-
-  color: #647d6b;
-
-  font-size: 11px;
-
-  font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .heading h2 {
   margin: 0;
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 0 0.18em;
-
   color: var(--ink);
-
-  font-size:
-    clamp(
-      31px,
-      3.35vw,
-      47px
-    );
-
+  font-size: clamp(32px, 3.45vw, 49px);
+  line-height: 1.06;
   font-weight: 400;
-
-  line-height: 1.08;
-
-  letter-spacing:
-    -0.035em;
+  letter-spacing: -0.035em;
 }
 
 .heading h2 span {
-  color: #64816c;
+  color: #688873;
 }
 
 .heading > p {
   margin: 0;
-
-  color: #6e7c73;
-
+  color: #6d7d73;
   font-size: 12.5px;
-
   line-height: 1.7;
 }
 
-/* =========================================================
-   LAYOUT
-========================================================= */
-
 .layout {
-  width:
-    min(
-      1320px,
-      calc(100% - 64px)
-    );
-
-  margin: 0 auto;
-
   display: grid;
-
   grid-template-columns:
     minmax(0, 1.15fr)
     minmax(350px, 0.85fr);
-
-  gap:
-    clamp(
-      40px,
-      5vw,
-      76px
-    );
-
   align-items: center;
+  gap: clamp(42px, 5vw, 76px);
 }
-
-/* =========================================================
-   VISUAL
-========================================================= */
 
 .visual {
   position: relative;
-
   width: 100%;
-
-  min-height:
-    clamp(
-      620px,
-      58vw,
-      780px
-    );
-
+  min-height: clamp(620px, 58vw, 780px);
   overflow: hidden;
-
-  border-radius:
-    3px
-    3px
-    72px
-    3px;
-
+  border-radius: 4px 4px 72px 4px;
   background: #dce6d7;
-
-  box-shadow:
-    0
-    24px
-    58px
-    rgba(
-      34,
-      66,
-      44,
-      0.08
-    );
 }
 
 .image {
   object-fit: cover;
-
   object-position: center;
-
-  filter:
-    brightness(1.04)
-    contrast(0.98)
-    saturate(0.98);
 }
 
 .imageShade {
   position: absolute;
-
   inset: 0;
-
   pointer-events: none;
-
   background:
     linear-gradient(
       180deg,
       transparent 0%,
       transparent 58%,
-      rgba(
-        7,
-        27,
-        16,
-        0.09
-      )
-        76%,
-      rgba(
-        7,
-        27,
-        16,
-        0.53
-      )
-        100%
+      rgba(8, 27, 17, 0.08) 77%,
+      rgba(8, 27, 17, 0.52) 100%
     );
 }
 
-/* =========================================================
-   LOCATION
-========================================================= */
-
 .location {
   position: absolute;
-
   top: 18px;
   left: 18px;
-
   display: flex;
-
   align-items: center;
-
   gap: 7px;
-
-  padding:
-    6px
-    10px
-    6px
-    6px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.45
-    );
-
+  padding: 6px 10px 6px 6px;
   border-radius: 999px;
-
-  background:
-    rgba(
-      249,
-      249,
-      242,
-      0.88
-    );
-
+  background: rgba(250, 249, 243, 0.9);
   color: #315942;
-
   font-size: 9.5px;
-
-  backdrop-filter:
-    blur(10px);
-
-  -webkit-backdrop-filter:
-    blur(10px);
 }
 
 .locationIcon {
   width: 24px;
   height: 24px;
-
   display: grid;
-
   place-items: center;
-
   border-radius: 50%;
-
   background: #376849;
-
-  color: #fff;
+  color: white;
 }
-
-/* =========================================================
-   CAPTION
-========================================================= */
 
 .photoCaption {
   position: absolute;
-
+  left: 25px;
   right: 25px;
   bottom: 23px;
-  left: 25px;
-
   display: flex;
-
+  justify-content: space-between;
   align-items: end;
-
-  justify-content:
-    space-between;
-
   gap: 30px;
 }
 
 .photoCaption > span {
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.65
-    );
-
+  color: rgba(255, 255, 255, 0.67);
   font-size: 8px;
-
-  letter-spacing:
-    0.12em;
+  letter-spacing: 0.12em;
 }
 
 .photoCaption p {
-  width:
-    min(
-      280px,
-      50%
-    );
-
+  width: min(280px, 50%);
   margin: 0;
-
-  color: #fff;
-
+  color: white;
   text-align: right;
-
   font-size: 14px;
-
   line-height: 1.45;
 }
 
-/* =========================================================
-   CONTENT
-========================================================= */
-
-.content {
-  min-width: 0;
-}
-
 .contentLabel {
-  display: block;
-
   margin-bottom: 9px;
-
-  color: #597761;
-
-  font-size: 10.5px;
 }
 
 .content h3 {
-  max-width: 450px;
-
+  max-width: 460px;
   margin: 0;
-
-  color: #1b3529;
-
-  font-size:
-    clamp(
-      25px,
-      2.4vw,
-      34px
-    );
-
-  font-weight: 400;
-
+  color: #1c362a;
+  font-size: clamp(26px, 2.4vw, 35px);
   line-height: 1.16;
-
-  letter-spacing:
-    -0.025em;
+  font-weight: 400;
 }
 
 .description {
   max-width: 430px;
-
-  margin:
-    15px
-    0
-    0;
-
-  color: #6f7d74;
-
+  margin: 15px 0 0;
+  color: #718078;
   font-size: 12.5px;
-
   line-height: 1.68;
 }
 
-/* =========================================================
-   HIGHLIGHTS
-========================================================= */
-
 .highlights {
-  margin-top: 24px;
-
-  padding:
-    17px 0;
-
+  margin-top: 25px;
+  padding: 17px 0;
   display: grid;
-
   gap: 9px;
-
-  border-top:
-    1px solid
-    var(--line);
-
-  border-bottom:
-    1px solid
-    var(--line);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .highlights span {
   display: flex;
-
   align-items: center;
-
   gap: 7px;
-
-  color: #546c5c;
-
+  color: #526b5a;
   font-size: 10.5px;
 }
 
 .highlights svg {
-  flex-shrink: 0;
-
   color: #43825a;
 }
 
-/* =========================================================
-   AVAILABILITY BUTTON
-========================================================= */
-
 .availabilityButton {
-  width:
-    min(
-      100%,
-      350px
-    );
-
-  min-height: 61px;
-
-  margin-top: 25px;
-
-  padding:
-    8px
-    10px;
-
+  width: min(100%, 365px);
+  min-height: 64px;
+  margin-top: 26px;
+  padding: 8px 10px;
   display: grid;
-
-  grid-template-columns:
-    40px
-    minmax(0, 1fr)
-    34px;
-
+  grid-template-columns: 42px minmax(0, 1fr) 35px;
   align-items: center;
-
   gap: 11px;
-
-  border:
-    1px solid
-    rgba(
-      52,
-      100,
-      70,
-      0.16
-    );
-
-  border-radius: 16px;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.5
-    );
-
+  border: 1px solid rgba(52, 101, 71, 0.17);
+  border-radius: 17px;
+  background: rgba(255, 255, 255, 0.56);
   cursor: pointer;
-
   text-align: left;
-
-  transition:
-    transform
-    180ms ease,
-    background
-    180ms ease,
-    border-color
-    180ms ease,
-    box-shadow
-    180ms ease;
 }
 
 .availabilityIcon {
-  width: 40px;
-  height: 40px;
-
+  width: 42px;
+  height: 42px;
   display: grid;
-
   place-items: center;
-
   border-radius: 12px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #477c5b,
-      #326548
-    );
-
-  color: #fff;
+  color: white;
+  background: linear-gradient(145deg, #4c7d5c, #2f6144);
 }
 
 .availabilityCopy {
-  min-width: 0;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 2px;
 }
 
 .availabilityCopy small {
-  color: #89958d;
-
+  color: #87958c;
   font-size: 8px;
-
-  font-weight: 400;
 }
 
 .availabilityCopy strong {
   color: #294f37;
-
   font-size: 10.8px;
-
-  line-height: 1.3;
-
   font-weight: 400;
 }
 
 .availabilityArrow {
-  width: 34px;
-  height: 34px;
-
+  width: 35px;
+  height: 35px;
   display: grid;
-
   place-items: center;
-
   border-radius: 50%;
-
-  background:
-    rgba(
-      61,
-      101,
-      73,
-      0.08
-    );
-
-  color: #466750;
-
-  transition:
-    transform
-    180ms ease;
+  background: rgba(61, 101, 73, 0.08);
+  color: #496a53;
 }
-
-.availabilityButton:hover {
-  transform:
-    translateY(-2px);
-
-  border-color:
-    rgba(
-      52,
-      100,
-      70,
-      0.28
-    );
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.74
-    );
-
-  box-shadow:
-    0
-    14px
-    32px
-    rgba(
-      46,
-      80,
-      56,
-      0.07
-    );
-}
-
-.availabilityButton:hover
-.availabilityArrow {
-  transform:
-    translateX(2px);
-}
-
-/* =========================================================
-   FORM
-========================================================= */
 
 .formSection {
   margin-top: 36px;
-
   padding-top: 27px;
-
-  border-top:
-    1px solid
-    var(--line);
+  border-top: 1px solid var(--line);
 }
 
 .formHeading > span {
-  color: #294b37;
-
+  color: #294c38;
   font-size: 11.5px;
 }
 
 .formHeading p {
   max-width: 390px;
-
-  margin:
-    5px
-    0
-    0;
-
-  color: #7b8780;
-
+  margin: 5px 0 0;
+  color: #7c8981;
   font-size: 10px;
-
-  line-height: 1.55;
 }
 
 .form {
   margin-top: 19px;
-
   display: grid;
-
   gap: 17px;
 }
 
 .formRow {
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0, 1fr)
-    );
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
 .field {
   display: grid;
-
   gap: 4px;
 }
 
 .field > span {
   color: #607267;
-
   font-size: 9px;
 }
 
 .field input {
   width: 100%;
-
   min-width: 0;
-
   min-height: 38px;
-
-  padding:
-    0
-    0
-    7px;
-
+  padding: 0 0 7px;
   border: 0;
-
-  border-bottom:
-    1px solid
-    #cad6cd;
-
+  border-bottom: 1px solid #cad6cd;
   border-radius: 0;
-
   outline: none;
-
   background: transparent;
-
   color: #263e31;
-
-  font-family: inherit;
-
+  font: inherit;
   font-size: 11.5px;
 }
 
-.field input::placeholder {
-  color: #a2aaa5;
-}
-
 .field input:focus {
-  border-bottom-color:
-    #3e7751;
+  border-bottom-color: #3d7650;
 }
 
 .formFooter {
   display: flex;
-
   align-items: center;
-
   flex-wrap: wrap;
-
   gap: 13px;
 }
 
 .submitButton {
-  min-height: 41px;
-
-  padding:
-    0
-    16px;
-
+  min-height: 42px;
+  padding: 0 17px;
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 7px;
-
-  border:
-    1px solid
-    #38664a;
-
+  border: 1px solid #38664a;
   border-radius: 999px;
-
   background: transparent;
-
   color: #315e42;
-
   cursor: pointer;
-
+  font: inherit;
   font-size: 9.5px;
-}
-
-.submitButton:hover {
-  background: #356748;
-
-  color: #fff;
 }
 
 .formFooter small {
   max-width: 180px;
-
-  color: #939c96;
-
+  color: #929b95;
   font-size: 8px;
-
-  line-height: 1.4;
 }
 
 .success {
   display: flex;
-
   align-items: center;
-
   gap: 6px;
-
-  color: #3c8153;
-
+  color: #3d8154;
   font-size: 9px;
-}
-
-/* =========================================================
-   OVERLAY
-========================================================= */
-
-.overlay {
-  position: fixed;
-
-  z-index: 2147483000;
-
-  inset: 0;
-
-  width: 100vw;
-
-  height: 100dvh;
-
-  padding: 22px;
-
-  display: grid;
-
-  place-items: center;
-
-  overflow: hidden;
-
-  overscroll-behavior: none;
-
-  background:
-    rgba(
-      10,
-      25,
-      16,
-      0.76
-    );
-
-  backdrop-filter:
-    blur(12px);
-
-  -webkit-backdrop-filter:
-    blur(12px);
 }
 
 /* =========================================================
    MODAL
 ========================================================= */
 
-.modal {
-  width:
-    min(
-      1480px,
-      100%
-    );
-
-  height:
-    min(
-      900px,
-      calc(
-        100dvh - 44px
-      )
-    );
-
-  min-height: 0;
-
+.overlay {
+  position: fixed;
+  z-index: 2147483000;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  padding: 18px;
   display: grid;
-
-  grid-template-rows:
-    auto
-    auto
-    minmax(0, 1fr);
-
+  place-items: center;
   overflow: hidden;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.14
-    );
-
-  border-radius: 20px;
-
-  background: #f7f8f2;
-
-  box-shadow:
-    0
-    40px
-    120px
-    rgba(
-      0,
-      0,
-      0,
-      0.32
-    );
+  background: rgba(8, 24, 15, 0.78);
+  backdrop-filter: blur(12px);
 }
 
-/* =========================================================
-   MODAL HEADER
-========================================================= */
+.modal {
+  width: min(1500px, 100%);
+  height: min(920px, calc(100dvh - 36px));
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto auto minmax(0, 1fr);
+  overflow: hidden;
+  border-radius: 20px;
+  background: #f7f8f2;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.34);
+}
 
 .modalHeader {
-  padding:
-    17px
-    21px
-    13px;
-
+  padding: 17px 21px 13px;
   display: flex;
-
-  align-items: flex-start;
-
-  justify-content:
-    space-between;
-
+  justify-content: space-between;
   gap: 20px;
-
-  border-bottom:
-    1px solid
-    #e0e6df;
+  border-bottom: 1px solid #e0e6df;
 }
 
-.modalHeader
-> div
-> span {
+.modalEyebrow {
   color: #718077;
-
   font-size: 8.5px;
 }
 
 .modalHeader h2 {
-  margin:
-    3px
-    0
-    0;
-
+  margin: 3px 0 0;
   color: #203b2d;
-
-  font-size: 21px;
-
+  font-size: 22px;
   font-weight: 400;
 }
 
 .modalHeader p {
-  margin:
-    4px
-    0
-    0;
-
+  margin: 4px 0 0;
   color: #829087;
-
   font-size: 9.5px;
 }
 
 .close {
   width: 34px;
   height: 34px;
-
   flex-shrink: 0;
-
   display: grid;
-
   place-items: center;
-
-  border:
-    1px solid
-    #dce4dc;
-
+  border: 1px solid #dce4dc;
   border-radius: 50%;
-
-  background: #fff;
-
+  background: white;
   color: #3b5746;
-
   cursor: pointer;
 }
 
-/* =========================================================
-   LEGEND
-========================================================= */
-
 .legend {
-  padding:
-    9px
-    21px;
-
+  padding: 9px 21px;
   display: flex;
-
   align-items: center;
-
   flex-wrap: wrap;
-
-  gap:
-    9px
-    18px;
-
-  border-bottom:
-    1px solid
-    #e3e8e2;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.58
-    );
+  gap: 10px 14px;
+  border-bottom: 1px solid #e3e8e2;
+  background: rgba(255, 255, 255, 0.64);
 }
 
-.legend > div {
-  display: flex;
-
+.legendItem {
+  min-height: 30px;
+  padding: 0 10px;
+  display: inline-flex;
   align-items: center;
-
-  gap: 6px;
-
-  color: #68786f;
-
-  font-size: 9px;
+  gap: 7px;
+  border: 1px solid #e2e8e1;
+  border-radius: 999px;
+  background: white;
+  color: #65766b;
+  font-size: 8.5px;
 }
 
-.legend i {
-  width: 10px;
-  height: 10px;
-
-  display: block;
-
-  border-radius: 3px;
+.legendItem i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
 }
 
-.legendGreen {
-  background: #7ea00b;
-}
-
-.legendOrange {
-  background: #ff7f0b;
-}
-
-.legendRed {
-  background: #cf0647;
-}
+.legendGreen { background: #7ea00b; }
+.legendOrange { background: #ff7f0b; }
+.legendRed { background: #dc143c; }
 
 .legendHelp {
   margin-left: auto;
-
-  color: #909b94;
-
-  font-size: 8px;
+  color: #909a94;
+  font-size: 7.5px;
 }
-
-/* =========================================================
-   BODY
-========================================================= */
 
 .modalBody {
   min-height: 0;
-
   padding: 12px;
-
   display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    250px;
-
+  grid-template-columns: minmax(0, 1fr) 285px;
   gap: 13px;
-
   overflow: hidden;
 }
-
-/* =========================================================
-   MAP PANEL
-========================================================= */
 
 .mapPanel {
   min-width: 0;
-
   min-height: 0;
-
   display: grid;
-
-  grid-template-rows:
-    auto
-    minmax(0, 1fr)
-    auto;
-
+  grid-template-rows: auto minmax(0, 1fr) auto;
   overflow: hidden;
-
-  border:
-    1px solid
-    rgba(
-      42,
-      71,
-      49,
-      0.08
-    );
-
+  border: 1px solid #e4eae3;
   border-radius: 14px;
-
-  background: #fff;
+  background: white;
 }
 
 .mapTop {
-  padding:
-    8px
-    11px;
-
+  min-height: 36px;
+  padding: 0 11px;
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    space-between;
-
+  justify-content: space-between;
   gap: 15px;
-
-  border-bottom:
-    1px solid
-    #e8ece7;
+  border-bottom: 1px solid #e8ece7;
 }
 
 .mapTop span {
-  color: #3d5747;
-
+  color: #3c5746;
   font-size: 9px;
 }
 
 .mapTop small {
-  color: #929c96;
-
+  color: #919c95;
   font-size: 7.5px;
 }
 
-/* =========================================================
-   MAP VIEWPORT
-
-   DESKTOP:
-   blank area = drag
-   lot = click
-
-   MOBILE/TABLET:
-   native pan/scroll
-========================================================= */
-
 .mapViewport {
   position: relative;
-
   width: 100%;
   height: 100%;
-
   min-width: 0;
   min-height: 0;
-
   overflow: auto;
-
-  overscroll-behavior:
-    contain;
-
-  /*
-   * Crucial:
-   * dejamos pan nativo para
-   * touch/tablet.
-   */
-
-  touch-action:
-    pan-x pan-y;
-
-  -webkit-overflow-scrolling:
-    touch;
-
-  cursor: grab;
-
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y;
+  -webkit-overflow-scrolling: touch;
   user-select: none;
-
-  -webkit-user-select:
-    none;
-
-  background:
-    #f5f7f1;
-
-  scrollbar-width: thin;
-
-  scrollbar-color:
-    rgba(
-      52,
-      91,
-      64,
-      0.3
-    )
-    transparent;
+  cursor: grab;
+  background: #f5f7f1;
 }
 
 .mapViewport.dragging {
   cursor: grabbing;
 }
 
-.mapViewport::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+/*
+ * IMPORTANT:
+ * one fixed internal canvas.
+ * Desktop/tablet/mobile only change the canvas width,
+ * so the overlay positions always remain aligned.
+ */
+.mapCanvas {
+  position: relative;
+  width: 1180px;
+  min-width: 1180px;
+  margin: 0 auto;
 }
-
-.mapViewport::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-
-  background:
-    rgba(
-      52,
-      91,
-      64,
-      0.28
-    );
-}
-
-/* =========================================================
-   REAL MAP
-========================================================= */
 
 .realMap {
-  width: max-content;
-
-  min-width: 100%;
-
-  min-height: 100%;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: center;
+  position: relative;
+  width: 100%;
 }
 
-.realMap
-:global(svg) {
+.realMap :global(svg) {
   display: block;
-
-  width: 1180px;
-
-  min-width: 1180px;
-
+  width: 100%;
   height: auto;
-
   max-width: none;
-
-  flex-shrink: 0;
-
-  background: #fff;
-}
-
-.realMap
-:global(svg *) {
-  user-select: none;
-
-  -webkit-user-select:
-    none;
+  pointer-events: none;
 }
 
 /* =========================================================
-   LOTS
-
-   IMPORTANTE:
-   Cada lote sigue recibiendo click SIEMPRE.
+   REAL NUMBER HOTSPOTS
 ========================================================= */
 
-.realMap
-:global(.zagari-lot-zone) {
+.hotspotLayer {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mapHotspot {
+  position: absolute;
+  z-index: 11;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
   cursor: pointer;
-
-  pointer-events:
-    visiblePainted;
-
+  pointer-events: auto;
   transition:
-    filter
-    100ms ease;
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
 }
 
-/* =========================================================
-   HOVER
-========================================================= */
-
-@media (
-  hover: hover
-) and (
-  pointer: fine
-) {
-  .realMap
-  :global(
-    .zagari-lot-zone:hover
-  ) {
-    filter:
-      brightness(1.13)
-      saturate(1.15);
-  }
+/*
+ * The number itself is NOT generated in HTML.
+ * It remains the exact original number from the SVG.
+ */
+.mapHotspot:hover {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 3px rgba(22, 48, 31, 0.18);
 }
 
-/* =========================================================
-   SELECTED
-
-   SIN:
-   transform
-   scale
-   translate
-   stroke-width adicional
-
-   Así el lote seleccionado
-   jamás bloquea al siguiente.
-========================================================= */
-
-.realMap
-:global(
-  .zagari-selected
-) {
-  filter:
-    brightness(1.17)
-    saturate(1.25)
-    drop-shadow(
-      0
-      0
-      2px
-      #fff
-    )
-    drop-shadow(
-      0
-      0
-      5px
-      rgba(
-        29,
-        63,
-        40,
-        0.72
-      )
-    );
+.mapHotspot_available:hover {
+  box-shadow:
+    0 0 0 3px rgba(126, 160, 11, 0.28),
+    0 5px 15px rgba(0, 0, 0, 0.16);
 }
 
-/* =========================================================
-   SELECTED AVAILABLE
-========================================================= */
-
-.realMap
-:global(
-  .cls-56.zagari-selected
-) {
-  filter:
-    brightness(1.19)
-    saturate(1.3)
-    drop-shadow(
-      0
-      0
-      2px
-      #fff
-    )
-    drop-shadow(
-      0
-      0
-      6px
-      rgba(
-        126,
-        160,
-        11,
-        0.88
-      )
-    );
+.mapHotspot_reserved:hover {
+  box-shadow:
+    0 0 0 3px rgba(255, 127, 11, 0.28),
+    0 5px 15px rgba(0, 0, 0, 0.16);
 }
 
-/* =========================================================
-   SELECTED RESERVED
-========================================================= */
-
-.realMap
-:global(
-  .cls-53.zagari-selected
-) {
-  filter:
-    brightness(1.17)
-    saturate(1.3)
-    drop-shadow(
-      0
-      0
-      2px
-      #fff
-    )
-    drop-shadow(
-      0
-      0
-      6px
-      rgba(
-        255,
-        127,
-        11,
-        0.88
-      )
-    );
+.mapHotspot_sold:hover {
+  box-shadow:
+    0 0 0 3px rgba(220, 20, 60, 0.26),
+    0 5px 15px rgba(0, 0, 0, 0.16);
 }
 
-/* =========================================================
-   SELECTED SOLD
-========================================================= */
-
-.realMap
-:global(
-  .cls-54.zagari-selected
-) {
-  filter:
-    brightness(1.17)
-    saturate(1.3)
-    drop-shadow(
-      0
-      0
-      2px
-      #fff
-    )
-    drop-shadow(
-      0
-      0
-      6px
-      rgba(
-        207,
-        6,
-        71,
-        0.88
-      )
-    );
+.mapHotspotActive {
+  width: 38px;
+  height: 38px;
+  border: 2px solid white;
+  background: rgba(255, 255, 255, 0.14);
+  transform: translate(-50%, -50%);
 }
 
-/* =========================================================
-   FOCUS
-========================================================= */
-
-.realMap
-:global(
-  .zagari-lot-zone:focus-visible
-) {
-  outline: none;
-
-  filter:
-    brightness(1.14)
-    saturate(1.2)
-    drop-shadow(
-      0
-      0
-      5px
-      rgba(
-        42,
-        82,
-        52,
-        0.72
-      )
-    );
+.mapHotspot_available.mapHotspotActive {
+  box-shadow: 0 0 0 4px rgba(126, 160, 11, 0.85);
 }
 
-/* =========================================================
-   MAP HINT
-========================================================= */
+.mapHotspot_reserved.mapHotspotActive {
+  box-shadow: 0 0 0 4px rgba(255, 127, 11, 0.85);
+}
+
+.mapHotspot_sold.mapHotspotActive {
+  box-shadow: 0 0 0 4px rgba(220, 20, 60, 0.85);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .mapHint {
-  padding:
-    7px
-    11px;
-
+  min-height: 34px;
+  padding: 6px 11px;
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 7px;
-
-  border-top:
-    1px solid
-    #e7ece6;
-
-  color: #849089;
-
+  border-top: 1px solid #e7ece6;
+  color: #849088;
   font-size: 7.5px;
 }
 
-.mapHint span {
-  color: #50705a;
-
-  font-size: 13px;
-}
-
-/* =========================================================
-   MAP STATE
-========================================================= */
-
 .mapState {
-  width: 100%;
-
-  height: 100%;
-
   min-height: 300px;
-
   display: grid;
-
   place-items: center;
-
   color: #77857c;
-
   font-size: 10px;
 }
 
 .mapError {
-  color: #a84c4c;
+  color: #b34a4a;
 }
 
 /* =========================================================
@@ -1507,267 +663,169 @@
 
 .info {
   min-width: 0;
-
   min-height: 0;
-
-  padding:
-    15px
-    12px;
-
+  padding: 17px 15px;
   overflow-y: auto;
-
-  overscroll-behavior:
-    contain;
-
-  border:
-    1px solid
-    rgba(
-      40,
-      71,
-      49,
-      0.08
-    );
-
+  border: 1px solid #e3e9e2;
   border-radius: 14px;
-
-  background: #fbfcf8;
+  background:
+    linear-gradient(
+      180deg,
+      #fcfdf9 0%,
+      #f7f9f4 100%
+    );
 }
 
 .infoEmpty {
   min-height: 100%;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   text-align: center;
 }
 
 .infoIcon {
-  width: 42px;
-  height: 42px;
-
+  width: 44px;
+  height: 44px;
   margin-bottom: 11px;
-
   display: grid;
-
   place-items: center;
-
   border-radius: 50%;
-
-  background: #eef3eb;
-
+  background: #edf3eb;
   color: #628d70;
 }
 
 .infoEmpty strong {
   color: #395343;
-
-  font-size: 10.5px;
-
+  font-size: 11px;
   font-weight: 400;
 }
 
 .infoEmpty p {
-  max-width: 165px;
-
-  margin:
-    6px
-    auto
-    0;
-
-  color: #7d8982;
-
+  max-width: 190px;
+  margin: 6px 0 0;
+  color: #7c8981;
   font-size: 8.5px;
-
-  line-height: 1.5;
+  line-height: 1.55;
 }
-
-/* =========================================================
-   SELECTED INFO
-========================================================= */
 
 .infoContent {
-  padding:
-    5px
-    1px;
-
-  animation:
-    changeLot
-    130ms ease both;
+  animation: lotDetailsIn 150ms ease both;
 }
 
-@keyframes changeLot {
+@keyframes lotDetailsIn {
   from {
-    opacity: 0.55;
-
-    transform:
-      translateY(2px);
+    opacity: 0.45;
+    transform: translateY(3px);
   }
-
   to {
     opacity: 1;
-
-    transform:
-      translateY(0);
+    transform: translateY(0);
   }
 }
 
 .infoEyebrow {
   color: #7b8980;
-
   font-size: 8px;
 }
 
-.status {
-  margin-top: 9px;
-
+.detailStatus {
+  margin-top: 18px;
+  padding: 12px 0;
   display: flex;
-
   align-items: center;
-
-  gap: 8px;
+  gap: 9px;
+  border-top: 1px solid #dde4dd;
+  border-bottom: 1px solid #dde4dd;
 }
 
-.status i {
+.detailStatus i {
   width: 11px;
   height: 11px;
-
-  display: block;
-
   border-radius: 3px;
 }
 
-.status strong {
-  color: #294637;
+.status_available { background: #7ea00b; }
+.status_reserved { background: #ff7f0b; }
+.status_sold { background: #dc143c; }
 
-  font-size: 14px;
+.detailStatus > div {
+  display: grid;
+  gap: 1px;
+}
 
+.detailStatus small,
+.detailGrid span {
+  color: #89948c;
+  font-size: 7.5px;
+}
+
+.detailStatus strong {
+  color: #304e3b;
+  font-size: 11px;
   font-weight: 400;
 }
 
-.status_available {
-  background: #7ea00b;
+.detailGrid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
-.status_reserved {
-  background: #ff7f0b;
+.detailGrid > div {
+  min-width: 0;
+  padding: 10px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid #e2e8e1;
+  border-radius: 10px;
+  background: white;
 }
 
-.status_sold {
-  background: #cf0647;
-}
-
-/* =========================================================
-   REFERENCE
-========================================================= */
-
-.reference {
-  margin-top: 21px;
-
-  padding:
-    12px
-    0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content:
-    space-between;
-
-  gap: 15px;
-
-  border-top:
-    1px solid
-    #dfe5de;
-
-  border-bottom:
-    1px solid
-    #dfe5de;
-}
-
-.reference span {
-  color: #879289;
-
-  font-size: 8px;
-}
-
-.reference strong {
-  color: #395143;
-
-  font-size: 10px;
-
+.detailGrid strong {
+  color: #395344;
+  font-size: 8.5px;
+  line-height: 1.35;
   font-weight: 400;
 }
 
 .infoText {
-  margin:
-    17px
-    0
-    0;
-
+  margin: 15px 0 0;
   color: #748178;
-
-  font-size: 9px;
-
-  line-height: 1.55;
+  font-size: 8.8px;
+  line-height: 1.6;
 }
-
-/* =========================================================
-   WHATSAPP
-========================================================= */
 
 .whatsapp,
 .alternatives {
   width: 100%;
-
   min-height: 43px;
-
   margin-top: 14px;
-
-  padding:
-    0
-    13px;
-
+  padding: 0 13px;
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 8px;
-
   border-radius: 999px;
-
   text-decoration: none;
-
-  font-size: 9.5px;
+  font-size: 9px;
 }
 
 .whatsapp {
   background: #25d366;
-
-  color: #fff;
+  color: white;
 }
 
 .whatsapp span {
   flex: 1;
-
   text-align: center;
 }
 
 .alternatives {
-  border:
-    1px solid
-    #bcc8be;
-
+  border: 1px solid #bcc8be;
   background: transparent;
-
   color: #496553;
 }
 
@@ -1775,91 +833,67 @@
    TABLET
 ========================================================= */
 
-@media (
-  max-width: 1080px
-) {
+@media (max-width: 1080px) {
   .heading,
   .layout {
-    width:
-      calc(100% - 44px);
+    width: calc(100% - 44px);
   }
 
   .heading {
-    grid-template-columns:
-      1fr;
-
+    grid-template-columns: 1fr;
     gap: 18px;
   }
 
-  .heading > p {
-    max-width: 570px;
-  }
-
   .layout {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
   }
 
   .visual {
     min-height: 0;
-
-    aspect-ratio:
-      16 / 10;
+    aspect-ratio: 16 / 10;
   }
 
   .content {
-    width:
-      min(
-        700px,
-        100%
-      );
+    width: min(700px, 100%);
   }
 
   .overlay {
-    padding: 16px;
+    padding: 12px;
   }
 
   .modal {
     width: 100%;
-
-    height:
-      calc(
-        100dvh - 32px
-      );
+    height: calc(100dvh - 24px);
   }
 
   .modalBody {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
 
-    grid-template-rows:
-      minmax(0, 1fr)
-      auto;
+  .mapCanvas {
+    width: 1000px;
+    min-width: 1000px;
+    margin: 0;
+  }
+
+  .mapHotspot {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mapHotspotActive {
+    width: 42px;
+    height: 42px;
   }
 
   .info {
-    min-height: 120px;
-
-    max-height: 185px;
+    min-height: 150px;
+    max-height: 220px;
   }
 
-  .realMap
-  :global(svg) {
-    width: 1080px;
-
-    min-width: 1080px;
-  }
-
-  /*
-   * Tablet usa desplazamiento
-   * táctil nativo.
-   */
-
-  .mapViewport {
-    cursor: default;
-
-    touch-action:
-      pan-x pan-y;
+  .detailGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
@@ -1867,69 +901,44 @@
    MOBILE
 ========================================================= */
 
-@media (
-  max-width: 700px
-) {
+@media (max-width: 700px) {
   .section {
-    padding:
-      62px 0;
+    padding: 60px 0;
   }
 
   .heading,
   .layout {
-    width:
-      calc(100% - 28px);
+    width: calc(100% - 28px);
   }
 
   .heading {
-    margin-bottom: 29px;
+    margin-bottom: 28px;
   }
 
   .heading h2 {
     font-size: 28px;
   }
 
-  .heading > p {
-    font-size: 11px;
-  }
-
   .layout {
     gap: 29px;
   }
 
-  /* PHOTO */
-
   .visual {
-    aspect-ratio:
-      4 / 5;
-
-    border-radius:
-      3px
-      3px
-      46px
-      3px;
-  }
-
-  .location {
-    top: 12px;
-    left: 12px;
+    aspect-ratio: 4 / 5;
+    border-radius: 4px 4px 46px 4px;
   }
 
   .photoCaption {
+    left: 15px;
     right: 15px;
     bottom: 14px;
-    left: 15px;
-
     display: block;
   }
 
   .photoCaption p {
     width: 100%;
-
     margin-top: 4px;
-
     text-align: left;
-
     font-size: 12px;
   }
 
@@ -1937,23 +946,12 @@
     font-size: 24px;
   }
 
-  .description {
-    font-size: 11.5px;
-  }
-
-  /* CTA */
-
   .availabilityButton {
     width: 100%;
-
-    min-height: 60px;
   }
 
-  /* FORM */
-
   .formRow {
-    grid-template-columns:
-      1fr;
+    grid-template-columns: 1fr;
   }
 
   .formFooter {
@@ -1964,38 +962,20 @@
     width: 100%;
   }
 
-  .formFooter small {
-    max-width: none;
-  }
-
-  /* MODAL */
-
+  /* MOBILE MAP = bottom sheet */
   .overlay {
     padding: 0;
-
-    place-items:
-      end center;
+    place-items: end center;
   }
 
   .modal {
     width: 100%;
-
-    height: 94dvh;
-
-    max-height: 94dvh;
-
-    border-radius:
-      20px
-      20px
-      0
-      0;
+    height: 95dvh;
+    border-radius: 20px 20px 0 0;
   }
 
   .modalHeader {
-    padding:
-      14px
-      14px
-      11px;
+    padding: 13px 14px 10px;
   }
 
   .modalHeader h2 {
@@ -2003,263 +983,129 @@
   }
 
   .modalHeader p {
-    font-size: 8.5px;
+    max-width: 270px;
+    font-size: 8px;
   }
-
-  .close {
-    width: 32px;
-    height: 32px;
-  }
-
-  /* LEGEND */
 
   .legend {
-    padding:
-      8px
-      14px;
-
-    gap:
-      8px
-      12px;
+    padding: 8px 12px;
+    gap: 7px;
   }
 
-  .legend > div {
-    font-size: 8px;
+  .legendItem {
+    min-height: 27px;
+    padding: 0 8px;
+    font-size: 7px;
   }
 
   .legendHelp {
     width: 100%;
-
     margin-left: 0;
-
-    font-size: 7px;
+    font-size: 6.5px;
   }
-
-  /* BODY */
 
   .modalBody {
     padding: 8px;
-
-    grid-template-columns:
-      1fr;
-
-    grid-template-rows:
-      minmax(0, 1fr)
-      auto;
-
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr) auto;
     gap: 8px;
   }
 
-  /* MAP */
-
-  .mapPanel {
-    border-radius: 11px;
-  }
-
   .mapTop {
-    padding:
-      7px
-      9px;
-  }
-
-  .mapTop span {
-    font-size: 8px;
+    min-height: 32px;
+    padding: 0 9px;
   }
 
   .mapTop small {
-    font-size: 6.5px;
+    font-size: 6.3px;
   }
 
   /*
-   * MUY IMPORTANTE:
-   *
-   * Mobile NO usa nuestro
-   * drag de mouse.
-   *
-   * Usa scroll/pan nativo.
+   * Bigger internal map on phone.
+   * Horizontal/vertical native touch scroll.
    */
+  .mapCanvas {
+    width: 830px;
+    min-width: 830px;
+    margin: 0;
+  }
 
   .mapViewport {
     cursor: default;
-
-    touch-action:
-      pan-x pan-y;
-
-    overflow: auto;
-
-    -webkit-overflow-scrolling:
-      touch;
+    touch-action: pan-x pan-y;
   }
 
-  .mapViewport.dragging {
-    cursor: default;
+  .mapHotspot {
+    width: 40px;
+    height: 40px;
   }
 
-  .realMap {
-    justify-content:
-      flex-start;
-  }
-
-  .realMap
-  :global(svg) {
-    width: 850px;
-
-    min-width: 850px;
-
-    height: auto;
+  .mapHotspotActive {
+    width: 46px;
+    height: 46px;
   }
 
   .mapHint {
-    padding:
-      6px
-      9px;
-
-    font-size: 6.5px;
+    min-height: 29px;
+    font-size: 6.2px;
   }
-
-  /* INFO */
 
   .info {
-    min-height: 116px;
-
-    max-height: 190px;
-
-    padding:
-      11px
-      12px;
-
-    border-radius: 11px;
+    min-height: 150px;
+    max-height: 235px;
+    padding: 11px;
   }
 
-  .infoEmpty {
-    min-height: 92px;
-  }
-
-  .infoIcon {
-    width: 36px;
-    height: 36px;
-
-    margin-bottom: 7px;
-  }
-
-  .status strong {
-    font-size: 12px;
-  }
-
-  .reference {
-    margin-top: 10px;
-
-    padding:
-      8px 0;
+  .detailGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .infoText {
     margin-top: 9px;
-
     font-size: 8px;
   }
 
   .whatsapp,
   .alternatives {
     min-height: 40px;
-
     margin-top: 9px;
   }
 }
 
-/* =========================================================
-   SMALL MOBILE
-========================================================= */
-
-@media (
-  max-width: 430px
-) {
+@media (max-width: 430px) {
   .heading,
   .layout {
-    width:
-      calc(100% - 22px);
+    width: calc(100% - 22px);
   }
 
-  .visual {
-    aspect-ratio:
-      0.87;
+  .mapCanvas {
+    width: 760px;
+    min-width: 760px;
   }
 
-  .availabilityButton {
-    grid-template-columns:
-      38px
-      minmax(0, 1fr)
-      31px;
-
-    gap: 9px;
-
-    padding:
-      7px
-      9px;
+  .mapHotspot {
+    width: 42px;
+    height: 42px;
   }
 
-  .availabilityIcon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .availabilityArrow {
-    width: 31px;
-    height: 31px;
-  }
-
-  .realMap
-  :global(svg) {
-    width: 780px;
-
-    min-width: 780px;
+  .mapHotspotActive {
+    width: 48px;
+    height: 48px;
   }
 }
 
-/* =========================================================
-   VERY SMALL
-========================================================= */
-
-@media (
-  max-width: 360px
-) {
-  .realMap
-  :global(svg) {
-    width: 720px;
-
-    min-width: 720px;
-  }
-}
-
-/* =========================================================
-   LANDSCAPE
-========================================================= */
-
-@media (
-  max-height: 620px
-) and (
-  orientation:
-    landscape
-) {
+@media (max-height: 620px) and (orientation: landscape) {
   .overlay {
     padding: 6px;
   }
 
   .modal {
-    width: 100%;
-
-    height:
-      calc(
-        100dvh - 12px
-      );
-
+    height: calc(100dvh - 12px);
     border-radius: 14px;
   }
 
   .modalHeader {
-    padding:
-      8px
-      12px;
+    padding: 8px 12px;
   }
 
   .modalHeader p {
@@ -2267,51 +1113,32 @@
   }
 
   .legend {
-    padding:
-      6px
-      12px;
+    padding: 6px 12px;
   }
 
   .modalBody {
-    grid-template-columns:
-      minmax(0, 1fr)
-      210px;
-
-    grid-template-rows:
-      1fr;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-template-rows: 1fr;
   }
 
   .info {
     max-height: none;
   }
 
-  .realMap
-  :global(svg) {
+  .mapCanvas {
     width: 900px;
-
     min-width: 900px;
+  }
 
-    height: auto;
+  .detailGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media (
-  prefers-reduced-motion:
-    reduce
-) {
-  .availabilityButton,
-  .availabilityArrow,
-  .realMap
-  :global(
-    .zagari-lot-zone
-  ),
+@media (prefers-reduced-motion: reduce) {
+  .mapHotspot,
   .infoContent {
     transition: none;
-
     animation: none;
   }
 }

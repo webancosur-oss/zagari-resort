@@ -2,6 +2,7 @@
 
 import {
   ArrowUpRight,
+  CaretUp,
   FacebookLogo,
   InstagramLogo,
   MapPin,
@@ -13,6 +14,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./Footer.module.css";
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const GOOGLE_MAPS_URL =
+  "https://maps.app.goo.gl/p8EkgxDp4M3pmgkv5";
 
 const menuLinks = [
   {
@@ -52,7 +60,7 @@ const exploreLinks = [
   },
   {
     label: "Preguntas frecuentes",
-    href: "/#faq",
+    href: "/faq",
   },
 ];
 
@@ -74,6 +82,10 @@ const socials = [
   },
 ];
 
+/* =========================================================
+   FOOTER
+========================================================= */
+
 export default function Footer() {
   const year =
     new Date().getFullYear();
@@ -81,141 +93,108 @@ export default function Footer() {
   const whatsappNumber =
     process.env
       .NEXT_PUBLIC_ZAGARI_WHATSAPP ||
-    "519XXXXXXXX";
+    "51971069763";
 
   const whatsappUrl =
     `https://wa.me/${whatsappNumber}` +
     `?text=${encodeURIComponent(
-      "Hola Zagari Resort Club, quisiera recibir más información."
+      "Hola Zagari Resort Club, quisiera recibir más información.",
     )}`;
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <footer
-      className={
-        styles.footer
-      }
+      className={styles.footer}
       data-zagari-footer
     >
-      {/* =====================================
-          BACKGROUND
-      ====================================== */}
+      {/* =================================================
+          AMBIENT BACKGROUND
+      ================================================== */}
 
       <div
-        className={
-          styles.background
-        }
+        className={styles.background}
         aria-hidden="true"
       >
-        <div
-          className={
-            styles.glowLeft
-          }
+        <span
+          className={styles.glowLeft}
         />
 
-        <div
-          className={
-            styles.glowRight
-          }
+        <span
+          className={styles.glowRight}
         />
 
-        <div
-          className={
-            styles.glowBottom
-          }
+        <span
+          className={styles.glowCenter}
         />
 
-        <div
-          className={
-            styles.noise
-          }
+        <span
+          className={styles.noise}
         />
       </div>
 
-      {/* =====================================
+      {/* =================================================
           INNER
-      ====================================== */}
+      ================================================== */}
 
-      <div
-        className={
-          styles.inner
-        }
-      >
-        {/* ===================================
-            TOP
-        ==================================== */}
-
-        <div
-          className={
-            styles.topMeta
-          }
-        >
-        </div>
-
-        {/* ===================================
+      <div className={styles.inner}>
+        {/* =================================================
             MAIN
-        ==================================== */}
+        ================================================== */}
 
-        <div
-          className={
-            styles.main
-          }
-        >
-          {/* =================================
+        <div className={styles.main}>
+          {/* ===============================================
               BRAND
-          ================================== */}
+          ================================================ */}
 
-          <div
-            className={
-              styles.brand
-            }
-          >
+          <div className={styles.brand}>
             <Link
               href="/"
-              className={
-                styles.logo
-              }
+              className={styles.logo}
+              aria-label="Zagari Resort Club"
             >
               <Image
                 src="/assets/brand/zagari-logo-light.svg"
                 alt="Zagari Resort Club"
-                width={160}
-                height={58}
-                className={
-                  styles.logoImage
-                }
+                width={170}
+                height={62}
+                className={styles.logoImage}
               />
             </Link>
 
-            <div
-              className={
-                styles.slogan
-              }
-            >
+            <div className={styles.slogan}>
               <strong>
                 Vive diferente.
               </strong>
 
               <span>
-                Conecta con la
-                naturaleza.
+                Conecta con la naturaleza.
               </span>
             </div>
 
             <p
-              className={
-                styles.description
-              }
+              className={styles.description}
             >
               Naturaleza, descanso,
               bienestar y experiencias
-              diferentes en el corazón
-              de la Selva Central.
+              diferentes para reconectar
+              con lo esencial.
             </p>
 
-            <div
-              className={
-                styles.location
-              }
+            {/* =============================================
+                UBICACIÓN
+            ============================================== */}
+
+            <a
+              href={GOOGLE_MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.location}
             >
               <span
                 className={
@@ -223,31 +202,43 @@ export default function Footer() {
                 }
               >
                 <MapPin
-                  size={16}
+                  size={19}
                   weight="fill"
                 />
               </span>
 
-              <div>
+              <span
+                className={
+                  styles.locationText
+                }
+              >
                 <strong>
-                  San Ramón
+                  Zagari Resort Club
                 </strong>
 
-                <span>
-                  Selva Central · Perú
-                </span>
-              </div>
-            </div>
+                <small>
+                  Ver ubicación en Google Maps
+                </small>
+              </span>
+
+              <ArrowUpRight
+                className={
+                  styles.locationArrow
+                }
+                size={14}
+                weight="bold"
+              />
+            </a>
+
+            {/* =============================================
+                WHATSAPP
+            ============================================== */}
 
             <a
-              href={
-                whatsappUrl
-              }
+              href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={
-                styles.whatsapp
-              }
+              className={styles.whatsapp}
             >
               <span
                 className={
@@ -255,7 +246,7 @@ export default function Footer() {
                 }
               >
                 <WhatsappLogo
-                  size={17}
+                  size={18}
                   weight="fill"
                 />
               </span>
@@ -265,24 +256,22 @@ export default function Footer() {
               </span>
 
               <ArrowUpRight
-                size={13}
+                size={14}
+                weight="bold"
               />
             </a>
           </div>
 
-          {/* =================================
-              LINKS
-          ================================== */}
+          {/* ===============================================
+              NAVIGATION
+          ================================================ */}
 
-          <div
-            className={
-              styles.links
-            }
-          >
+          <div className={styles.links}>
             <nav
               className={
                 styles.linkColumn
               }
+              aria-label="Menú"
             >
               <span
                 className={
@@ -300,22 +289,19 @@ export default function Footer() {
                 {menuLinks.map(
                   (item) => (
                     <Link
-                      key={
-                        item.href
-                      }
-                      href={
-                        item.href
-                      }
+                      key={item.href}
+                      href={item.href}
                     >
-                      {
-                        item.label
-                      }
+                      <span>
+                        {item.label}
+                      </span>
 
                       <ArrowUpRight
-                        size={10}
+                        size={12}
+                        weight="bold"
                       />
                     </Link>
-                  )
+                  ),
                 )}
               </div>
             </nav>
@@ -324,6 +310,7 @@ export default function Footer() {
               className={
                 styles.linkColumn
               }
+              aria-label="Explora"
             >
               <span
                 className={
@@ -341,36 +328,29 @@ export default function Footer() {
                 {exploreLinks.map(
                   (item) => (
                     <Link
-                      key={
-                        item.href
-                      }
-                      href={
-                        item.href
-                      }
+                      key={item.href}
+                      href={item.href}
                     >
-                      {
-                        item.label
-                      }
+                      <span>
+                        {item.label}
+                      </span>
 
                       <ArrowUpRight
-                        size={10}
+                        size={12}
+                        weight="bold"
                       />
                     </Link>
-                  )
+                  ),
                 )}
               </div>
             </nav>
           </div>
 
-          {/* =================================
+          {/* ===============================================
               SOCIAL
-          ================================== */}
+          ================================================ */}
 
-          <div
-            className={
-              styles.social
-            }
-          >
+          <div className={styles.social}>
             <span
               className={
                 styles.columnTitle
@@ -399,6 +379,9 @@ export default function Footer() {
                       }
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={
+                        item.label
+                      }
                     >
                       <span
                         className={
@@ -406,7 +389,7 @@ export default function Footer() {
                         }
                       >
                         <Icon
-                          size={14}
+                          size={17}
                           weight="fill"
                         />
                       </span>
@@ -418,18 +401,17 @@ export default function Footer() {
                       </span>
 
                       <ArrowUpRight
-                        size={9}
+                        size={11}
+                        weight="bold"
                       />
                     </a>
                   );
-                }
+                },
               )}
             </div>
 
             <div
-              className={
-                styles.legal
-              }
+              className={styles.legal}
             >
               <Link href="/politica-de-privacidad">
                 Política de privacidad
@@ -440,51 +422,21 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-
-          {/* =================================
-              SIGNATURE DESKTOP
-          ================================== */}
-
-          <div
-            className={
-              styles.signature
-            }
-            aria-hidden="true"
-          >
-            <strong>
-              Z.
-            </strong>
-
-            <span
-              className={
-                styles.signatureLine
-              }
-            />
-
-            <small>
-              Vive diferente
-            </small>
-          </div>
         </div>
 
-        {/* ===================================
+        {/* =================================================
             BOTTOM
-        ==================================== */}
+        ================================================== */}
 
-        <div
-          className={
-            styles.bottom
-          }
-        >
+        <div className={styles.bottom}>
           <p>
             © {year} Zagari Resort Club.
             Todos los derechos reservados.
           </p>
 
           <div
-            className={
-              styles.values
-            }
+            className={styles.values}
+            aria-hidden="true"
           >
             <span>
               Naturaleza
@@ -505,23 +457,19 @@ export default function Footer() {
 
           <button
             type="button"
-            className={
-              styles.backTop
-            }
-            onClick={() => {
-              window.scrollTo({
-                top: 0,
-                behavior:
-                  "smooth",
-              });
-            }}
+            className={styles.backTop}
+            onClick={scrollToTop}
+            aria-label="Volver arriba"
           >
             <span>
               Volver arriba
             </span>
 
             <strong>
-              ↑
+              <CaretUp
+                size={16}
+                weight="bold"
+              />
             </strong>
           </button>
         </div>

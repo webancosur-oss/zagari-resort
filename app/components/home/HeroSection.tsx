@@ -6,14 +6,6 @@ import { ArrowDown, ArrowRight } from "@phosphor-icons/react";
 import styles from "./HeroSection.module.css";
 
 export default function HeroSection() {
-  const scrollToNextSection = () => {
-    const nextSection = document.querySelector("#experiencias");
-
-    nextSection?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
 
   return (
     <section className={styles.hero}>
@@ -138,23 +130,6 @@ export default function HeroSection() {
               </span>
             </div>
           </div>
-
-          {/* scroll */}
-          <button
-            type="button"
-            className={styles.scrollButton}
-            onClick={scrollToNextSection}
-            aria-label="Ir a la siguiente sección"
-          >
-            <span>Explorar</span>
-
-            <span className={styles.scrollCircle}>
-              <ArrowDown
-                size={16}
-                weight="regular"
-              />
-            </span>
-          </button>
         </div>
       </div>
     </section>

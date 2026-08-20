@@ -1,13 +1,10 @@
 "use client";
 
-import {
-  CheckCircle,
-  MapPin,
-  WhatsappLogo,
-  X,
-} from "@phosphor-icons/react";
 import Image from "next/image";
-import { useState } from "react";
+import {
+  FormEvent,
+  useState,
+} from "react";
 
 import styles from "./LocationSection.module.css";
 
@@ -15,210 +12,290 @@ import styles from "./LocationSection.module.css";
    TIPOS
 ========================================================= */
 
-type ZoneStatus =
-  | "sold"
-  | "available";
-
-type Zona = {
+type NearbyPlace = {
   id: string;
-  nombre: string;
-  descripcion: string;
-  estado: string;
-  status: ZoneStatus;
+  name: string;
+  label: string;
+  image: string;
+};
 
-  ubicacion: {
-    left: string;
-    top: string;
-  };
+type LeadForm = {
+  nombre: string;
+  telefono: string;
+  email: string;
 };
 
 /* =========================================================
    CONFIGURACIÓN
 ========================================================= */
 
-const WHATSAPP_NUMBER =
-  "51971069763";
+const GOOGLE_MAPS_URL =
+  "https://maps.app.goo.gl/p8EkgxDp4M3pmgkv5";
 
-const zonas: Zona[] = [
+const nearbyPlaces: NearbyPlace[] = [
   {
-    id: "A",
-    nombre: "Zona A",
-    descripcion:
-      "Lotes ubicados cerca del Resort Club y de los principales espacios recreativos.",
-    estado:
-      "Primera etapa vendida",
-    status:
-      "sold",
-    ubicacion: {
-      left: "67.7%",
-      top: "47%",
-    },
+    id: "plaza-san-ramon",
+    name: "Plaza San Ramón",
+    label: "Referencia cercana",
+    image:
+      "/assets/location/attractions/plaza-san-ramon.jpg",
   },
   {
-    id: "B",
-    nombre: "Zona B",
-    descripcion:
-      "Lotes con acceso cercano a las amenidades y al recorrido principal del proyecto.",
-    estado:
-      "Primera etapa vendida",
-    status:
-      "sold",
-    ubicacion: {
-      left: "59.8%",
-      top: "45.5%",
-    },
+    id: "ingreso-chincana",
+    name: "Ingreso a Chincana",
+    label: "Ingreso a Chincana",
+    image:
+      "/assets/location/attractions/ingreso-chincana.png",
   },
   {
-    id: "C",
-    nombre: "Zona C",
-    descripcion:
-      "Lotes ubicados en la zona central del proyecto, con conexión hacia sus principales espacios.",
-    estado:
-      "Segunda etapa en preventa",
-    status:
-      "available",
-    ubicacion: {
-      left: "48.6%",
-      top: "72%",
-    },
+    id: "mirador-mishasho",
+    name: "Mirador El Mishasho",
+    label: "Naturaleza",
+    image:
+      "/assets/location/attractions/mirador-mishasho.jpg",
   },
   {
-    id: "D",
-    nombre: "Zona D",
-    descripcion:
-      "Lotes rodeados de naturaleza, áreas verdes y recorridos internos.",
-    estado:
-      "Primera etapa vendida",
-    status:
-      "sold",
-    ubicacion: {
-      left: "56.3%",
-      top: "65%",
-    },
+    id: "fundo-selenita",
+    name: "Fundo Selenita",
+    label: "Referencia cercana",
+    image:
+      "/assets/location/attractions/fundo-selenita.jpg",
   },
   {
-    id: "E",
-    nombre: "Zona E",
-    descripcion:
-      "Lotes próximos al biohuerto, zona de trekking y espacios naturales.",
-    estado:
-      "Segunda etapa en preventa",
-    status:
-      "available",
-    ubicacion: {
-      left: "36%",
-      top: "63%",
-    },
+    id: "iglesia",
+    name: "Iglesia Chincana",
+    label: "Referencia local",
+    image:
+      "/assets/location/attractions/iglesia-chincana.jpg",
   },
-  {
-    id: "F",
-    nombre: "Zona F",
-    descripcion:
-      "Lotes con acceso directo al recorrido interno y conexión hacia las amenidades.",
-    estado:
-      "Segunda etapa en preventa",
-    status:
-      "available",
-    ubicacion: {
-      left: "45.6%",
-      top: "57.5%",
-    },
-  },
+
 ];
-
-/* =========================================================
-   UTILIDAD
-========================================================= */
-
-function createWhatsAppUrl(
-  zone: Zona,
-): string {
-  const message =
-    `Hola, deseo información sobre la ${zone.nombre} de Zagari Resort Club. ` +
-    `Estado: ${zone.estado}.`;
-
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-    message,
-  )}`;
-}
 
 /* =========================================================
    COMPONENTE
 ========================================================= */
 
-export default function MapaZagari() {
-  const [
-    zonaSeleccionada,
-    setZonaSeleccionada,
-  ] = useState<Zona | null>(
-    null,
-  );
+export default function LocationSection() {
+  const [formData, setFormData] =
+    useState<LeadForm>({
+      nombre: "",
+      telefono: "",
+      email: "",
+    });
 
-  const selectZone = (
-    zone: Zona,
+  const [isSending, setIsSending] =
+    useState(false);
+
+  const [sent, setSent] =
+    useState(false);
+
+  const [error, setError] =
+    useState("");
+
+  /* =======================================================
+     INPUT
+  ======================================================= */
+
+  const updateField = (
+    field: keyof LeadForm,
+    value: string,
   ) => {
-    setZonaSeleccionada(
-      zone,
-    );
+    setFormData((current) => ({
+      ...current,
+      [field]: value,
+    }));
+
+    if (error) {
+      setError("");
+    }
   };
 
-  const closeZone = () => {
-    setZonaSeleccionada(
-      null,
-    );
+  /* =======================================================
+     SUBMIT
+  ======================================================= */
+
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>,
+  ) => {
+    event.preventDefault();
+
+    if (isSending) return;
+
+    const nombre =
+      formData.nombre.trim();
+
+    const telefono =
+      formData.telefono.replace(
+        /\D/g,
+        "",
+      );
+
+    const email =
+      formData.email
+        .trim()
+        .toLowerCase();
+
+    if (!nombre) {
+      setError(
+        "Ingresa tu nombre.",
+      );
+      return;
+    }
+
+    if (telefono.length < 9) {
+      setError(
+        "Ingresa un número válido.",
+      );
+      return;
+    }
+
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        email,
+      )
+    ) {
+      setError(
+        "Ingresa un correo válido.",
+      );
+      return;
+    }
+
+    try {
+      setIsSending(true);
+      setError("");
+
+      const response =
+        await fetch(
+          "/api/leads",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body: JSON.stringify({
+              nombre,
+              telefono,
+              email,
+              dni: "",
+
+              campaña:
+                "Zagari Resort Club",
+
+              anuncio:
+                "Sección ubicación Zagari",
+
+              comentario:
+                "Cliente interesado en conocer Zagari Resort Club.",
+
+              msj_client:
+                JSON.stringify({
+                  interes:
+                    "Zagari Resort Club",
+
+                  origen:
+                    "Sección ubicación",
+
+                  ruta:
+                    window.location
+                      .pathname,
+                }),
+            }),
+          },
+        );
+
+      if (!response.ok) {
+        throw new Error();
+      }
+
+      setSent(true);
+
+      setFormData({
+        nombre: "",
+        telefono: "",
+        email: "",
+      });
+    } catch {
+      setError(
+        "No pudimos enviar tus datos. Inténtalo nuevamente.",
+      );
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <section
       className={styles.section}
       id="ubicacion"
-      aria-labelledby="zagari-map-title"
+      aria-labelledby="location-title"
     >
       <div className={styles.container}>
         {/* =================================================
-            CABECERA
+            HEADER
         ================================================== */}
 
-        <header className={styles.header}>
-          <div className={styles.headerText}>
-            <span className={styles.eyebrow}>
-              Explora el proyecto
+        <header
+          className={styles.header}
+        >
+          <div
+            className={
+              styles.headerTitle
+            }
+          >
+            <span
+              className={
+                styles.eyebrow
+              }
+            >
+              Ubicación
             </span>
 
-            <h2 id="zagari-map-title">
-              Conoce las zonas de Zagari Resort Club
+            <h2 id="location-title">
+              Tu escape comienza
+              <span>
+                {" "}
+                mucho antes de
+                llegar.
+              </span>
             </h2>
           </div>
 
-          <div className={styles.headerAside}>
+          <div
+            className={
+              styles.headerCopy
+            }
+          >
             <p>
-              Selecciona una zona del mapa para conocer sus
-              características, disponibilidad y ubicación dentro
-              del proyecto.
+              Descubre la ruta
+              hacia Zagari y
+              algunos de los
+              lugares que forman
+              parte de su entorno.
             </p>
 
-            <div
-              className={styles.legend}
-              aria-label="Leyenda del mapa"
+            <a
+              href={
+                GOOGLE_MAPS_URL
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className={
+                styles.mapsTextLink
+              }
             >
-              <span>
-                <i
-                  className={styles.availableDot}
-                  aria-hidden="true"
-                />
+              Ver ubicación en
+              Google Maps
 
-                En preventa
+              <span
+                aria-hidden="true"
+              >
+                ↗
               </span>
-
-              <span>
-                <i
-                  className={styles.soldDot}
-                  aria-hidden="true"
-                />
-
-                Vendido
-              </span>
-            </div>
+            </a>
           </div>
         </header>
 
@@ -226,246 +303,379 @@ export default function MapaZagari() {
             MAPA
         ================================================== */}
 
-        <div className={styles.mapViewport}>
-          <div className={styles.mapCanvas}>
+        <div
+          className={
+            styles.mapSection
+          }
+        >
+          <div
+            className={
+              styles.mapFrame
+            }
+          >
             <Image
-              src="/assets/images/mapa-zagari.webp"
-              alt="Plano general interactivo de las zonas de Zagari Resort Club"
+              src="/assets/location/ubicacion.webp"
+              alt="Ruta referencial hacia Zagari Resort Club"
               fill
               priority
               sizes="
-                (max-width: 700px) 1100px,
-                (max-width: 1200px) 100vw,
-                1500px
+                (max-width: 600px) 100vw,
+                (max-width: 1024px) 100vw,
+                1440px
               "
-              className={styles.mapImage}
+              className={
+                styles.mapImage
+              }
             />
+          </div>
 
-            <div
-              className={styles.mapShade}
-              aria-hidden="true"
-            />
+          <div
+            className={
+              styles.mapFooter
+            }
+          >
+            <div>
+              <span>
+                Zagari Resort
+                Club
+              </span>
 
-            {/* MARCADORES */}
+              <p>
+                Consulta la
+                ubicación exacta
+                y planifica tu
+                visita.
+              </p>
+            </div>
 
-            {zonas.map((zona) => {
-              const isSelected =
-                zonaSeleccionada?.id ===
-                zona.id;
+            <a
+              href={
+                GOOGLE_MAPS_URL
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className={
+                styles.mapsButton
+              }
+            >
+              Abrir en Google
+              Maps
 
-              return (
-                <button
-                  key={zona.id}
-                  type="button"
-                  aria-label={`Ver información de ${zona.nombre}: ${zona.estado}`}
-                  aria-pressed={isSelected}
-                  className={`${styles.marker} ${
-                    zona.status ===
-                    "sold"
-                      ? styles.markerSold
-                      : styles.markerAvailable
-                  } ${
-                    isSelected
-                      ? styles.markerSelected
-                      : ""
-                  }`}
-                  style={{
-                    left:
-                      zona.ubicacion
-                        .left,
-
-                    top:
-                      zona.ubicacion
-                        .top,
-                  }}
-                  onClick={() =>
-                    selectZone(
-                      zona,
-                    )
-                  }
-                >
-                  <span>
-                    {zona.id}
-                  </span>
-                </button>
-              );
-            })}
-
-            {/* INFORMACIÓN EN DESKTOP */}
-
-            {zonaSeleccionada && (
-              <aside
-                className={styles.card}
-                aria-live="polite"
+              <span
+                aria-hidden="true"
               >
-                <button
-                  type="button"
-                  className={styles.close}
-                  onClick={closeZone}
-                  aria-label="Cerrar información de la zona"
-                >
-                  <X
-                    size={19}
-                    weight="bold"
-                    aria-hidden="true"
-                  />
-                </button>
-
-                <div className={styles.cardHeader}>
-                  <span
-                    className={`${styles.cardIcon} ${
-                      zonaSeleccionada.status ===
-                      "sold"
-                        ? styles.cardIconSold
-                        : styles.cardIconAvailable
-                    }`}
-                  >
-                    <MapPin
-                      size={22}
-                      weight="fill"
-                      aria-hidden="true"
-                    />
-                  </span>
-
-                  <div>
-                    <span className={styles.zoneLabel}>
-                      {zonaSeleccionada.nombre}
-                    </span>
-
-                    <h3>
-                      {
-                        zonaSeleccionada.estado
-                      }
-                    </h3>
-                  </div>
-                </div>
-
-                <p>
-                  {
-                    zonaSeleccionada.descripcion
-                  }
-                </p>
-
-                <div className={styles.cardStatus}>
-                  <CheckCircle
-                    size={18}
-                    weight="fill"
-                    aria-hidden="true"
-                  />
-
-                  <span>
-                    {zonaSeleccionada.status ===
-                    "available"
-                      ? "Disponible para consultas comerciales"
-                      : "Zona correspondiente a una etapa vendida"}
-                  </span>
-                </div>
-
-                <a
-                  href={createWhatsAppUrl(
-                    zonaSeleccionada,
-                  )}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.button}
-                >
-                  <WhatsappLogo
-                    size={20}
-                    weight="fill"
-                    aria-hidden="true"
-                  />
-
-                  <span>
-                    Consultar disponibilidad
-                  </span>
-                </a>
-              </aside>
-            )}
+                ↗
+              </span>
+            </a>
           </div>
         </div>
 
         {/* =================================================
-            INFORMACIÓN EN MÓVIL
+            LUGARES CERCANOS
         ================================================== */}
 
-        {zonaSeleccionada && (
-          <aside
-            className={styles.mobileCard}
-            aria-live="polite"
+        <section
+          className={
+            styles.nearbySection
+          }
+          aria-labelledby="nearby-title"
+        >
+          <div
+            className={
+              styles.nearbyHeader
+            }
           >
-            <button
-              type="button"
-              className={styles.mobileClose}
-              onClick={closeZone}
-              aria-label="Cerrar información de la zona"
-            >
-              <X
-                size={18}
-                weight="bold"
-                aria-hidden="true"
-              />
-            </button>
-
-            <div className={styles.mobileCardHeader}>
-              <span
-                className={`${styles.cardIcon} ${
-                  zonaSeleccionada.status ===
-                  "sold"
-                    ? styles.cardIconSold
-                    : styles.cardIconAvailable
-                }`}
-              >
-                <MapPin
-                  size={21}
-                  weight="fill"
-                  aria-hidden="true"
-                />
+            <div>
+              <span>
+                El entorno
               </span>
 
-              <div>
-                <span className={styles.zoneLabel}>
-                  {zonaSeleccionada.nombre}
-                </span>
-
-                <h3>
-                  {
-                    zonaSeleccionada.estado
-                  }
-                </h3>
-              </div>
+              <h3 id="nearby-title">
+                Descubre lo que
+                tienes
+                <em>
+                  {" "}
+                  cerca de
+                  Zagari.
+                </em>
+              </h3>
             </div>
 
             <p>
-              {
-                zonaSeleccionada.descripcion
-              }
+              Naturaleza,
+              referencias y
+              lugares que
+              acompañan el
+              recorrido hacia el
+              resort.
             </p>
+          </div>
 
-            <a
-              href={createWhatsAppUrl(
-                zonaSeleccionada,
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.button}
+          <div
+            className={
+              styles.placesGrid
+            }
+          >
+            {nearbyPlaces.map(
+              (place) => (
+                <article
+                  key={place.id}
+                  className={
+                    styles.placeCard
+                  }
+                >
+                  <div
+                    className={
+                      styles.placeImage
+                    }
+                  >
+                    <Image
+                      src={
+                        place.image
+                      }
+                      alt={
+                        place.name
+                      }
+                      fill
+                      sizes="
+                        (max-width: 480px) 50vw,
+                        (max-width: 768px) 50vw,
+                        (max-width: 1100px) 33vw,
+                        25vw
+                      "
+                      className={
+                        styles.placePhoto
+                      }
+                    />
+
+                    <div
+                      className={
+                        styles.placeShade
+                      }
+                    />
+
+                    <div
+                      className={
+                        styles.placeContent
+                      }
+                    >
+                      <span>
+                        {
+                          place.label
+                        }
+                      </span>
+
+                      <h4>
+                        {
+                          place.name
+                        }
+                      </h4>
+                    </div>
+                  </div>
+                </article>
+              ),
+            )}
+          </div>
+        </section>
+
+        {/* =================================================
+            LEAD
+        ================================================== */}
+
+        <section
+          className={
+            styles.leadSection
+          }
+        >
+          <div
+            className={
+              styles.leadIntro
+            }
+          >
+            <span>
+              Vive Zagari
+            </span>
+
+            <h3>
+              ¿Quieres conocerlo
+              en persona?
+            </h3>
+
+            <p>
+              Déjanos tus datos
+              y nuestro equipo
+              te contactará.
+            </p>
+          </div>
+
+          {sent ? (
+            <div
+              className={
+                styles.success
+              }
             >
-              <WhatsappLogo
-                size={20}
-                weight="fill"
-                aria-hidden="true"
-              />
+              <strong>
+                Datos enviados
+              </strong>
 
-              <span>
-                Consultar disponibilidad
-              </span>
-            </a>
-          </aside>
-        )}
+              <p>
+                Nos pondremos en
+                contacto contigo
+                pronto.
+              </p>
 
-        <p className={styles.mobileHint}>
-          Desliza horizontalmente para explorar todo el mapa y
-          presiona las letras para ver cada zona.
-        </p>
+              <button
+                type="button"
+                onClick={() =>
+                  setSent(false)
+                }
+              >
+                Nueva consulta
+              </button>
+            </div>
+          ) : (
+            <form
+              className={
+                styles.form
+              }
+              onSubmit={
+                handleSubmit
+              }
+            >
+              <div
+                className={
+                  styles.field
+                }
+              >
+                <label
+                  htmlFor="zagari-nombre"
+                >
+                  Nombre
+                </label>
+
+                <input
+                  id="zagari-nombre"
+                  type="text"
+                  autoComplete="name"
+                  placeholder="Tu nombre"
+                  value={
+                    formData.nombre
+                  }
+                  onChange={(
+                    event,
+                  ) =>
+                    updateField(
+                      "nombre",
+                      event.target
+                        .value,
+                    )
+                  }
+                />
+              </div>
+
+              <div
+                className={
+                  styles.field
+                }
+              >
+                <label
+                  htmlFor="zagari-telefono"
+                >
+                  WhatsApp
+                </label>
+
+                <input
+                  id="zagari-telefono"
+                  type="tel"
+                  inputMode="numeric"
+                  autoComplete="tel"
+                  placeholder="999 999 999"
+                  maxLength={15}
+                  value={
+                    formData.telefono
+                  }
+                  onChange={(
+                    event,
+                  ) =>
+                    updateField(
+                      "telefono",
+                      event.target
+                        .value,
+                    )
+                  }
+                />
+              </div>
+
+              <div
+                className={
+                  styles.field
+                }
+              >
+                <label
+                  htmlFor="zagari-email"
+                >
+                  Correo
+                  <span>
+                    {" "}
+                    opcional
+                  </span>
+                </label>
+
+                <input
+                  id="zagari-email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="correo@ejemplo.com"
+                  value={
+                    formData.email
+                  }
+                  onChange={(
+                    event,
+                  ) =>
+                    updateField(
+                      "email",
+                      event.target
+                        .value,
+                    )
+                  }
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={
+                  isSending
+                }
+                className={
+                  styles.submit
+                }
+              >
+                {isSending
+                  ? "Enviando..."
+                  : "Quiero conocer Zagari"}
+
+                {!isSending && (
+                  <span
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                )}
+              </button>
+
+              {error && (
+                <p
+                  className={
+                    styles.error
+                  }
+                  role="alert"
+                >
+                  {error}
+                </p>
+              )}
+            </form>
+          )}
+        </section>
       </div>
     </section>
   );

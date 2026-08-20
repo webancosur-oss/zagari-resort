@@ -2,6 +2,7 @@
 
 import AmenitiesSection from "./components/AmenitiesSection/AmenitiesSection";
 import CabinsSection from "./components/CabinsSection/CabinsSection";
+import FaqSection from "./components/Faq/FaqSection";
 import FinalCta from "./components/FinalCta/FinalCta";
 import CinematicExperience from "./components/home/CinematicExperience/CinematicExperience";
 import HeroSection from "./components/home/HeroSection";
@@ -24,25 +25,23 @@ export default function HomePage() {
       
       <ZagariExperience />
 
-      <ZagariManifesto />
-
       <CinematicExperience />
 
       <LotsSection/>
 
-      <AmenitiesSection />
+      {/* <AmenitiesSection /> */}
 
       {/* <HomeHero /> */}
 
-      <NearbyExperiences />
-
-      
-
+      {/* <NearbyExperiences /> */}
 
       {/* <CabinsSection /> */}
 
-
       <LocationSection />
+
+      <FaqSection />
+
+      <ZagariManifesto />
 
       <HomeContactForm />
 

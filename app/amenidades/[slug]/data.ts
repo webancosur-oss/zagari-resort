@@ -164,7 +164,7 @@ export const amenities:
       "Un espacio elevado para contemplar el paisaje y conectar con la naturaleza de San Ramón.",
 
     image:
-      "/assets/amenities/mirador-san-ramon.webp",
+      "/assets/amenities/mirador.png",
 
     imagePosition:
       "center center",
@@ -176,29 +176,29 @@ export const amenities:
       true,
   },
 
-  {
-    id: "yoga",
+  // {
+  //   id: "yoga",
 
-    number: "02",
+  //   number: "02",
 
-    name:
-      "Zona de yoga",
+  //   name:
+  //     "Zona de yoga",
 
-    shortName:
-      "Yoga",
+  //   shortName:
+  //     "Yoga",
 
-    description:
-      "Un espacio abierto para respirar, encontrar equilibrio y disfrutar la tranquilidad del entorno.",
+  //   description:
+  //     "Un espacio abierto para respirar, encontrar equilibrio y disfrutar la tranquilidad del entorno.",
 
-    image:
-      "/assets/amenities/yoga.webp",
+  //   image:
+  //     "/assets/amenities/yoga.webp",
 
-    imagePosition:
-      "center center",
+  //   imagePosition:
+  //     "center center",
 
-    element:
-      "aire",
-  },
+  //   element:
+  //     "aire",
+  // },
 
   {
     id: "muro-escalable",
@@ -215,7 +215,7 @@ export const amenities:
       "Movimiento, aventura y una experiencia diferente integrada al paisaje natural.",
 
     image:
-      "/assets/amenities/muro-escalable.webp",
+      "/assets/amenities/tenis.png",
 
     imagePosition:
       "center center",
@@ -239,7 +239,7 @@ export const amenities:
       "Una experiencia al aire libre para vivir la naturaleza durante el día y bajo las estrellas.",
 
     image:
-      "/assets/amenities/camping.webp",
+      "/assets/amenities/camping.png",
 
     imagePosition:
       "center center",
@@ -267,7 +267,7 @@ export const amenities:
       "Un refugio para detenerte, meditar y recargar energías rodeado de naturaleza.",
 
     image:
-      "/assets/amenities/zona-espiritual.webp",
+      "/assets/amenities/zona-espiritual.png",
 
     imagePosition:
       "center center",
@@ -294,7 +294,7 @@ export const amenities:
       "Un espacio pensado para compartir encuentros, sabores y buenos momentos.",
 
     image:
-      "/assets/amenities/parrillas.webp",
+      "/assets/amenities/camping.png",
 
     imagePosition:
       "center center",

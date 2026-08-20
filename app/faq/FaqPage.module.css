@@ -1,0 +1,1912 @@
+/* =========================================================
+   ZAGARI RESORT CLUB
+   FAQ PAGE
+   MOBILE / TABLET / DESKTOP
+========================================================= */
+
+.page {
+  /* =======================================================
+     PALETA ZAGARI
+  ======================================================= */
+
+  --zagari-green: #00a95c;
+  --zagari-green-dark: #087443;
+  --zagari-green-soft: #dff4e8;
+
+  --zagari-magenta: #d51b83;
+  --zagari-magenta-soft: #f8e1ef;
+
+  --zagari-yellow: #f2d51c;
+  --zagari-blue: #23a9df;
+  --zagari-orange: #f18b2b;
+
+  --zagari-black: #171917;
+  --zagari-dark: #202820;
+
+  --zagari-bg: #f7f5ef;
+  --zagari-white: #ffffff;
+
+  --zagari-text:
+    rgba(25, 32, 25, 0.65);
+
+  --zagari-muted:
+    rgba(25, 32, 25, 0.45);
+
+  --zagari-line:
+    rgba(25, 32, 25, 0.1);
+
+  /*
+    AJUSTA ESTO SOLO SI TU NAVBAR
+    ES MÁS ALTO O MÁS BAJO
+  */
+
+  --navbar-height: 88px;
+
+  width: 100%;
+
+  overflow: clip;
+
+  color:
+    var(--zagari-black);
+
+  background:
+    var(--zagari-bg);
+}
+
+.container {
+  width:
+    min(
+      calc(100% - 64px),
+      1380px
+    );
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+  position: relative;
+
+  /*
+    IMPORTANTE:
+    espacio real para tu navbar fijo
+  */
+
+  padding:
+    calc(
+      var(--navbar-height) +
+      clamp(75px, 7vw, 115px)
+    )
+    0
+    clamp(65px, 7vw, 105px);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 88% 7%,
+      rgba(0, 169, 92, 0.09),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 97% 50%,
+      rgba(213, 27, 131, 0.045),
+      transparent 23%
+    ),
+    var(--zagari-bg);
+}
+
+
+/* =========================================================
+   HERO GRID
+========================================================= */
+
+.heroGrid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.25fr)
+    minmax(300px, 0.46fr);
+
+  align-items: end;
+
+  gap:
+    clamp(
+      65px,
+      8vw,
+      135px
+    );
+}
+
+.heroMain {
+  max-width: 940px;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 11px;
+
+  margin-bottom: 20px;
+
+  font-size: 10px;
+  font-weight: 750;
+
+  line-height: 1;
+
+  letter-spacing: 0.17em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--zagari-green-dark);
+}
+
+.eyebrowLine {
+  display: block;
+
+  width: 36px;
+  height: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--zagari-green) 0 35%,
+      var(--zagari-yellow) 35% 58%,
+      var(--zagari-magenta) 58% 78%,
+      var(--zagari-blue) 78% 100%
+    );
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero h1 {
+  margin: 0;
+
+  max-width: 930px;
+
+  font-size:
+    clamp(
+      50px,
+      6.4vw,
+      90px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.92;
+
+  letter-spacing: -0.058em;
+
+  color:
+    var(--zagari-black);
+}
+
+.hero h1 span {
+  color:
+    #7d887b;
+}
+
+
+/* =========================================================
+   HERO ASIDE
+========================================================= */
+
+.heroAside {
+  padding-bottom: 4px;
+}
+
+.heroAside > p {
+  margin:
+    0
+    0
+    26px;
+
+  max-width: 390px;
+
+  font-size: 13px;
+
+  line-height: 1.75;
+
+  color:
+    var(--zagari-text);
+}
+
+
+/* =========================================================
+   WHATSAPP HERO
+========================================================= */
+
+.heroWhatsapp {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-height: 45px;
+
+  padding:
+    0
+    16px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  color: #ffffff;
+
+  background:
+    var(--zagari-green);
+
+  box-shadow:
+    0 10px 25px
+    rgba(0, 169, 92, 0.17);
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.heroWhatsapp:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    var(--zagari-green-dark);
+
+  box-shadow:
+    0 14px 30px
+    rgba(0, 169, 92, 0.22);
+}
+
+.heroWhatsapp
+> span:last-child {
+  font-size: 14px;
+}
+
+.whatsappDot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background:
+    var(--zagari-yellow);
+}
+
+
+/* =========================================================
+   QUICK FACTS
+========================================================= */
+
+.quickFacts {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 1px;
+
+  margin-top:
+    clamp(
+      65px,
+      8vw,
+      105px
+    );
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--zagari-line);
+
+  border-radius: 17px;
+
+  background:
+    var(--zagari-line);
+}
+
+.quickFact {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  min-height: 92px;
+
+  justify-content: center;
+
+  padding:
+    17px
+    20px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.62
+    );
+}
+
+.quickFact strong {
+  font-size:
+    clamp(
+      19px,
+      2vw,
+      27px
+    );
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: -0.035em;
+
+  color:
+    var(--zagari-black);
+}
+
+.quickFact span {
+  font-size: 9px;
+
+  color:
+    var(--zagari-muted);
+}
+
+
+/* =========================================================
+   CATEGORY NAV
+========================================================= */
+
+.categoryNav {
+  position: sticky;
+
+  /*
+    No queda debajo del navbar
+  */
+
+  top:
+    var(--navbar-height);
+
+  z-index: 20;
+
+  width: 100%;
+
+  border-top:
+    1px solid
+    rgba(25, 32, 25, 0.06);
+
+  border-bottom:
+    1px solid
+    rgba(25, 32, 25, 0.08);
+
+  background:
+    rgba(
+      247,
+      245,
+      239,
+      0.92
+    );
+
+  backdrop-filter:
+    blur(18px);
+
+  -webkit-backdrop-filter:
+    blur(18px);
+}
+
+.categoryScroll {
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  overflow-x: auto;
+
+  padding:
+    11px
+    0;
+
+  scrollbar-width: none;
+
+  -webkit-overflow-scrolling:
+    touch;
+}
+
+.categoryScroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   CATEGORY BUTTON
+========================================================= */
+
+.categoryLink {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-width: max-content;
+
+  gap: 8px;
+
+  min-height: 38px;
+
+  padding:
+    0
+    14px;
+
+  border:
+    1px solid
+    transparent;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  color:
+    rgba(23, 25, 23, 0.64);
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.categoryLink span {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  font-size: 7px;
+
+  color:
+    var(--zagari-green-dark);
+
+  background:
+    var(--zagari-green-soft);
+}
+
+.categoryLink:hover {
+  color: #ffffff;
+
+  border-color:
+    var(--zagari-green);
+
+  background:
+    var(--zagari-green);
+}
+
+.categoryLink:hover span {
+  color:
+    var(--zagari-black);
+
+  background:
+    var(--zagari-yellow);
+}
+
+
+/* =========================================================
+   FAQ SECTION
+========================================================= */
+
+.faqSection {
+  padding:
+    clamp(
+      90px,
+      10vw,
+      155px
+    )
+    0;
+
+  background:
+    var(--zagari-white);
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+
+  gap:
+    clamp(
+      105px,
+      11vw,
+      165px
+    );
+}
+
+
+/* =========================================================
+   GROUP
+========================================================= */
+
+.group {
+  display: grid;
+
+  grid-template-columns:
+    minmax(250px, 0.5fr)
+    minmax(0, 1.5fr);
+
+  align-items: start;
+
+  gap:
+    clamp(
+      55px,
+      8vw,
+      125px
+    );
+
+  scroll-margin-top:
+    calc(
+      var(--navbar-height) +
+      85px
+    );
+}
+
+
+/* =========================================================
+   GROUP HEADER
+========================================================= */
+
+.groupHeader {
+  position: sticky;
+
+  top:
+    calc(
+      var(--navbar-height) +
+      95px
+    );
+
+  display: grid;
+
+  grid-template-columns:
+    37px
+    minmax(0, 1fr);
+
+  gap: 13px;
+
+  max-width: 390px;
+}
+
+.groupNumber {
+  padding-top: 4px;
+
+  font-size: 8px;
+  font-weight: 750;
+
+  letter-spacing: 0.08em;
+
+  color:
+    var(--zagari-magenta);
+}
+
+.groupEyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 8px;
+  font-weight: 750;
+
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color:
+    var(--zagari-green-dark);
+}
+
+.groupHeader h2 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      29px,
+      3vw,
+      42px
+    );
+
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.042em;
+
+  color:
+    var(--zagari-black);
+}
+
+
+/* =========================================================
+   FAQ LIST
+========================================================= */
+
+.faqList {
+  width: 100%;
+
+  border-top:
+    1px solid
+    var(--zagari-line);
+}
+
+
+/* =========================================================
+   FAQ ITEM
+========================================================= */
+
+.faqItem {
+  position: relative;
+
+  border-bottom:
+    1px solid
+    var(--zagari-line);
+}
+
+.faqItem summary {
+  list-style: none;
+}
+
+.faqItem summary::-webkit-details-marker {
+  display: none;
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.question {
+  display: grid;
+
+  grid-template-columns:
+    32px
+    minmax(0, 1fr)
+    42px;
+
+  align-items: center;
+
+  gap: 16px;
+
+  width: 100%;
+
+  padding:
+    27px
+    0;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
+
+.questionNumber {
+  font-size: 8px;
+  font-weight: 700;
+
+  color:
+    rgba(23, 25, 23, 0.3);
+}
+
+.questionText {
+  max-width: 760px;
+
+  font-size:
+    clamp(
+      17px,
+      1.4vw,
+      21px
+    );
+
+  font-weight: 500;
+
+  line-height: 1.3;
+
+  letter-spacing: -0.021em;
+
+  color:
+    var(--zagari-black);
+}
+
+
+/* =========================================================
+   TOGGLE
+========================================================= */
+
+.toggle {
+  position: relative;
+
+  width: 38px;
+  height: 38px;
+
+  justify-self: end;
+
+  border:
+    1px solid
+    var(--zagari-line);
+
+  border-radius: 50%;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.toggle > span {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 11px;
+  height: 1.5px;
+
+  border-radius: 99px;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+
+  background:
+    var(--zagari-black);
+
+  transition:
+    transform 220ms ease,
+    background 180ms ease;
+}
+
+.toggle > span:last-child {
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    rotate(90deg);
+}
+
+
+/* =========================================================
+   OPEN
+========================================================= */
+
+.faqItem[open]
+.toggle {
+  border-color:
+    var(--zagari-green);
+
+  background:
+    var(--zagari-green);
+}
+
+.faqItem[open]
+.toggle > span {
+  background: #ffffff;
+}
+
+.faqItem[open]
+.toggle
+> span:last-child {
+  transform:
+    translate(
+      -50%,
+      -50%
+    )
+    rotate(0deg);
+}
+
+
+/* =========================================================
+   QUESTION HOVER
+========================================================= */
+
+.question:hover
+.toggle {
+  border-color:
+    var(--zagari-green);
+}
+
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+.answer {
+  padding:
+    0
+    55px
+    29px
+    48px;
+}
+
+.answer p {
+  margin: 0;
+
+  max-width: 710px;
+
+  font-size: 12px;
+
+  line-height: 1.8;
+
+  color:
+    var(--zagari-text);
+}
+
+
+/* =========================================================
+   ANSWER LINK
+========================================================= */
+
+.answerLink {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 17px;
+
+  min-height: 38px;
+
+  padding:
+    0
+    13px;
+
+  border:
+    1px solid
+    rgba(0, 169, 92, 0.18);
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  color:
+    var(--zagari-green-dark);
+
+  background:
+    var(--zagari-green-soft);
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.answerLink span {
+  font-size: 13px;
+}
+
+.answerLink:hover {
+  transform:
+    translateY(-1px);
+
+  color: #ffffff;
+
+  background:
+    var(--zagari-green);
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contactSection {
+  padding:
+    0
+    0
+    clamp(
+      80px,
+      9vw,
+      135px
+    );
+
+  background:
+    var(--zagari-white);
+}
+
+.contactCard {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(240px, auto);
+
+  align-items: end;
+
+  gap:
+    clamp(
+      50px,
+      8vw,
+      120px
+    );
+
+  overflow: hidden;
+
+  padding:
+    clamp(
+      48px,
+      6vw,
+      78px
+    );
+
+  border-radius: 28px;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 90% 0%,
+      rgba(0, 169, 92, 0.2),
+      transparent 30%
+    ),
+    #171917;
+}
+
+
+/* =========================================================
+   LOGO COLOR STRIP
+========================================================= */
+
+.contactDecoration {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+
+  width: 100%;
+  height: 4px;
+}
+
+.contactDecoration span {
+  flex: 1;
+}
+
+.colorGreen {
+  background:
+    var(--zagari-green);
+}
+
+.colorYellow {
+  background:
+    var(--zagari-yellow);
+}
+
+.colorMagenta {
+  background:
+    var(--zagari-magenta);
+}
+
+.colorBlue {
+  background:
+    var(--zagari-blue);
+}
+
+
+/* =========================================================
+   CONTACT COPY
+========================================================= */
+
+.contactCopy {
+  max-width: 720px;
+}
+
+.contactEyebrow {
+  display: block;
+
+  margin-bottom: 13px;
+
+  font-size: 8px;
+  font-weight: 750;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  color:
+    #75d9a5;
+}
+
+.contactCopy h2 {
+  margin:
+    0
+    0
+    17px;
+
+  max-width: 700px;
+
+  font-size:
+    clamp(
+      37px,
+      4.5vw,
+      61px
+    );
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.047em;
+}
+
+.contactCopy h2 span {
+  color:
+    #9ea69b;
+}
+
+.contactCopy p {
+  margin: 0;
+
+  max-width: 520px;
+
+  font-size: 11px;
+
+  line-height: 1.7;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+}
+
+
+/* =========================================================
+   CONTACT ACTIONS
+========================================================= */
+
+.contactActions {
+  display: flex;
+
+  flex-direction: column;
+
+  width: 245px;
+
+  gap: 9px;
+}
+
+.primaryButton,
+.phoneButton {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  width: 100%;
+  min-height: 50px;
+
+  padding:
+    0
+    17px;
+
+  border-radius: 999px;
+
+  text-decoration: none;
+
+  font-size: 9px;
+  font-weight: 700;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.primaryButton {
+  color: #ffffff;
+
+  background:
+    var(--zagari-green);
+}
+
+.primaryButton:hover {
+  transform:
+    translateY(-2px);
+
+  background:
+    #00bd68;
+}
+
+.phoneButton {
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.15
+    );
+
+  color: #ffffff;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.05
+    );
+}
+
+.phoneButton:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    var(--zagari-magenta);
+
+  background:
+    rgba(
+      213,
+      27,
+      131,
+      0.13
+    );
+}
+
+
+/* =========================================================
+   DESKTOP GRANDE
+   1281+
+========================================================= */
+
+@media (min-width: 1281px) {
+  .container {
+    width:
+      min(
+        calc(100% - 64px),
+        1380px
+      );
+  }
+}
+
+
+/* =========================================================
+   LAPTOP
+   1025 - 1280
+========================================================= */
+
+@media (
+  min-width: 1025px
+) and (
+  max-width: 1280px
+) {
+  .page {
+    --navbar-height: 82px;
+  }
+
+  .container {
+    width:
+      min(
+        calc(100% - 48px),
+        1200px
+      );
+  }
+
+  .heroGrid {
+    gap: 65px;
+  }
+
+  .hero h1 {
+    font-size:
+      clamp(
+        52px,
+        6vw,
+        72px
+      );
+  }
+
+  .group {
+    grid-template-columns:
+      minmax(230px, 0.46fr)
+      minmax(0, 1.54fr);
+
+    gap: 70px;
+  }
+}
+
+
+/* =========================================================
+   TABLET LANDSCAPE
+   769 - 1024
+========================================================= */
+
+@media (
+  min-width: 769px
+) and (
+  max-width: 1024px
+) {
+  .page {
+    --navbar-height: 78px;
+  }
+
+  .container {
+    width:
+      calc(
+        100% - 44px
+      );
+  }
+
+  .hero {
+    padding-top:
+      calc(
+        var(--navbar-height) +
+        70px
+      );
+  }
+
+  .heroGrid {
+    grid-template-columns:
+      minmax(0, 1fr)
+      270px;
+
+    gap: 45px;
+  }
+
+  .hero h1 {
+    font-size:
+      clamp(
+        48px,
+        6vw,
+        62px
+      );
+  }
+
+  .quickFact {
+    min-height: 82px;
+
+    padding:
+      15px;
+  }
+
+  .group {
+    grid-template-columns:
+      220px
+      minmax(0, 1fr);
+
+    gap: 45px;
+  }
+
+  .groupHeader {
+    position: static;
+
+    grid-template-columns:
+      28px
+      1fr;
+  }
+
+  .question {
+    grid-template-columns:
+      28px
+      1fr
+      36px;
+
+    gap: 12px;
+
+    padding:
+      24px
+      0;
+  }
+
+  .questionText {
+    font-size: 17px;
+  }
+
+  .answer {
+    padding:
+      0
+      47px
+      25px
+      40px;
+  }
+
+  .contactCard {
+    gap: 45px;
+
+    padding: 48px;
+  }
+}
+
+
+/* =========================================================
+   TABLET PORTRAIT
+   601 - 768
+========================================================= */
+
+@media (
+  min-width: 601px
+) and (
+  max-width: 768px
+) {
+  .page {
+    --navbar-height: 74px;
+  }
+
+  .container {
+    width:
+      calc(
+        100% - 40px
+      );
+  }
+
+  .hero {
+    padding-top:
+      calc(
+        var(--navbar-height) +
+        65px
+      );
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
+    gap: 31px;
+  }
+
+  .hero h1 {
+    max-width: 650px;
+
+    font-size:
+      clamp(
+        46px,
+        8vw,
+        59px
+      );
+  }
+
+  .heroAside {
+    max-width: 560px;
+  }
+
+  .quickFacts {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .group {
+    grid-template-columns: 1fr;
+
+    gap: 31px;
+  }
+
+  .groupHeader {
+    position: static;
+
+    max-width: 500px;
+  }
+
+  .groups {
+    gap: 95px;
+  }
+
+  .contactCard {
+    grid-template-columns: 1fr;
+
+    align-items: start;
+
+    gap: 35px;
+
+    padding: 45px;
+  }
+
+  .contactActions {
+    width: 100%;
+
+    max-width: 370px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   <= 600
+========================================================= */
+
+@media (max-width: 600px) {
+  .page {
+    --navbar-height: 70px;
+  }
+
+  .container {
+    width: 100%;
+
+    padding:
+      0
+      18px;
+  }
+
+
+  /* HERO */
+
+  .hero {
+    padding:
+      calc(
+        var(--navbar-height) +
+        55px
+      )
+      0
+      62px;
+  }
+
+  .heroGrid {
+    display: block;
+  }
+
+  .eyebrow {
+    margin-bottom: 15px;
+
+    font-size: 8px;
+  }
+
+  .eyebrowLine {
+    width: 29px;
+  }
+
+  .hero h1 {
+    max-width: 470px;
+
+    font-size:
+      clamp(
+        39px,
+        11vw,
+        49px
+      );
+
+    line-height: 0.94;
+  }
+
+  .heroAside {
+    margin-top: 27px;
+  }
+
+  .heroAside > p {
+    max-width: 420px;
+
+    margin-bottom: 19px;
+
+    font-size: 10px;
+
+    line-height: 1.65;
+  }
+
+  .heroWhatsapp {
+    min-height: 43px;
+
+    padding:
+      0
+      14px;
+
+    font-size: 9px;
+  }
+
+
+  /* FACTS */
+
+  .quickFacts {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    margin-top: 48px;
+
+    border-radius: 14px;
+  }
+
+  .quickFact {
+    min-height: 76px;
+
+    padding:
+      13px
+      14px;
+  }
+
+  .quickFact strong {
+    font-size: 20px;
+  }
+
+  .quickFact span {
+    font-size: 8px;
+  }
+
+
+  /* NAV */
+
+  .categoryNav
+  .container {
+    padding: 0;
+  }
+
+  .categoryScroll {
+    padding:
+      9px
+      18px;
+  }
+
+  .categoryLink {
+    min-height: 35px;
+
+    padding:
+      0
+      11px;
+
+    font-size: 8px;
+  }
+
+  .categoryLink span {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  /* FAQ */
+
+  .faqSection {
+    padding:
+      70px
+      0;
+  }
+
+  .groups {
+    gap: 78px;
+  }
+
+  .group {
+    display: block;
+
+    scroll-margin-top:
+      calc(
+        var(--navbar-height) +
+        65px
+      );
+  }
+
+  .groupHeader {
+    position: static;
+
+    grid-template-columns:
+      25px
+      1fr;
+
+    gap: 8px;
+
+    margin-bottom: 26px;
+  }
+
+  .groupNumber {
+    font-size: 7px;
+  }
+
+  .groupEyebrow {
+    margin-bottom: 6px;
+
+    font-size: 7px;
+  }
+
+  .groupHeader h2 {
+    font-size:
+      clamp(
+        28px,
+        8vw,
+        35px
+      );
+  }
+
+
+  /* QUESTIONS */
+
+  .question {
+    grid-template-columns:
+      21px
+      minmax(0, 1fr)
+      33px;
+
+    gap: 8px;
+
+    padding:
+      20px
+      0;
+  }
+
+  .questionNumber {
+    font-size: 7px;
+  }
+
+  .questionText {
+    padding-right: 4px;
+
+    font-size:
+      clamp(
+        15px,
+        4.2vw,
+        17px
+      );
+
+    line-height: 1.3;
+  }
+
+  .toggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .toggle > span {
+    width: 9px;
+  }
+
+
+  /* ANSWERS */
+
+  .answer {
+    padding:
+      0
+      38px
+      22px
+      29px;
+  }
+
+  .answer p {
+    font-size: 10px;
+
+    line-height: 1.7;
+  }
+
+  .answerLink {
+    min-height: 36px;
+
+    margin-top: 13px;
+
+    padding:
+      0
+      11px;
+
+    font-size: 8px;
+  }
+
+
+  /* CONTACT */
+
+  .contactSection {
+    padding-bottom: 0;
+  }
+
+  .contactSection
+  .container {
+    padding: 0;
+  }
+
+  .contactCard {
+    display: block;
+
+    padding:
+      48px
+      18px;
+
+    border-radius: 0;
+  }
+
+  .contactCopy h2 {
+    max-width: 450px;
+
+    font-size:
+      clamp(
+        34px,
+        9vw,
+        43px
+      );
+  }
+
+  .contactCopy p {
+    max-width: 400px;
+
+    font-size: 10px;
+  }
+
+  .contactActions {
+    width: 100%;
+
+    margin-top: 30px;
+  }
+
+  .primaryButton,
+  .phoneButton {
+    width: 100%;
+
+    min-height: 49px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE PEQUEÑO
+   <= 390
+========================================================= */
+
+@media (max-width: 390px) {
+  .page {
+    --navbar-height: 68px;
+  }
+
+  .container {
+    padding:
+      0
+      15px;
+  }
+
+  .hero {
+    padding-top:
+      calc(
+        var(--navbar-height) +
+        48px
+      );
+  }
+
+  .hero h1 {
+    font-size:
+      clamp(
+        36px,
+        10.7vw,
+        42px
+      );
+  }
+
+  .quickFact {
+    padding:
+      12px;
+  }
+
+  .categoryScroll {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .groupHeader {
+    grid-template-columns:
+      22px
+      1fr;
+  }
+
+  .question {
+    grid-template-columns:
+      18px
+      1fr
+      31px;
+
+    gap: 7px;
+  }
+
+  .questionText {
+    font-size: 14px;
+  }
+
+  .answer {
+    padding-left: 25px;
+
+    padding-right: 33px;
+  }
+
+  .contactCard {
+    padding:
+      43px
+      15px;
+  }
+}
+
+
+/* =========================================================
+   TOUCH
+========================================================= */
+
+@media (hover: none) {
+  .question:hover
+  .toggle {
+    border-color:
+      var(--zagari-line);
+  }
+
+  .faqItem[open]
+  .question:hover
+  .toggle {
+    border-color:
+      var(--zagari-green);
+  }
+
+  .heroWhatsapp:hover,
+  .answerLink:hover,
+  .primaryButton:hover,
+  .phoneButton:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.categoryLink:focus-visible,
+.question:focus-visible,
+.answerLink:focus-visible,
+.heroWhatsapp:focus-visible,
+.primaryButton:focus-visible,
+.phoneButton:focus-visible {
+  outline:
+    2px solid
+    var(--zagari-magenta);
+
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+  .categoryLink,
+  .toggle,
+  .toggle > span,
+  .answerLink,
+  .heroWhatsapp,
+  .primaryButton,
+  .phoneButton {
+    transition: none;
+  }
+}

@@ -45,10 +45,6 @@ const rightNavigation = [
     href: "/#experiencia",
   },
   {
-    label: "Amenidades",
-    href: "/#amenities",
-  },
-  {
     label: "Ubicación",
     href: "/#ubicacion",
   },

@@ -1,5 +1,16 @@
 "use client";
 
+import Image from "next/image";
+import { createPortal } from "react-dom";
+import {
+  FormEvent,
+  PointerEvent as ReactPointerEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+
 import {
   ArrowRight,
   CheckCircle,
@@ -9,62 +20,31 @@ import {
   X,
 } from "@phosphor-icons/react";
 
-import Image from "next/image";
-
-import {
-  FormEvent,
-  PointerEvent as ReactPointerEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-
-import { createPortal } from "react-dom";
-
 import styles from "./LotsSection.module.css";
 
-/* =========================================================
-   CONFIG
-========================================================= */
-
-const MAP_URL =
-  "/assets/lots/lotes-zagari-mapa.svg";
+const MAP_URL = "/assets/lots/lotes-zagari-mapa.svg";
 
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_ZAGARI_WHATSAPP ||
   "51971069763";
 
-const DRAG_THRESHOLD = 6;
+type LotStatus = "available" | "reserved" | "sold";
 
-/* =========================================================
-   TYPES
-========================================================= */
-
-type LotStatus =
-  | "available"
-  | "reserved"
-  | "sold";
-
-type SelectedLot = {
+type MapLot = {
+  id: string;
   status: LotStatus;
-  reference: string;
+  x: number;
+  y: number;
 };
 
 type DragState = {
   active: boolean;
   moved: boolean;
-
   startX: number;
   startY: number;
-
-  startScrollLeft: number;
-  startScrollTop: number;
+  scrollLeft: number;
+  scrollTop: number;
 };
-
-/* =========================================================
-   DATA
-========================================================= */
 
 const highlights = [
   "Desde 234 m²",
@@ -72,1147 +52,520 @@ const highlights = [
   "+20 amenidades",
 ];
 
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function getStatusLabel(
-  status: LotStatus,
-) {
-  if (status === "available") {
-    return "Disponible";
-  }
-
-  if (status === "reserved") {
-    return "Separado";
-  }
-
+function getStatusLabel(status: LotStatus) {
+  if (status === "available") return "Disponible";
+  if (status === "reserved") return "Separado";
   return "Vendido";
 }
 
-function getWhatsAppUrl(
-  lot: SelectedLot,
-) {
-  const status =
-    getStatusLabel(
-      lot.status,
-    ).toLowerCase();
+function getWhatsappUrl(status: LotStatus) {
+  const statusText = getStatusLabel(status).toLowerCase();
 
   const message =
-    lot.status === "available"
-      ? `Hola, estoy interesado en el lote ${lot.reference} de Zagari Resort Club. Figura como disponible. Quisiera conocer área, precio y condiciones comerciales.`
-      : `Hola, estaba revisando el plano de Zagari Resort Club. El lote ${lot.reference} figura como ${status}. Quisiera conocer otras alternativas disponibles.`;
+    status === "available"
+      ? "Hola, estoy revisando el mapa de Zagari Resort Club y quiero información del lote que seleccioné. Figura como disponible. ¿Me pueden indicar área, precio y condiciones?"
+      : `Hola, estoy revisando el mapa de Zagari Resort Club. El lote que seleccioné figura como ${statusText}. Quisiera conocer alternativas disponibles.`;
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     message,
   )}`;
 }
 
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 export default function LotsSection() {
-  const mapContainerRef =
-    useRef<HTMLDivElement | null>(
-      null,
-    );
+  const mapRootRef = useRef<HTMLDivElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
 
-  const viewportRef =
-    useRef<HTMLDivElement | null>(
-      null,
-    );
+  const pageScrollRef = useRef(0);
 
-  const selectedElementRef =
-    useRef<SVGElement | null>(
-      null,
-    );
+  const dragRef = useRef<DragState>({
+    active: false,
+    moved: false,
+    startX: 0,
+    startY: 0,
+    scrollLeft: 0,
+    scrollTop: 0,
+  });
 
-  const pageScrollRef =
-    useRef(0);
-
-  const dragRef =
-    useRef<DragState>({
-      active: false,
-      moved: false,
-
-      startX: 0,
-      startY: 0,
-
-      startScrollLeft: 0,
-      startScrollTop: 0,
-    });
-
-  const [
-    mounted,
-    setMounted,
-  ] = useState(false);
-
-  const [
-    isMapOpen,
-    setIsMapOpen,
-  ] = useState(false);
-
-  const [
-    svgMarkup,
-    setSvgMarkup,
-  ] = useState("");
-
-  const [
-    mapLoading,
-    setMapLoading,
-  ] = useState(false);
-
-  const [
-    mapError,
-    setMapError,
-  ] = useState("");
-
-  const [
-    selectedLot,
-    setSelectedLot,
-  ] =
-    useState<SelectedLot | null>(
-      null,
-    );
-
-  const [
-    isDragging,
-    setIsDragging,
-  ] = useState(false);
-
-  const [
-    submitted,
-    setSubmitted,
-  ] = useState(false);
-
-  /* =======================================================
-     MOUNT
-  ======================================================= */
+  const [mounted, setMounted] = useState(false);
+  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [svgMarkup, setSvgMarkup] = useState("");
+  const [mapLoading, setMapLoading] = useState(false);
+  const [mapError, setMapError] = useState("");
+  const [lots, setLots] = useState<MapLot[]>([]);
+  const [selectedLot, setSelectedLot] = useState<MapLot | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  /* =======================================================
+  /* =========================================================
      LOAD SVG
-  ======================================================= */
+  ========================================================= */
 
   useEffect(() => {
-    if (
-      !isMapOpen ||
-      svgMarkup
-    ) {
-      return;
-    }
+    if (!isMapOpen || svgMarkup) return;
 
-    const controller =
-      new AbortController();
+    const controller = new AbortController();
 
-    const loadMap =
-      async () => {
-        try {
-          setMapLoading(true);
-          setMapError("");
+    const loadMap = async () => {
+      try {
+        setMapLoading(true);
+        setMapError("");
 
-          const response =
-            await fetch(
-              MAP_URL,
-              {
-                cache:
-                  "force-cache",
+        const response = await fetch(MAP_URL, {
+          cache: "force-cache",
+          signal: controller.signal,
+        });
 
-                signal:
-                  controller.signal,
-              },
-            );
-
-          if (!response.ok) {
-            throw new Error(
-              `No se pudo cargar el plano (${response.status}).`,
-            );
-          }
-
-          const svg =
-            await response.text();
-
-          setSvgMarkup(svg);
-        } catch (error) {
-          if (
-            error instanceof Error &&
-            error.name ===
-              "AbortError"
-          ) {
-            return;
-          }
-
-          setMapError(
-            error instanceof Error
-              ? error.message
-              : "No se pudo cargar el plano.",
-          );
-        } finally {
-          setMapLoading(false);
+        if (!response.ok) {
+          throw new Error(`No se pudo cargar el mapa (${response.status}).`);
         }
-      };
 
-    loadMap();
-
-    return () => {
-      controller.abort();
-    };
-  }, [
-    isMapOpen,
-    svgMarkup,
-  ]);
-
-  /* =======================================================
-     LOCK PAGE
-  ======================================================= */
-
-  useEffect(() => {
-    if (!isMapOpen) {
-      return;
-    }
-
-    const body =
-      document.body;
-
-    const html =
-      document.documentElement;
-
-    pageScrollRef.current =
-      window.scrollY;
-
-    const previous = {
-      position:
-        body.style.position,
-
-      top:
-        body.style.top,
-
-      left:
-        body.style.left,
-
-      right:
-        body.style.right,
-
-      width:
-        body.style.width,
-
-      overflow:
-        body.style.overflow,
-
-      htmlOverflow:
-        html.style.overflow,
-    };
-
-    body.style.position =
-      "fixed";
-
-    body.style.top =
-      `-${pageScrollRef.current}px`;
-
-    body.style.left = "0";
-    body.style.right = "0";
-
-    body.style.width =
-      "100%";
-
-    body.style.overflow =
-      "hidden";
-
-    html.style.overflow =
-      "hidden";
-
-    const handleEscape = (
-      event: KeyboardEvent,
-    ) => {
-      if (
-        event.key === "Escape"
-      ) {
-        setIsMapOpen(false);
-      }
-    };
-
-    window.addEventListener(
-      "keydown",
-      handleEscape,
-    );
-
-    return () => {
-      body.style.position =
-        previous.position;
-
-      body.style.top =
-        previous.top;
-
-      body.style.left =
-        previous.left;
-
-      body.style.right =
-        previous.right;
-
-      body.style.width =
-        previous.width;
-
-      body.style.overflow =
-        previous.overflow;
-
-      html.style.overflow =
-        previous.htmlOverflow;
-
-      window.scrollTo(
-        0,
-        pageScrollRef.current,
-      );
-
-      window.removeEventListener(
-        "keydown",
-        handleEscape,
-      );
-    };
-  }, [isMapOpen]);
-
-  /* =======================================================
-     SELECT LOT
-  ======================================================= */
-
-  const selectLot =
-    useCallback(
-      (
-        lotElement:
-          SVGElement,
-      ) => {
-        const status =
-          lotElement.dataset
-            .lotStatus as
-            | LotStatus
-            | undefined;
-
-        const reference =
-          lotElement.dataset
-            .lotReference;
-
+        setSvgMarkup(await response.text());
+      } catch (error) {
         if (
-          !status ||
-          !reference
+          error instanceof Error &&
+          error.name === "AbortError"
         ) {
           return;
         }
 
-        /*
-         * Limpiamos solo el anterior.
-         */
-
-        if (
-          selectedElementRef.current &&
-          selectedElementRef.current !==
-            lotElement
-        ) {
-          selectedElementRef.current.classList.remove(
-            "zagari-selected",
-          );
-
-          selectedElementRef.current.setAttribute(
-            "aria-pressed",
-            "false",
-          );
-        }
-
-        /*
-         * Seleccionamos el nuevo.
-         */
-
-        lotElement.classList.add(
-          "zagari-selected",
+        setMapError(
+          error instanceof Error
+            ? error.message
+            : "No se pudo cargar el mapa.",
         );
+      } finally {
+        setMapLoading(false);
+      }
+    };
 
-        lotElement.setAttribute(
-          "aria-pressed",
-          "true",
-        );
+    void loadMap();
 
-        selectedElementRef.current =
-          lotElement;
+    return () => controller.abort();
+  }, [isMapOpen, svgMarkup]);
 
-        /*
-         * Siempre nuevo objeto.
-         */
+  /* =========================================================
+     DETECT LOTS USING REAL SVG GEOMETRY
 
-        setSelectedLot({
-          status,
-          reference,
-        });
-      },
-      [],
-    );
+     NO manual x/y.
+     NO artificial 01, 02, 03...
 
-  /* =======================================================
-     PREPARE SVG
-
-     AQUÍ ESTÁ LA CORRECCIÓN PRINCIPAL.
-
-     Cada lote recibe SU PROPIO listener.
-     No dependemos del viewport.
-  ======================================================= */
+     The original number printed in the SVG remains visible.
+     We only place a transparent interactive hit-area around it.
+  ========================================================= */
 
   useEffect(() => {
-    if (
-      !svgMarkup ||
-      !isMapOpen
-    ) {
-      return;
-    }
+    if (!isMapOpen || !svgMarkup) return;
 
-    const frame =
-      requestAnimationFrame(
-        () => {
-          const root =
-            mapContainerRef.current;
+    const frame = window.requestAnimationFrame(() => {
+      const root = mapRootRef.current;
+      if (!root) return;
 
-          if (!root) {
-            return;
-          }
+      const svg = root.querySelector("svg");
+      if (!svg) return;
 
-          const svg =
-            root.querySelector(
-              "svg",
-            );
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
+      svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
-          if (!svg) {
-            return;
-          }
+      const viewBox = svg.viewBox.baseVal;
 
-          svg.removeAttribute(
-            "width",
-          );
+      if (!viewBox.width || !viewBox.height) return;
 
-          svg.removeAttribute(
-            "height",
-          );
-
-          svg.setAttribute(
-            "preserveAspectRatio",
-            "xMidYMid meet",
-          );
-
-          svg.setAttribute(
-            "role",
-            "img",
-          );
-
-          svg.setAttribute(
-            "aria-label",
-            "Plano interactivo de disponibilidad Zagari Resort Club",
-          );
-
-          /* =====================================
-             PREPARE LOT GROUP
-          ====================================== */
-
-          const prepare = (
-            selector: string,
-
-            status:
-              LotStatus,
-
-            prefix:
-              string,
-          ) => {
-            const elements =
-              svg.querySelectorAll(
-                selector,
-              );
-
-            elements.forEach(
-              (
-                element,
-                index,
-              ) => {
-                const lot =
-                  element as SVGElement;
-
-                /*
-                 * No configurarlo dos veces.
-                 */
-
-                if (
-                  lot.dataset
-                    .zagariPrepared ===
-                  "true"
-                ) {
-                  return;
-                }
-
-                const reference =
-                  `${prefix}-${String(
-                    index + 1,
-                  ).padStart(
-                    2,
-                    "0",
-                  )}`;
-
-                lot.dataset
-                  .zagariPrepared =
-                  "true";
-
-                lot.dataset
-                  .lotStatus =
-                  status;
-
-                lot.dataset
-                  .lotReference =
-                  reference;
-
-                lot.classList.add(
-                  "zagari-lot-zone",
-                );
-
-                lot.setAttribute(
-                  "role",
-                  "button",
-                );
-
-                lot.setAttribute(
-                  "tabindex",
-                  "0",
-                );
-
-                lot.setAttribute(
-                  "aria-pressed",
-                  "false",
-                );
-
-                lot.setAttribute(
-                  "aria-label",
-                  `${reference} · ${getStatusLabel(
-                    status,
-                  )}`,
-                );
-
-                /* =================================
-                   CLICK DIRECTO
-
-                   Esto evita el estado extraño.
-                ================================== */
-
-                lot.addEventListener(
-                  "click",
-                  (
-                    event:
-                      Event,
-                  ) => {
-                    event.preventDefault();
-
-                    event.stopPropagation();
-
-                    selectLot(
-                      lot,
-                    );
-                  },
-                );
-
-                /* =================================
-                   POINTER DOWN EN LOTE
-
-                   Cancelamos drag del mapa.
-                ================================== */
-
-                lot.addEventListener(
-                  "pointerdown",
-                  (
-                    event:
-                      Event,
-                  ) => {
-                    event.stopPropagation();
-
-                    dragRef.current.active =
-                      false;
-
-                    dragRef.current.moved =
-                      false;
-
-                    setIsDragging(
-                      false,
-                    );
-                  },
-                );
-
-                /* =================================
-                   KEYBOARD
-                ================================== */
-
-                lot.addEventListener(
-                  "keydown",
-                  (
-                    event:
-                      Event,
-                  ) => {
-                    const keyboard =
-                      event as KeyboardEvent;
-
-                    if (
-                      keyboard.key !==
-                        "Enter" &&
-                      keyboard.key !==
-                        " "
-                    ) {
-                      return;
-                    }
-
-                    keyboard.preventDefault();
-
-                    selectLot(
-                      lot,
-                    );
-                  },
-                );
-              },
-            );
-          };
-
-          prepare(
-            ".cls-56",
-            "available",
-            "D",
-          );
-
-          prepare(
-            ".cls-53",
-            "reserved",
-            "S",
-          );
-
-          prepare(
-            ".cls-54",
-            "sold",
-            "V",
-          );
-        },
+      const elements = Array.from(
+        svg.querySelectorAll<SVGGraphicsElement>(
+          ".cls-53, .cls-54, .cls-56",
+        ),
       );
+
+      const detected: MapLot[] = [];
+
+      elements.forEach((element, index) => {
+        let box: DOMRect | SVGRect;
+
+        try {
+          box = element.getBBox();
+        } catch {
+          return;
+        }
+
+        // Ignore tiny decorative fragments.
+        if (box.width < 25 || box.height < 25) {
+          return;
+        }
+
+        const status: LotStatus =
+          element.classList.contains("cls-56")
+            ? "available"
+            : element.classList.contains("cls-53")
+              ? "reserved"
+              : "sold";
+
+        detected.push({
+          id: `svg-lot-${index}`,
+          status,
+          x:
+            ((box.x + box.width / 2 - viewBox.x) /
+              viewBox.width) *
+            100,
+          y:
+            ((box.y + box.height / 2 - viewBox.y) /
+              viewBox.height) *
+            100,
+        });
+      });
+
+      setLots(detected);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [isMapOpen, svgMarkup]);
+
+  const counters = useMemo(
+    () => ({
+      available: lots.filter((lot) => lot.status === "available").length,
+      reserved: lots.filter((lot) => lot.status === "reserved").length,
+      sold: lots.filter((lot) => lot.status === "sold").length,
+    }),
+    [lots],
+  );
+
+  /* =========================================================
+     LOCK BACKGROUND
+  ========================================================= */
+
+  useEffect(() => {
+    if (!isMapOpen) return;
+
+    const body = document.body;
+    const html = document.documentElement;
+
+    pageScrollRef.current = window.scrollY;
+
+    const previous = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+      overflow: body.style.overflow,
+      htmlOverflow: html.style.overflow,
+    };
+
+    body.style.position = "fixed";
+    body.style.top = `-${pageScrollRef.current}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+    body.style.overflow = "hidden";
+    html.style.overflow = "hidden";
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMapOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
 
     return () => {
-      cancelAnimationFrame(
-        frame,
-      );
+      body.style.position = previous.position;
+      body.style.top = previous.top;
+      body.style.left = previous.left;
+      body.style.right = previous.right;
+      body.style.width = previous.width;
+      body.style.overflow = previous.overflow;
+      html.style.overflow = previous.htmlOverflow;
+
+      window.scrollTo(0, pageScrollRef.current);
+
+      window.removeEventListener("keydown", handleEscape);
     };
-  }, [
-    svgMarkup,
-    isMapOpen,
-    selectLot,
-  ]);
+  }, [isMapOpen]);
 
-  /* =======================================================
-     DESKTOP DRAG START
-
-     Solo llega aquí si pointerdown
-     NO ocurrió en un lote.
-  ======================================================= */
+  /* =========================================================
+     DESKTOP DRAG
+  ========================================================= */
 
   const handlePointerDown = (
-    event:
-      ReactPointerEvent<HTMLDivElement>,
+    event: ReactPointerEvent<HTMLDivElement>,
   ) => {
-    /*
-     * Touch:
-     * scroll nativo.
-     */
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
 
-    if (
-      event.pointerType !==
-      "mouse"
-    ) {
+    const target = event.target as HTMLElement;
+
+    if (target.closest("[data-map-hotspot]")) {
       return;
     }
 
-    if (
-      event.button !== 0
-    ) {
-      return;
-    }
-
-    const viewport =
-      viewportRef.current;
-
-    if (!viewport) {
-      return;
-    }
+    const viewport = viewportRef.current;
+    if (!viewport) return;
 
     dragRef.current = {
       active: true,
-
       moved: false,
-
-      startX:
-        event.clientX,
-
-      startY:
-        event.clientY,
-
-      startScrollLeft:
-        viewport.scrollLeft,
-
-      startScrollTop:
-        viewport.scrollTop,
+      startX: event.clientX,
+      startY: event.clientY,
+      scrollLeft: viewport.scrollLeft,
+      scrollTop: viewport.scrollTop,
     };
   };
 
-  /* =======================================================
-     DESKTOP DRAG MOVE
-  ======================================================= */
-
   const handlePointerMove = (
-    event:
-      ReactPointerEvent<HTMLDivElement>,
+    event: ReactPointerEvent<HTMLDivElement>,
   ) => {
-    if (
-      event.pointerType !==
-      "mouse"
-    ) {
-      return;
+    if (event.pointerType !== "mouse") return;
+
+    const viewport = viewportRef.current;
+    const drag = dragRef.current;
+
+    if (!viewport || !drag.active) return;
+
+    const dx = event.clientX - drag.startX;
+    const dy = event.clientY - drag.startY;
+
+    if (!drag.moved && Math.hypot(dx, dy) > 5) {
+      drag.moved = true;
+      setIsDragging(true);
     }
 
-    const viewport =
-      viewportRef.current;
-
-    const drag =
-      dragRef.current;
-
-    if (
-      !viewport ||
-      !drag.active
-    ) {
-      return;
-    }
-
-    const deltaX =
-      event.clientX -
-      drag.startX;
-
-    const deltaY =
-      event.clientY -
-      drag.startY;
-
-    const distance =
-      Math.hypot(
-        deltaX,
-        deltaY,
-      );
-
-    if (
-      !drag.moved &&
-      distance <
-        DRAG_THRESHOLD
-    ) {
-      return;
-    }
-
-    if (
-      !drag.moved
-    ) {
-      drag.moved =
-        true;
-
-      setIsDragging(
-        true,
-      );
-    }
+    if (!drag.moved) return;
 
     event.preventDefault();
 
-    viewport.scrollLeft =
-      drag.startScrollLeft -
-      deltaX;
-
-    viewport.scrollTop =
-      drag.startScrollTop -
-      deltaY;
+    viewport.scrollLeft = drag.scrollLeft - dx;
+    viewport.scrollTop = drag.scrollTop - dy;
   };
-
-  /* =======================================================
-     END DRAG
-  ======================================================= */
 
   const finishDrag = () => {
-    if (
-      !dragRef.current.active
-    ) {
-      return;
-    }
-
-    dragRef.current.active =
-      false;
-
-    dragRef.current.moved =
-      false;
-
+    dragRef.current.active = false;
+    dragRef.current.moved = false;
     setIsDragging(false);
   };
 
-  /* =======================================================
-     OPEN MAP
-  ======================================================= */
-
   const openMap = () => {
-    if (
-      selectedElementRef.current
-    ) {
-      selectedElementRef.current.classList.remove(
-        "zagari-selected",
-      );
-
-      selectedElementRef.current.setAttribute(
-        "aria-pressed",
-        "false",
-      );
-    }
-
-    selectedElementRef.current =
-      null;
-
-    dragRef.current.active =
-      false;
-
-    dragRef.current.moved =
-      false;
-
-    setIsDragging(false);
-
     setSelectedLot(null);
-
+    finishDrag();
     setIsMapOpen(true);
   };
 
-  /* =======================================================
-     CLOSE MAP
-  ======================================================= */
-
   const closeMap = () => {
-    dragRef.current.active =
-      false;
-
-    dragRef.current.moved =
-      false;
-
-    setIsDragging(false);
-
+    finishDrag();
     setIsMapOpen(false);
   };
 
-  /* =======================================================
-     FORM
-  ======================================================= */
-
   const handleSubmit = (
-    event:
-      FormEvent<HTMLFormElement>,
+    event: FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
-
     setSubmitted(true);
-
     event.currentTarget.reset();
   };
 
-  /* =======================================================
+  /* =========================================================
      MODAL
-  ======================================================= */
+  ========================================================= */
 
-  const modal =
-    isMapOpen ? (
-      <div
-        className={
-          styles.overlay
+  const modal = isMapOpen ? (
+    <div
+      className={styles.overlay}
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          closeMap();
         }
-        onMouseDown={(
-          event,
-        ) => {
-          if (
-            event.target ===
-            event.currentTarget
-          ) {
-            closeMap();
-          }
-        }}
+      }}
+    >
+      <section
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="zagari-map-title"
       >
-        <section
-          className={
-            styles.modal
-          }
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="zagari-map-title"
-        >
-          {/* =================================
-              HEADER
-          ================================== */}
-
-          <header
-            className={
-              styles.modalHeader
-            }
-          >
-            <div>
-              <span>
-                Zagari · Segunda
-                etapa
-              </span>
-
-              <h2
-                id="zagari-map-title"
-              >
-                Disponibilidad
-              </h2>
-
-              <p>
-                Selecciona cualquier
-                lote para consultar su
-                estado.
-              </p>
-            </div>
-
-            <button
-              type="button"
-              className={
-                styles.close
-              }
-              onClick={
-                closeMap
-              }
-              aria-label="Cerrar mapa"
-            >
-              <X
-                size={18}
-              />
-            </button>
-          </header>
-
-          {/* =================================
-              LEGEND
-          ================================== */}
-
-          <div
-            className={
-              styles.legend
-            }
-          >
-            <div>
-              <i
-                className={
-                  styles.legendGreen
-                }
-              />
-
-              <span>
-                Disponible
-              </span>
-            </div>
-
-            <div>
-              <i
-                className={
-                  styles.legendOrange
-                }
-              />
-
-              <span>
-                Separado
-              </span>
-            </div>
-
-            <div>
-              <i
-                className={
-                  styles.legendRed
-                }
-              />
-
-              <span>
-                Vendido
-              </span>
-            </div>
-
-            <span
-              className={
-                styles.legendHelp
-              }
-            >
-              Toca un lote para
-              seleccionarlo
+        <header className={styles.modalHeader}>
+          <div>
+            <span className={styles.modalEyebrow}>
+              Zagari · Segunda etapa
             </span>
+
+            <h2 id="zagari-map-title">
+              Mapa interactivo
+            </h2>
+
+            <p>
+              Usa los números originales del plano. Toca directamente
+              sobre cada número para consultar su estado.
+            </p>
           </div>
 
-          {/* =================================
-              BODY
-          ================================== */}
-
-          <div
-            className={
-              styles.modalBody
-            }
+          <button
+            type="button"
+            className={styles.close}
+            onClick={closeMap}
+            aria-label="Cerrar mapa"
           >
-            {/* ===============================
-                MAP
-            ================================ */}
+            <X size={18} />
+          </button>
+        </header>
 
-            <div
-              className={
-                styles.mapPanel
-              }
-            >
-              <div
-                className={
-                  styles.mapTop
-                }
-              >
-                <span>
-                  Plano general
-                </span>
+        <div className={styles.legend}>
+          <div className={styles.legendItem}>
+            <i className={styles.legendGreen} />
+            <span>Disponible</span>
+            <strong>{counters.available}</strong>
+          </div>
 
-                <small>
-                  Desliza para recorrer
-                  el mapa
-                </small>
-              </div>
+          <div className={styles.legendItem}>
+            <i className={styles.legendOrange} />
+            <span>Separado</span>
+            <strong>{counters.reserved}</strong>
+          </div>
 
-              <div
-                ref={
-                  viewportRef
-                }
-                className={`${styles.mapViewport} ${
-                  isDragging
-                    ? styles.dragging
-                    : ""
-                }`}
-                onPointerDown={
-                  handlePointerDown
-                }
-                onPointerMove={
-                  handlePointerMove
-                }
-                onPointerUp={
-                  finishDrag
-                }
-                onPointerCancel={
-                  finishDrag
-                }
-                onPointerLeave={
-                  finishDrag
-                }
-              >
-                {mapLoading && (
-                  <div
-                    className={
-                      styles.mapState
-                    }
-                  >
-                    Cargando plano...
-                  </div>
-                )}
+          <div className={styles.legendItem}>
+            <i className={styles.legendRed} />
+            <span>Vendido</span>
+            <strong>{counters.sold}</strong>
+          </div>
 
-                {mapError && (
-                  <div
-                    className={`${styles.mapState} ${styles.mapError}`}
-                  >
-                    {mapError}
-                  </div>
-                )}
+          <span className={styles.legendHelp}>
+            Número original = seleccionar · Fondo = mover mapa
+          </span>
+        </div>
 
-                {!mapError &&
-                  svgMarkup && (
-                    <div
-                      ref={
-                        mapContainerRef
-                      }
-                      className={
-                        styles.realMap
-                      }
-                      dangerouslySetInnerHTML={{
-                        __html:
-                          svgMarkup,
-                      }}
-                    />
-                  )}
-              </div>
-
-              <div
-                className={
-                  styles.mapHint
-                }
-              >
-                <span>
-                  ↔
-                </span>
-
-                Lote = seleccionar ·
-                fondo = mover mapa
-              </div>
+        <div className={styles.modalBody}>
+          <div className={styles.mapPanel}>
+            <div className={styles.mapTop}>
+              <span>Plano general</span>
+              <small>
+                Numeración idéntica al SVG original
+              </small>
             </div>
 
-            {/* ===============================
-                INFO
-            ================================ */}
-
-            <aside
-              className={
-                styles.info
-              }
+            <div
+              ref={viewportRef}
+              className={`${styles.mapViewport} ${
+                isDragging ? styles.dragging : ""
+              }`}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={finishDrag}
+              onPointerCancel={finishDrag}
+              onPointerLeave={finishDrag}
             >
-              {!selectedLot ? (
-                <div
-                  className={
-                    styles.infoEmpty
-                  }
-                >
-                  <span
-                    className={
-                      styles.infoIcon
-                    }
-                  >
-                    <MapPin
-                      size={22}
-                      weight="duotone"
-                    />
-                  </span>
-
-                  <strong>
-                    Selecciona un lote
-                  </strong>
-
-                  <p>
-                    Puedes cambiar de
-                    lote todas las
-                    veces que quieras.
-                  </p>
+              {mapLoading && (
+                <div className={styles.mapState}>
+                  Cargando plano...
                 </div>
-              ) : (
-                <div
-                  key={`${selectedLot.reference}-${selectedLot.status}`}
-                  className={
-                    styles.infoContent
-                  }
-                >
-                  <span
-                    className={
-                      styles.infoEyebrow
-                    }
-                  >
-                    Selección actual
-                  </span>
+              )}
 
+              {mapError && (
+                <div
+                  className={`${styles.mapState} ${styles.mapError}`}
+                >
+                  {mapError}
+                </div>
+              )}
+
+              {!mapError && svgMarkup && (
+                <div className={styles.mapCanvas}>
                   <div
+                    ref={mapRootRef}
+                    className={styles.realMap}
+                    dangerouslySetInnerHTML={{
+                      __html: svgMarkup,
+                    }}
+                  />
+
+                  <div className={styles.hotspotLayer}>
+                    {lots.map((lot) => {
+                      const active =
+                        selectedLot?.id === lot.id;
+
+                      return (
+                        <button
+                          key={lot.id}
+                          type="button"
+                          data-map-hotspot
+                          aria-label={`${getStatusLabel(
+                            lot.status,
+                          )}. Seleccionar lote en el mapa.`}
+                          aria-pressed={active}
+                          className={`${styles.mapHotspot} ${
+                            styles[`mapHotspot_${lot.status}`]
+                          } ${
+                            active
+                              ? styles.mapHotspotActive
+                              : ""
+                          }`}
+                          style={{
+                            left: `${lot.x}%`,
+                            top: `${lot.y}%`,
+                          }}
+                          onPointerDown={(event) => {
+                            event.stopPropagation();
+                          }}
+                          onClick={(event) => {
+                            event.preventDefault();
+                            event.stopPropagation();
+                            setSelectedLot(lot);
+                          }}
+                        >
+                          <span className={styles.srOnly}>
+                            {getStatusLabel(lot.status)}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className={styles.mapHint}>
+              <span>↔</span>
+              Desliza el plano · toca el número original del lote
+            </div>
+          </div>
+
+          <aside className={styles.info}>
+            {!selectedLot ? (
+              <div className={styles.infoEmpty}>
+                <span className={styles.infoIcon}>
+                  <MapPin
+                    size={24}
+                    weight="duotone"
+                  />
+                </span>
+
+                <strong>
+                  Selecciona un lote
+                </strong>
+
+                <p>
+                  Los números que ves son exactamente los que contiene
+                  el SVG original; ya no se generan números artificiales.
+                </p>
+              </div>
+            ) : (
+              <div
+                key={selectedLot.id}
+                className={styles.infoContent}
+              >
+                <span className={styles.infoEyebrow}>
+                  Lote seleccionado
+                </span>
+
+                <div className={styles.detailStatus}>
+                  <i
                     className={
-                      styles.status
+                      styles[`status_${selectedLot.status}`]
                     }
-                  >
-                    <i
-                      className={
-                        styles[
-                          `status_${selectedLot.status}`
-                        ]
-                      }
-                    />
+                  />
+
+                  <div>
+                    <small>Estado actual</small>
 
                     <strong>
                       {getStatusLabel(
@@ -1220,160 +573,123 @@ export default function LotsSection() {
                       )}
                     </strong>
                   </div>
+                </div>
 
-                  <div
-                    className={
-                      styles.reference
-                    }
-                  >
-                    <span>
-                      Referencia
-                    </span>
-
-                    <strong>
-                      {
-                        selectedLot.reference
-                      }
-                    </strong>
+                <div className={styles.detailGrid}>
+                  <div>
+                    <span>Proyecto</span>
+                    <strong>Zagari Resort Club</strong>
                   </div>
 
-                  {selectedLot.status ===
-                  "available" ? (
-                    <>
-                      <p
-                        className={
-                          styles.infoText
-                        }
-                      >
-                        Consulta área,
-                        precio y
-                        condiciones con
-                        nuestro equipo.
-                      </p>
+                  <div>
+                    <span>Etapa</span>
+                    <strong>Segunda etapa</strong>
+                  </div>
 
-                      <a
-                        href={getWhatsAppUrl(
-                          selectedLot,
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={
-                          styles.whatsapp
-                        }
-                      >
-                        <WhatsappLogo
-                          size={17}
-                          weight="fill"
-                        />
+                  <div>
+                    <span>Ubicación</span>
+                    <strong>San Ramón · Junín</strong>
+                  </div>
 
-                        <span>
-                          Contactar asesor
-                        </span>
-
-                        <ArrowRight
-                          size={14}
-                        />
-                      </a>
-                    </>
-                  ) : (
-                    <>
-                      <p
-                        className={
-                          styles.infoText
-                        }
-                      >
-                        Esta unidad no
-                        está disponible.
-                        Podemos mostrarte
-                        otras opciones.
-                      </p>
-
-                      <a
-                        href={getWhatsAppUrl(
-                          selectedLot,
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={
-                          styles.alternatives
-                        }
-                      >
-                        <WhatsappLogo
-                          size={16}
-                          weight="fill"
-                        />
-
-                        <span>
-                          Ver alternativas
-                        </span>
-                      </a>
-                    </>
-                  )}
+                  <div>
+                    <span>Número</span>
+                    <strong>Ver plano seleccionado</strong>
+                  </div>
                 </div>
-              )}
-            </aside>
-          </div>
-        </section>
-      </div>
-    ) : null;
 
-  /* =======================================================
-     PAGE
-  ======================================================= */
+                {selectedLot.status === "available" ? (
+                  <>
+                    <p className={styles.infoText}>
+                      Este lote aparece disponible. El número mostrado
+                      directamente en el plano es la referencia comercial
+                      que debes indicar al asesor.
+                    </p>
+
+                    <a
+                      href={getWhatsappUrl(
+                        selectedLot.status,
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.whatsapp}
+                    >
+                      <WhatsappLogo
+                        size={17}
+                        weight="fill"
+                      />
+
+                      <span>
+                        Consultar este lote
+                      </span>
+
+                      <ArrowRight size={14} />
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <p className={styles.infoText}>
+                      Esta unidad figura como{" "}
+                      <strong>
+                        {getStatusLabel(
+                          selectedLot.status,
+                        ).toLowerCase()}
+                      </strong>
+                      . Podemos mostrarte alternativas.
+                    </p>
+
+                    <a
+                      href={getWhatsappUrl(
+                        selectedLot.status,
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.alternatives}
+                    >
+                      <WhatsappLogo
+                        size={16}
+                        weight="fill"
+                      />
+
+                      <span>
+                        Ver alternativas
+                      </span>
+                    </a>
+                  </>
+                )}
+              </div>
+            )}
+          </aside>
+        </div>
+      </section>
+    </div>
+  ) : null;
 
   return (
     <>
       <section
         id="lotes"
-        className={
-          styles.section
-        }
+        className={styles.section}
         aria-labelledby="lots-title"
       >
-        <header
-          className={
-            styles.heading
-          }
-        >
+        <header className={styles.heading}>
           <div>
-            <span
-              className={
-                styles.eyebrow
-              }
-            >
+            <span className={styles.eyebrow}>
               Segunda etapa · Preventa
             </span>
 
             <h2 id="lots-title">
-              Tu espacio en
-              <span>
-                Zagari.
-              </span>
+              Tu espacio en <span>Zagari.</span>
             </h2>
           </div>
 
           <p>
-            Lotes en San Ramón con
-            acceso a las experiencias
-            y amenidades del Resort
-            Club.
+            Lotes en San Ramón con acceso a las experiencias
+            y amenidades del Resort Club.
           </p>
         </header>
 
-        <div
-          className={
-            styles.layout
-          }
-        >
-          {/* =================================
-              IMAGE
-          ================================== */}
-
-          <div
-            className={
-              styles.visual
-            }
-          >
+        <div className={styles.layout}>
+          <div className={styles.visual}>
             <Image
               src="/assets/lots/zagari-lot.png"
               alt="Lotes Zagari Resort Club en San Ramón"
@@ -1385,27 +701,13 @@ export default function LotsSection() {
                 (max-width: 1100px) 100vw,
                 58vw
               "
-              className={
-                styles.image
-              }
+              className={styles.image}
             />
 
-            <div
-              className={
-                styles.imageShade
-              }
-            />
+            <div className={styles.imageShade} />
 
-            <div
-              className={
-                styles.location
-              }
-            >
-              <span
-                className={
-                  styles.locationIcon
-                }
-              >
+            <div className={styles.location}>
+              <span className={styles.locationIcon}>
                 <MapPin
                   size={14}
                   weight="fill"
@@ -1415,174 +717,79 @@ export default function LotsSection() {
               San Ramón · Junín
             </div>
 
-            <div
-              className={
-                styles.photoCaption
-              }
-            >
-              <span>
-                ZAGARI RESORT CLUB
-              </span>
+            <div className={styles.photoCaption}>
+              <span>ZAGARI RESORT CLUB</span>
 
               <p>
-                Un espacio propio en
-                medio de la naturaleza.
+                Un espacio propio en medio de la naturaleza.
               </p>
             </div>
           </div>
 
-          {/* =================================
-              CONTENT
-          ================================== */}
-
-          <div
-            className={
-              styles.content
-            }
-          >
-            <span
-              className={
-                styles.contentLabel
-              }
-            >
+          <div className={styles.content}>
+            <span className={styles.contentLabel}>
               Lotes Zagari
             </span>
 
             <h3>
-              Elige dónde empieza tu
-              próxima historia.
+              Elige dónde empieza tu próxima historia.
             </h3>
 
-            <p
-              className={
-                styles.description
-              }
-            >
-              Espacios desde 234 m²
-              para disfrutar Zagari a
-              tu manera.
+            <p className={styles.description}>
+              Espacios desde 234 m² para disfrutar Zagari a tu manera.
             </p>
 
-            <div
-              className={
-                styles.highlights
-              }
-            >
-              {highlights.map(
-                (highlight) => (
-                  <span
-                    key={
-                      highlight
-                    }
-                  >
-                    <CheckCircle
-                      size={15}
-                      weight="fill"
-                    />
+            <div className={styles.highlights}>
+              {highlights.map((highlight) => (
+                <span key={highlight}>
+                  <CheckCircle
+                    size={15}
+                    weight="fill"
+                  />
 
-                    {highlight}
-                  </span>
-                ),
-              )}
+                  {highlight}
+                </span>
+              ))}
             </div>
-
-            {/* =================================
-                MAP BUTTON
-            ================================== */}
 
             <button
               type="button"
-              className={
-                styles.availabilityButton
-              }
-              onClick={
-                openMap
-              }
+              className={styles.availabilityButton}
+              onClick={openMap}
             >
-              <span
-                className={
-                  styles.availabilityIcon
-                }
-              >
+              <span className={styles.availabilityIcon}>
                 <MapPin
                   size={16}
                   weight="fill"
                 />
               </span>
 
-              <span
-                className={
-                  styles.availabilityCopy
-                }
-              >
-                <small>
-                  Segunda etapa
-                </small>
-
-                <strong>
-                  Explorar
-                  disponibilidad
-                </strong>
+              <span className={styles.availabilityCopy}>
+                <small>Plano interactivo</small>
+                <strong>Explorar disponibilidad</strong>
               </span>
 
-              <span
-                className={
-                  styles.availabilityArrow
-                }
-              >
-                <ArrowRight
-                  size={15}
-                />
+              <span className={styles.availabilityArrow}>
+                <ArrowRight size={15} />
               </span>
             </button>
 
-            {/* =================================
-                FORM
-            ================================== */}
-
-            <div
-              className={
-                styles.formSection
-              }
-            >
-              <header
-                className={
-                  styles.formHeading
-                }
-              >
-                <span>
-                  Conversemos
-                </span>
+            <div className={styles.formSection}>
+              <header className={styles.formHeading}>
+                <span>Conversemos</span>
 
                 <p>
-                  Déjanos tus datos
-                  para recibir
-                  información
-                  comercial.
+                  Déjanos tus datos para recibir información comercial.
                 </p>
               </header>
 
               <form
-                className={
-                  styles.form
-                }
-                onSubmit={
-                  handleSubmit
-                }
+                className={styles.form}
+                onSubmit={handleSubmit}
               >
-                <div
-                  className={
-                    styles.formRow
-                  }
-                >
-                  <label
-                    className={
-                      styles.field
-                    }
-                  >
-                    <span>
-                      Nombre
-                    </span>
+                <div className={styles.formRow}>
+                  <label className={styles.field}>
+                    <span>Nombre</span>
 
                     <input
                       type="text"
@@ -1593,14 +800,8 @@ export default function LotsSection() {
                     />
                   </label>
 
-                  <label
-                    className={
-                      styles.field
-                    }
-                  >
-                    <span>
-                      Celular
-                    </span>
+                  <label className={styles.field}>
+                    <span>Celular</span>
 
                     <input
                       type="tel"
@@ -1613,14 +814,8 @@ export default function LotsSection() {
                   </label>
                 </div>
 
-                <label
-                  className={
-                    styles.field
-                  }
-                >
-                  <span>
-                    Correo
-                  </span>
+                <label className={styles.field}>
+                  <span>Correo</span>
 
                   <input
                     type="email"
@@ -1631,39 +826,26 @@ export default function LotsSection() {
                   />
                 </label>
 
-                <div
-                  className={
-                    styles.formFooter
-                  }
-                >
+                <div className={styles.formFooter}>
                   <button
                     type="submit"
-                    className={
-                      styles.submitButton
-                    }
+                    className={styles.submitButton}
                   >
                     <PaperPlaneTilt
                       size={14}
                       weight="fill"
                     />
 
-                    Solicitar
-                    información
+                    Solicitar información
                   </button>
 
                   <small>
-                    Nuestro equipo te
-                    contactará para
-                    orientarte.
+                    Nuestro equipo te contactará para orientarte.
                   </small>
                 </div>
 
                 {submitted && (
-                  <div
-                    className={
-                      styles.success
-                    }
-                  >
+                  <div className={styles.success}>
                     <CheckCircle
                       size={15}
                       weight="fill"
@@ -1678,8 +860,7 @@ export default function LotsSection() {
         </div>
       </section>
 
-      {mounted &&
-      modal
+      {mounted && modal
         ? createPortal(
             modal,
             document.body,

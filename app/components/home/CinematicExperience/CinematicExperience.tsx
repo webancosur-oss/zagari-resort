@@ -74,7 +74,7 @@ const experiences: ExperienceItem[] = [
       "Mirador natural de Zagari Resort Club representando el elemento aire",
 
     href:
-      "/amenidades#aire",
+      "/amenidades/aire",
 
     theme: "air",
 
@@ -107,7 +107,7 @@ const experiences: ExperienceItem[] = [
       "Zona social con fuego de Zagari Resort Club",
 
     href:
-      "/amenidades#fuego",
+      "/amenidades/fuego",
 
     theme: "fire",
 
@@ -140,7 +140,7 @@ const experiences: ExperienceItem[] = [
       "Naturaleza y espacios de aventura de Zagari Resort Club",
 
     href:
-      "/amenidades#tierra",
+      "/amenidades/tierra",
 
     theme: "earth",
 
@@ -173,7 +173,7 @@ const experiences: ExperienceItem[] = [
       "Piscina y zona de bienestar de Zagari Resort Club",
 
     href:
-      "/amenidades#agua",
+      "/amenidades/agua",
 
     theme: "water",
 
@@ -284,29 +284,6 @@ export default function CinematicExperience() {
               naturaleza.
             </p>
 
-            <Link
-              href="/amenidades"
-              className={
-                styles.headerLink
-              }
-            >
-              <Sparkle
-                size={17}
-                weight="fill"
-                aria-hidden="true"
-              />
-
-              <span>
-                Ver todas las
-                amenidades
-              </span>
-
-              <ArrowRightIcon
-                size={16}
-                weight="regular"
-                aria-hidden="true"
-              />
-            </Link>
           </div>
         </header>
 
