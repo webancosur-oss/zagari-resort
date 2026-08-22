@@ -22,6 +22,10 @@ import styles from "./Footer.module.css";
 const GOOGLE_MAPS_URL =
   "https://maps.app.goo.gl/p8EkgxDp4M3pmgkv5";
 
+/* =========================================================
+   MENÚ
+========================================================= */
+
 const menuLinks = [
   {
     label: "Inicio",
@@ -29,23 +33,27 @@ const menuLinks = [
   },
   {
     label: "Proyecto",
-    href: "/#proyecto",
+    href: "/proyecto",
   },
   {
     label: "Lotes",
     href: "/lotes",
   },
   {
-    label: "Cabañas",
-    href: "/cabanas",
+    label: "Nosotros",
+    href: "/nosotros",
   },
-  {
-    label: "Amenidades",
-    href: "/#amenities",
-  },
-];
+] as const;
+
+/* =========================================================
+   EXPLORA
+========================================================= */
 
 const exploreLinks = [
+  {
+    label: "Amenidades",
+    href: "/#amenidades",
+  },
   {
     label: "Experiencias",
     href: "/#experiencia",
@@ -55,14 +63,18 @@ const exploreLinks = [
     href: "/#ubicacion",
   },
   {
-    label: "Contacto",
-    href: "/contacto",
-  },
-  {
     label: "Preguntas frecuentes",
     href: "/faq",
   },
-];
+  {
+    label: "Contacto",
+    href: "/contacto",
+  },
+] as const;
+
+/* =========================================================
+   REDES SOCIALES
+========================================================= */
 
 const socials = [
   {
@@ -80,7 +92,7 @@ const socials = [
     href: "#",
     icon: TiktokLogo,
   },
-];
+] as const;
 
 /* =========================================================
    FOOTER
@@ -100,6 +112,10 @@ export default function Footer() {
     `?text=${encodeURIComponent(
       "Hola Zagari Resort Club, quisiera recibir más información.",
     )}`;
+
+  /* =======================================================
+     VOLVER ARRIBA
+  ======================================================= */
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -178,7 +194,9 @@ export default function Footer() {
             </div>
 
             <p
-              className={styles.description}
+              className={
+                styles.description
+              }
             >
               Naturaleza, descanso,
               bienestar y experiencias
@@ -217,7 +235,8 @@ export default function Footer() {
                 </strong>
 
                 <small>
-                  Ver ubicación en Google Maps
+                  Ver ubicación en Google
+                  Maps
                 </small>
               </span>
 
@@ -238,7 +257,9 @@ export default function Footer() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={styles.whatsapp}
+              className={
+                styles.whatsapp
+              }
             >
               <span
                 className={
@@ -267,11 +288,15 @@ export default function Footer() {
           ================================================ */}
 
           <div className={styles.links}>
+            {/* =============================================
+                MENÚ
+            ============================================== */}
+
             <nav
               className={
                 styles.linkColumn
               }
-              aria-label="Menú"
+              aria-label="Menú principal"
             >
               <span
                 className={
@@ -306,11 +331,15 @@ export default function Footer() {
               </div>
             </nav>
 
+            {/* =============================================
+                EXPLORA
+            ============================================== */}
+
             <nav
               className={
                 styles.linkColumn
               }
-              aria-label="Explora"
+              aria-label="Explora Zagari"
             >
               <span
                 className={
@@ -371,12 +400,8 @@ export default function Footer() {
 
                   return (
                     <a
-                      key={
-                        item.label
-                      }
-                      href={
-                        item.href
-                      }
+                      key={item.label}
+                      href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={
@@ -395,9 +420,7 @@ export default function Footer() {
                       </span>
 
                       <span>
-                        {
-                          item.label
-                        }
+                        {item.label}
                       </span>
 
                       <ArrowUpRight
@@ -409,6 +432,10 @@ export default function Footer() {
                 },
               )}
             </div>
+
+            {/* =============================================
+                LEGALES
+            ============================================== */}
 
             <div
               className={styles.legal}

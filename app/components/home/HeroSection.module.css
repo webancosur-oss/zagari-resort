@@ -116,6 +116,103 @@
 
 
 /* =========================================================
+   VIDEO CONTROLS
+========================================================= */
+
+.videoControls {
+  position: absolute;
+
+  top: clamp(100px, 12vh, 145px);
+  right: clamp(28px, 6vw, 96px);
+
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.videoControl {
+  position: relative;
+
+  display: grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 auto;
+
+  padding: 0;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.28);
+
+  border-radius: 50%;
+
+  background:
+    rgba(10, 18, 13, 0.3);
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 28px
+    rgba(0, 0, 0, 0.12);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.videoControl svg {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+}
+
+.videoControl:hover {
+  border-color:
+    rgba(255, 255, 255, 0.6);
+
+  background:
+    rgba(255, 255, 255, 0.16);
+
+  box-shadow:
+    0 12px 32px
+    rgba(0, 0, 0, 0.18);
+
+  transform:
+    translateY(-2px);
+}
+
+.videoControl:active {
+  transform:
+    translateY(0)
+    scale(0.94);
+}
+
+.videoControl:focus-visible {
+  outline:
+    2px solid
+    rgba(255, 255, 255, 0.9);
+
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
    CONTAINER
 ========================================================= */
 
@@ -145,7 +242,8 @@
 .content {
   width: min(780px, 70vw);
 
-  margin-bottom: clamp(60px, 9vh, 110px);
+  margin-bottom:
+    clamp(60px, 9vh, 110px);
 }
 
 
@@ -156,11 +254,13 @@
 .eyebrow {
   display: flex;
   align-items: center;
+
   gap: 14px;
 
   margin-bottom: 24px;
 
-  color: rgba(255, 255, 255, 0.88);
+  color:
+    rgba(255, 255, 255, 0.88);
 
   font-size: 11px;
   font-weight: 500;
@@ -178,7 +278,8 @@
   width: 42px;
   height: 1px;
 
-  background: rgba(255, 255, 255, 0.72);
+  background:
+    rgba(255, 255, 255, 0.72);
 }
 
 
@@ -191,7 +292,9 @@
 
   margin: 0;
 
-  font-size: clamp(54px, 6.4vw, 104px);
+  font-size:
+    clamp(54px, 6.4vw, 104px);
+
   font-weight: 300;
 
   line-height: 0.94;
@@ -203,11 +306,6 @@
 
 .title span {
   display: block;
-
-  font-family:
-    "Times New Roman",
-    "Times",
-    serif;
 
   font-weight: 400;
   font-style: italic;
@@ -228,9 +326,12 @@
     0
     0;
 
-  color: rgba(255, 255, 255, 0.82);
+  color:
+    rgba(255, 255, 255, 0.82);
 
-  font-size: clamp(15px, 1.2vw, 18px);
+  font-size:
+    clamp(15px, 1.2vw, 18px);
+
   font-weight: 300;
 
   line-height: 1.65;
@@ -246,6 +347,7 @@
 .actions {
   display: flex;
   align-items: center;
+
   gap: 28px;
 
   margin-top: 34px;
@@ -260,6 +362,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 28px;
 
   min-width: 220px;
@@ -272,7 +375,8 @@
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.96);
+  background:
+    rgba(255, 255, 255, 0.96);
 
   color: #182019;
 
@@ -289,7 +393,8 @@
 .primaryButton:hover {
   background: #ffffff;
 
-  transform: translateY(-2px);
+  transform:
+    translateY(-2px);
 }
 
 .buttonIcon {
@@ -308,12 +413,20 @@
   color: #ffffff;
 
   transition:
-    transform 0.4s
-    cubic-bezier(0.22, 1, 0.36, 1);
+    transform
+    0.4s
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
 }
 
-.primaryButton:hover .buttonIcon {
-  transform: rotate(-35deg);
+.primaryButton:hover
+.buttonIcon {
+  transform:
+    rotate(-35deg);
 }
 
 
@@ -326,7 +439,8 @@
 
   padding: 9px 0;
 
-  color: rgba(255, 255, 255, 0.92);
+  color:
+    rgba(255, 255, 255, 0.92);
 
   font-size: 13px;
   font-weight: 400;
@@ -347,15 +461,18 @@
   width: 100%;
   height: 1px;
 
-  background: rgba(255, 255, 255, 0.45);
+  background:
+    rgba(255, 255, 255, 0.45);
 
   transform-origin: left;
 
-  transition: transform 0.4s ease;
+  transition:
+    transform 0.4s ease;
 }
 
 .secondaryButton:hover::after {
-  transform: scaleX(0.35);
+  transform:
+    scaleX(0.35);
 }
 
 
@@ -385,21 +502,20 @@
 .bottomInfo {
   display: flex;
   align-items: center;
+
   gap: 28px;
 }
 
 .infoItem {
   display: flex;
   align-items: baseline;
+
   gap: 9px;
 }
 
 .infoNumber {
-  font-family:
-    "Times New Roman",
-    serif;
-
   font-size: 22px;
+
   font-style: italic;
   font-weight: 400;
 
@@ -407,7 +523,8 @@
 }
 
 .infoLabel {
-  color: rgba(255, 255, 255, 0.64);
+  color:
+    rgba(255, 255, 255, 0.64);
 
   font-size: 10px;
   font-weight: 500;
@@ -423,7 +540,8 @@
   width: 1px;
   height: 18px;
 
-  background: rgba(255, 255, 255, 0.25);
+  background:
+    rgba(255, 255, 255, 0.25);
 }
 
 
@@ -434,6 +552,7 @@
 .scrollButton {
   display: flex;
   align-items: center;
+
   gap: 14px;
 
   padding: 0;
@@ -442,7 +561,8 @@
 
   background: transparent;
 
-  color: rgba(255, 255, 255, 0.72);
+  color:
+    rgba(255, 255, 255, 0.72);
 
   cursor: pointer;
 
@@ -476,14 +596,16 @@
     transform 0.3s ease;
 }
 
-.scrollButton:hover .scrollCircle {
+.scrollButton:hover
+.scrollCircle {
   background: #ffffff;
 
   border-color: #ffffff;
 
   color: #182019;
 
-  transform: translateY(3px);
+  transform:
+    translateY(3px);
 }
 
 
@@ -502,11 +624,21 @@
   }
 
   .content {
-    width: min(720px, 75vw);
+    width:
+      min(720px, 75vw);
   }
 
   .title {
-    font-size: clamp(52px, 6.6vw, 84px);
+    font-size:
+      clamp(
+        52px,
+        6.6vw,
+        84px
+      );
+  }
+
+  .videoControls {
+    right: 52px;
   }
 }
 
@@ -537,7 +669,12 @@
   .title {
     max-width: 650px;
 
-    font-size: clamp(52px, 9vw, 78px);
+    font-size:
+      clamp(
+        52px,
+        9vw,
+        78px
+      );
   }
 
   .description {
@@ -551,6 +688,16 @@
   .separator {
     height: 16px;
   }
+
+  .videoControls {
+    top: 100px;
+    right: 30px;
+  }
+
+  .videoControl {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 
@@ -561,24 +708,24 @@
 @media (max-width: 600px) {
   .hero {
     height: 100svh;
+
     min-height: 680px;
     max-height: 980px;
   }
 
   .video {
-    /*
-      En móvil normalmente conviene reencuadrar
-      ligeramente hacia el centro.
-    */
-    object-position: 52% center;
+    object-position:
+      52% center;
   }
 
   .overlay {
     background:
       linear-gradient(
         90deg,
-        rgba(7, 12, 9, 0.34) 0%,
-        rgba(7, 12, 9, 0.08) 100%
+        rgba(7, 12, 9, 0.34)
+          0%,
+        rgba(7, 12, 9, 0.08)
+          100%
       );
   }
 
@@ -588,20 +735,30 @@
     background:
       linear-gradient(
         to top,
-        rgba(7, 11, 8, 0.9) 0%,
-        rgba(7, 11, 8, 0.62) 34%,
-        rgba(7, 11, 8, 0.22) 70%,
-        transparent 100%
+        rgba(7, 11, 8, 0.9)
+          0%,
+        rgba(7, 11, 8, 0.62)
+          34%,
+        rgba(7, 11, 8, 0.22)
+          70%,
+        transparent
+          100%
       );
   }
 
   .container {
-    justify-content: flex-end;
+    justify-content:
+      flex-end;
 
     padding:
       100px
       20px
-      max(22px, env(safe-area-inset-bottom));
+      max(
+        22px,
+        env(
+          safe-area-inset-bottom
+        )
+      );
   }
 
   .content {
@@ -627,7 +784,12 @@
   .title {
     max-width: 100%;
 
-    font-size: clamp(45px, 14.5vw, 66px);
+    font-size:
+      clamp(
+        45px,
+        14.5vw,
+        66px
+      );
 
     line-height: 0.96;
 
@@ -716,13 +878,80 @@
   }
 
   .scrollButton {
-    font-size: 0;
     gap: 0;
+
+    font-size: 0;
   }
 
   .scrollCircle {
     width: 39px;
     height: 39px;
+  }
+
+  /* ===============================
+     VIDEO CONTROLS MOBILE
+  =============================== */
+
+  .videoControls {
+    top:
+      max(
+        84px,
+        calc(
+          env(
+            safe-area-inset-top
+          ) + 66px
+        )
+      );
+
+    right: 20px;
+
+    gap: 7px;
+  }
+
+  .videoControl {
+    width: 38px;
+    height: 38px;
+
+    background:
+      rgba(8, 15, 10, 0.38);
+
+    border-color:
+      rgba(255, 255, 255, 0.3);
+
+    box-shadow:
+      0 8px 24px
+      rgba(0, 0, 0, 0.15);
+
+    backdrop-filter:
+      blur(10px);
+
+    -webkit-backdrop-filter:
+      blur(10px);
+  }
+
+  .videoControl svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /*
+    En dispositivos táctiles evitamos
+    depender visualmente del hover.
+  */
+
+  .videoControl:hover {
+    transform: none;
+
+    background:
+      rgba(8, 15, 10, 0.38);
+  }
+
+  .videoControl:active {
+    transform:
+      scale(0.92);
+
+    background:
+      rgba(255, 255, 255, 0.16);
   }
 }
 
@@ -742,7 +971,12 @@
   }
 
   .title {
-    font-size: clamp(42px, 13.8vw, 54px);
+    font-size:
+      clamp(
+        42px,
+        13.8vw,
+        54px
+      );
   }
 
   .description {
@@ -760,6 +994,20 @@
   .infoItem + .infoItem {
     margin-left: 7px;
   }
+
+  .videoControls {
+    right: 17px;
+  }
+
+  .videoControl {
+    width: 36px;
+    height: 36px;
+  }
+
+  .videoControl svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 
@@ -767,10 +1015,14 @@
    REDUCED MOTION
 ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
   .primaryButton,
   .buttonIcon,
   .scrollCircle,
+  .videoControl,
   .secondaryButton::after {
     transition: none;
   }

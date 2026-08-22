@@ -53,13 +53,13 @@ export default function NosotrosPage() {
 
       <section className={styles.hero}>
         <Image
-          src="/assets/amenities/element-aire-mirador.webp"
-          alt="Naturaleza de Zagari Resort Club en San Ramón"
-          fill
-          priority
-          sizes="100vw"
-          className={styles.heroImage}
-        />
+              src="/assets/amenities/element-aire-mirador.webp"
+              alt="Naturaleza de Zagari Resort Club en San Ramón"
+              fill
+              priority
+              sizes="100vw"
+              className={styles.heroImage}
+            />
 
         <div
           className={styles.heroOverlay}

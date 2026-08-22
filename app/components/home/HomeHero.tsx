@@ -476,22 +476,13 @@ export default function HomeHero() {
                 }`}
               >
                 <Image
-                  src={
-                    cabin.image
-                  }
+                  src={cabin.image}
                   alt=""
                   fill
-                  priority={
-                    index ===
-                    0
-                  }
-                  sizes="100vw"
-                  className={
-                    styles.image
-                  }
-                  draggable={
-                    false
-                  }
+                  priority={index === 0}
+                  sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 50vw"
+                  className={styles.image}
+                  draggable={false}
                 />
               </div>
             );

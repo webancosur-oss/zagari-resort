@@ -595,18 +595,12 @@ export default function CinematicExperience() {
                       styles.mobileMedia
                     }
                   >
-                    <Image
-                      src={
-                        experience.image
-                      }
-                      alt={
-                        experience.alt
-                      }
+                   <Image
+                      src={experience.image}
+                      alt={experience.alt}
                       fill
                       sizes="100vw"
-                      className={
-                        styles.mobileImage
-                      }
+                      className={styles.mobileImage}
                     />
 
                     <div

@@ -10,7 +10,10 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+
+import {
+  usePathname,
+} from "next/navigation";
 
 import {
   useEffect,
@@ -21,7 +24,7 @@ import {
 import styles from "./Navbar.module.css";
 
 /* ==========================================================
-   NAVIGATION
+   DESKTOP NAVIGATION
 ========================================================== */
 
 const leftNavigation = [
@@ -50,9 +53,34 @@ const rightNavigation = [
   },
 ] as const;
 
-const navigationItems = [
-  ...leftNavigation,
-  ...rightNavigation,
+/* ==========================================================
+   MOBILE NAVIGATION
+
+   Independiente del desktop para controlar
+   orden y páginas visibles en mobile.
+========================================================== */
+
+const mobileNavigation = [
+  {
+    label: "Inicio",
+    href: "/",
+  },
+  {
+    label: "Proyecto",
+    href: "/proyecto",
+  },
+  {
+    label: "Nosotros",
+    href: "/nosotros",
+  },
+  {
+    label: "Ubicación",
+    href: "/#ubicacion",
+  },
+  {
+    label: "Preguntas frecuentes",
+    href: "/faq",
+  },
 ] as const;
 
 /* ==========================================================
@@ -65,7 +93,7 @@ export default function Navbar() {
 
   const frameRef =
     useRef<number | null>(
-      null
+      null,
     );
 
   const [
@@ -95,12 +123,12 @@ export default function Navbar() {
   const whatsappNumber =
     process.env
       .NEXT_PUBLIC_ZAGARI_WHATSAPP ||
-    "519XXXXXXXX";
+    "971069763";
 
   const whatsappUrl =
     `https://wa.me/${whatsappNumber}` +
     `?text=${encodeURIComponent(
-      "Hola Zagari Resort Club, quisiera recibir más información."
+      "Hola Zagari Resort Club, quisiera recibir más información.",
     )}`;
 
   /* ========================================================
@@ -110,7 +138,7 @@ export default function Navbar() {
   useEffect(() => {
     const update = () => {
       setIsScrolled(
-        window.scrollY > 70
+        window.scrollY > 70,
       );
     };
 
@@ -121,29 +149,19 @@ export default function Navbar() {
       update,
       {
         passive: true,
-      }
+      },
     );
 
     return () => {
       window.removeEventListener(
         "scroll",
-        update
+        update,
       );
     };
   }, []);
 
   /* ========================================================
      FOOTER DOCK
-
-     IMPORTANTE:
-
-     El navbar NO SE MUEVE.
-
-     El footer sube normalmente.
-
-     Cuando el top del footer llega
-     prácticamente al top del viewport,
-     cambiamos el diseño del navbar.
   ======================================================== */
 
   useEffect(() => {
@@ -151,12 +169,12 @@ export default function Navbar() {
       () => {
         const footer =
           document.querySelector<HTMLElement>(
-            "[data-zagari-footer]"
+            "[data-zagari-footer]",
           );
 
         if (!footer) {
           setIsFooterDocked(
-            false
+            false,
           );
 
           return;
@@ -164,11 +182,6 @@ export default function Navbar() {
 
         const rect =
           footer.getBoundingClientRect();
-
-        /*
-         * 12 px evita problemas de
-         * subpíxeles / zoom del navegador.
-         */
 
         const reachedTop =
           rect.top <= 12;
@@ -178,7 +191,7 @@ export default function Navbar() {
 
         setIsFooterDocked(
           reachedTop &&
-            footerVisible
+            footerVisible,
         );
       };
 
@@ -189,13 +202,13 @@ export default function Navbar() {
           null
         ) {
           cancelAnimationFrame(
-            frameRef.current
+            frameRef.current,
           );
         }
 
         frameRef.current =
           requestAnimationFrame(
-            updateFooterDock
+            updateFooterDock,
           );
       };
 
@@ -206,12 +219,12 @@ export default function Navbar() {
       requestUpdate,
       {
         passive: true,
-      }
+      },
     );
 
     window.addEventListener(
       "resize",
-      requestUpdate
+      requestUpdate,
     );
 
     return () => {
@@ -220,18 +233,18 @@ export default function Navbar() {
         null
       ) {
         cancelAnimationFrame(
-          frameRef.current
+          frameRef.current,
         );
       }
 
       window.removeEventListener(
         "scroll",
-        requestUpdate
+        requestUpdate,
       );
 
       window.removeEventListener(
         "resize",
-        requestUpdate
+        requestUpdate,
       );
     };
   }, []);
@@ -243,7 +256,7 @@ export default function Navbar() {
   useEffect(() => {
     const updateHash = () => {
       setActiveHash(
-        window.location.hash
+        window.location.hash,
       );
     };
 
@@ -251,19 +264,19 @@ export default function Navbar() {
 
     window.addEventListener(
       "hashchange",
-      updateHash
+      updateHash,
     );
 
     return () => {
       window.removeEventListener(
         "hashchange",
-        updateHash
+        updateHash,
       );
     };
   }, []);
 
   /* ========================================================
-     ROUTE
+     CLOSE MENU WHEN ROUTE CHANGES
   ======================================================== */
 
   useEffect(() => {
@@ -277,7 +290,7 @@ export default function Navbar() {
   useEffect(() => {
     if (!isMenuOpen) {
       document.body.style.removeProperty(
-        "overflow"
+        "overflow",
       );
 
       return;
@@ -288,7 +301,7 @@ export default function Navbar() {
 
     return () => {
       document.body.style.removeProperty(
-        "overflow"
+        "overflow",
       );
     };
   }, [isMenuOpen]);
@@ -299,7 +312,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleKeyDown = (
-      event: KeyboardEvent
+      event: KeyboardEvent,
     ) => {
       if (
         event.key ===
@@ -311,13 +324,13 @@ export default function Navbar() {
 
     window.addEventListener(
       "keydown",
-      handleKeyDown
+      handleKeyDown,
     );
 
     return () => {
       window.removeEventListener(
         "keydown",
-        handleKeyDown
+        handleKeyDown,
       );
     };
   }, []);
@@ -327,19 +340,30 @@ export default function Navbar() {
   ======================================================== */
 
   const isActive = (
-    href: string
+    href: string,
   ) => {
     const [
       route,
       hash,
     ] = href.split("#");
 
-    if (href === "/") {
+    /* -----------------------------------------
+       HOME
+    ------------------------------------------ */
+
+    if (
+      href === "/"
+    ) {
       return (
         pathname === "/" &&
         !activeHash
       );
     }
+
+    /* -----------------------------------------
+       HASH HOME
+       /#ubicacion
+    ------------------------------------------ */
 
     if (
       hash &&
@@ -355,25 +379,50 @@ export default function Navbar() {
       );
     }
 
-    if (route) {
-      return pathname.startsWith(
-        route
+    /* -----------------------------------------
+       NORMAL ROUTE
+    ------------------------------------------ */
+
+    if (
+      route
+    ) {
+      return (
+        pathname ===
+          route ||
+        pathname.startsWith(
+          `${route}/`,
+        )
       );
     }
 
     return false;
   };
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  /* ========================================================
+     HELPERS
+  ======================================================== */
+
+  const closeMenu =
+    () => {
+      setIsMenuOpen(
+        false,
+      );
+    };
 
   const showFooterNav =
     isFooterDocked &&
     !isMenuOpen;
 
+  /* ========================================================
+     RENDER
+  ======================================================== */
+
   return (
     <>
+      {/* ===================================================
+          NAVBAR
+      ==================================================== */}
+
       <header
         className={`${styles.header} ${
           isScrolled
@@ -390,19 +439,17 @@ export default function Navbar() {
             styles.notch
           }
         >
-          {/* =================================
-              FOOTER NAVBAR
-          ================================== */}
-
           {showFooterNav ? (
+            /* ===============================================
+               FOOTER NAVBAR MODE
+            ================================================ */
+
             <div
               className={
                 styles.footerNav
               }
             >
-              {/* ===========================
-                  LOGO
-              ============================ */}
+              {/* LOGO */}
 
               <Link
                 href="/"
@@ -422,32 +469,16 @@ export default function Navbar() {
                 />
               </Link>
 
-              {/* ===========================
-                  MESSAGE
-              ============================ */}
+              {/* MESSAGE */}
 
               <div
                 className={
                   styles.footerNavMessage
                 }
               >
-                <span>
-                  Zagari Resort Club
-                </span>
-
-                <strong>
-                  Vive diferente.
-                </strong>
-
-                <small>
-                  San Ramón ·
-                  Selva Central
-                </small>
               </div>
 
-              {/* ===========================
-                  ACTIONS
-              ============================ */}
+              {/* ACTIONS */}
 
               <div
                 className={
@@ -474,7 +505,7 @@ export default function Navbar() {
                   </span>
                 </a>
 
-                <button
+                {/* <button
                   type="button"
                   className={
                     styles.footerTop
@@ -492,14 +523,14 @@ export default function Navbar() {
                     size={16}
                     weight="bold"
                   />
-                </button>
+                </button> */}
               </div>
             </div>
           ) : (
             <>
-              {/* =================================
-                  NORMAL LEFT
-              ================================== */}
+              {/* =============================================
+                  DESKTOP LEFT
+              ============================================== */}
 
               <nav
                 className={
@@ -511,7 +542,7 @@ export default function Navbar() {
                   (item) => {
                     const active =
                       isActive(
-                        item.href
+                        item.href,
                       );
 
                     return (
@@ -528,9 +559,7 @@ export default function Navbar() {
                             : ""
                         }`}
                       >
-                        {
-                          item.label
-                        }
+                        {item.label}
 
                         <span
                           className={
@@ -539,13 +568,13 @@ export default function Navbar() {
                         />
                       </Link>
                     );
-                  }
+                  },
                 )}
               </nav>
 
-              {/* =================================
-                  NORMAL LOGO
-              ================================== */}
+              {/* =============================================
+                  LOGO CENTER
+              ============================================== */}
 
               <Link
                 href="/"
@@ -566,9 +595,9 @@ export default function Navbar() {
                 />
               </Link>
 
-              {/* =================================
-                  NORMAL RIGHT
-              ================================== */}
+              {/* =============================================
+                  DESKTOP RIGHT
+              ============================================== */}
 
               <div
                 className={
@@ -585,7 +614,7 @@ export default function Navbar() {
                     (item) => {
                       const active =
                         isActive(
-                          item.href
+                          item.href,
                         );
 
                       return (
@@ -602,9 +631,7 @@ export default function Navbar() {
                               : ""
                           }`}
                         >
-                          {
-                            item.label
-                          }
+                          {item.label}
 
                           <span
                             className={
@@ -613,7 +640,7 @@ export default function Navbar() {
                           />
                         </Link>
                       );
-                    }
+                    },
                   )}
                 </nav>
 
@@ -640,9 +667,9 @@ export default function Navbar() {
                 </Link>
               </div>
 
-              {/* =================================
+              {/* =============================================
                   MOBILE BUTTON
-              ================================== */}
+              ============================================== */}
 
               <button
                 type="button"
@@ -661,7 +688,7 @@ export default function Navbar() {
                 onClick={() => {
                   setIsMenuOpen(
                     (current) =>
-                      !current
+                      !current,
                   );
                 }}
               >
@@ -680,9 +707,9 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* =====================================
+      {/* ===================================================
           BACKDROP
-      ====================================== */}
+      ==================================================== */}
 
       <button
         type="button"
@@ -702,9 +729,9 @@ export default function Navbar() {
         }
       />
 
-      {/* =====================================
+      {/* ===================================================
           MOBILE MENU
-      ====================================== */}
+      ==================================================== */}
 
       <aside
         id="zagari-menu"
@@ -717,6 +744,10 @@ export default function Navbar() {
           !isMenuOpen
         }
       >
+        {/* ===============================================
+            MOBILE HEADER
+        ================================================ */}
+
         <div
           className={
             styles.mobileHeader
@@ -730,6 +761,7 @@ export default function Navbar() {
             onClick={
               closeMenu
             }
+            aria-label="Ir al inicio"
           >
             <Image
               src="/assets/brand/zagari-logo-light.svg"
@@ -752,9 +784,15 @@ export default function Navbar() {
             }
             aria-label="Cerrar menú"
           >
-            <X size={20} />
+            <X
+              size={20}
+            />
           </button>
         </div>
+
+        {/* ===============================================
+            MOBILE INTRO
+        ================================================ */}
 
         <div
           className={
@@ -777,66 +815,78 @@ export default function Navbar() {
           </p>
         </div>
 
+        {/* ===============================================
+            MOBILE NAVIGATION
+        ================================================ */}
+
         <nav
           className={
             styles.mobileNavigation
           }
+          aria-label="Navegación móvil"
         >
-          {navigationItems.map(
+          {mobileNavigation.map(
             (
               item,
-              index
-            ) => (
-              <Link
-                key={
-                  item.href
-                }
-                href={
-                  item.href
-                }
-                onClick={
-                  closeMenu
-                }
-                className={`${styles.mobileLink} ${
-                  isActive(
+              index,
+            ) => {
+              const active =
+                isActive(
+                  item.href,
+                );
+
+              return (
+                <Link
+                  key={
                     item.href
-                  )
-                    ? styles.mobileLinkActive
-                    : ""
-                }`}
-              >
-                <span
-                  className={
-                    styles.mobileIndex
                   }
+                  href={
+                    item.href
+                  }
+                  onClick={
+                    closeMenu
+                  }
+                  className={`${styles.mobileLink} ${
+                    active
+                      ? styles.mobileLinkActive
+                      : ""
+                  }`}
                 >
-                  {String(
-                    index + 1
-                  ).padStart(
-                    2,
-                    "0"
-                  )}
-                </span>
+                  <span
+                    className={
+                      styles.mobileIndex
+                    }
+                  >
+                    {String(
+                      index + 1,
+                    ).padStart(
+                      2,
+                      "0",
+                    )}
+                  </span>
 
-                <strong>
-                  {
-                    item.label
-                  }
-                </strong>
+                  <strong>
+                    {item.label}
+                  </strong>
 
-                <span
-                  className={
-                    styles.mobileArrow
-                  }
-                >
-                  <ArrowRight
-                    size={17}
-                  />
-                </span>
-              </Link>
-            )
+                  <span
+                    className={
+                      styles.mobileArrow
+                    }
+                  >
+                    <ArrowRight
+                      size={17}
+                    />
+                  </span>
+                </Link>
+              );
+            },
           )}
         </nav>
+
+        {/* ===============================================
+            MOBILE CONTACT CTA
+        ================================================ */}
 
         <Link
           href="/contacto"
@@ -863,14 +913,44 @@ export default function Navbar() {
           </span>
         </Link>
 
+        {/* ===============================================
+            MOBILE WHATSAPP
+        ================================================ */}
+
+        <a
+          href={
+            whatsappUrl
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+          className={
+            styles.mobileWhatsapp
+          }
+          onClick={
+            closeMenu
+          }
+        >
+          <WhatsappLogo
+            size={18}
+            weight="fill"
+          />
+
+          <span>
+            Hablar por WhatsApp
+          </span>
+        </a>
+
+        {/* ===============================================
+            MOBILE FOOTER
+        ================================================ */}
+
         <div
           className={
             styles.mobileFooter
           }
         >
           <span>
-            San Ramón ·
-            Selva Central
+            San Ramón · Selva Central
           </span>
 
           <span>

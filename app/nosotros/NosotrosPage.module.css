@@ -156,11 +156,6 @@
 .hero h1 span {
   display: block;
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
   font-weight: 400;
 
   font-style: italic;
@@ -221,7 +216,6 @@
 
   border-radius: 999px;
 
-  font-family: inherit;
 
   font-size: 9px;
 
@@ -493,11 +487,6 @@
 .elementsHeader h2 span,
 .backingContent h2 span {
   color: #6f8879;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
 
   font-weight: 400;
 
@@ -892,11 +881,6 @@
 
 .elementContent h3 {
   margin: 0;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
 
   font-size:
     clamp(

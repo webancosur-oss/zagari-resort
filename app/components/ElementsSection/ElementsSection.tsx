@@ -178,14 +178,13 @@ export default function ElementsSection() {
               >
                 <div className={styles.sceneCard}>
                   <Image
-                    src={element.image}
-                    alt={element.alt}
-                    fill
-                    priority={index === 0}
-                    sizes="100vw"
-                    className={styles.image}
-                  />
-
+                      src={element.image}
+                      alt={element.alt}
+                      fill
+                      priority={index === 0}
+                      sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 25vw"
+                      className={styles.image}
+                    />
                   <div
                     className={styles.overlay}
                     aria-hidden="true"
