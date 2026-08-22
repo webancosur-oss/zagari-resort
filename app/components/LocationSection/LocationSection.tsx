@@ -276,26 +276,6 @@ export default function LocationSection() {
               lugares que forman
               parte de su entorno.
             </p>
-
-            <a
-              href={
-                GOOGLE_MAPS_URL
-              }
-              target="_blank"
-              rel="noopener noreferrer"
-              className={
-                styles.mapsTextLink
-              }
-            >
-              Ver ubicación en
-              Google Maps
-
-              <span
-                aria-hidden="true"
-              >
-                ↗
-              </span>
-            </a>
           </div>
         </header>
 

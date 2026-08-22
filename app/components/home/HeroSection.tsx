@@ -74,7 +74,7 @@ export default function HeroSection() {
           {/* botones */}
           <div className={styles.actions}>
             <Link
-              href="#experiencias"
+              href="#experiencia"
               className={styles.primaryButton}
             >
               <span>Descubrir Zagari</span>

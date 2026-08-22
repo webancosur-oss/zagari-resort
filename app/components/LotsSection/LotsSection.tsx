@@ -716,14 +716,6 @@ export default function LotsSection() {
 
               San Ramón · Junín
             </div>
-
-            <div className={styles.photoCaption}>
-              <span>ZAGARI RESORT CLUB</span>
-
-              <p>
-                Un espacio propio en medio de la naturaleza.
-              </p>
-            </div>
           </div>
 
           <div className={styles.content}>
@@ -787,19 +779,19 @@ export default function LotsSection() {
                 className={styles.form}
                 onSubmit={handleSubmit}
               >
+                <label className={styles.field}>
+                  <span>Nombre completo</span>
+
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Escribe tu nombre"
+                    autoComplete="name"
+                    required
+                  />
+                </label>
+
                 <div className={styles.formRow}>
-                  <label className={styles.field}>
-                    <span>Nombre</span>
-
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Tu nombre"
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
-
                   <label className={styles.field}>
                     <span>Celular</span>
 
@@ -809,6 +801,23 @@ export default function LotsSection() {
                       placeholder="987 654 321"
                       autoComplete="tel"
                       inputMode="numeric"
+                      maxLength={9}
+                      pattern="[0-9]{9}"
+                      required
+                    />
+                  </label>
+
+                  <label className={styles.field}>
+                    <span>DNI</span>
+
+                    <input
+                      type="text"
+                      name="dni"
+                      placeholder="12345678"
+                      inputMode="numeric"
+                      maxLength={8}
+                      pattern="[0-9]{8}"
+                      autoComplete="off"
                       required
                     />
                   </label>
@@ -824,6 +833,32 @@ export default function LotsSection() {
                     autoComplete="email"
                     required
                   />
+                </label>
+
+                <label className={styles.privacyConsent}>
+                  <input
+                    type="checkbox"
+                    name="privacy"
+                    defaultChecked
+                    required
+                  />
+
+                  <span className={styles.privacyCheckbox} aria-hidden="true">
+                    ✓
+                  </span>
+
+                  <span className={styles.privacyText}>
+                    Acepto el tratamiento de mis datos personales de acuerdo
+                    con la{" "}
+                    <a
+                      href="/politica-de-privacidad"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Política de Privacidad
+                    </a>
+                    .
+                  </span>
                 </label>
 
                 <div className={styles.formFooter}>

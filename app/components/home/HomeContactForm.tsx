@@ -636,26 +636,6 @@ export default function HomeContactForm() {
                   />
                 </span>
               </button>
-
-              <button
-                type="button"
-                className={
-                  styles.formWhatsapp
-                }
-                onClick={
-                  handleWhatsApp
-                }
-                aria-label="Contactar por WhatsApp"
-              >
-                <WhatsappLogo
-                  size={20}
-                  weight="fill"
-                />
-
-                <span>
-                  WhatsApp
-                </span>
-              </button>
             </div>
 
             {/* ===========================

@@ -31,7 +31,7 @@ const leftNavigation = [
   },
   {
     label: "Proyecto",
-    href: "/#proyecto",
+    href: "/proyecto",
   },
   {
     label: "Lotes",
@@ -41,8 +41,8 @@ const leftNavigation = [
 
 const rightNavigation = [
   {
-    label: "Experiencias",
-    href: "/#experiencia",
+    label: "Nosotros",
+    href: "/nosotros",
   },
   {
     label: "Ubicación",

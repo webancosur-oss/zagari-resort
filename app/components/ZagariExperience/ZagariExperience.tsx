@@ -1,5 +1,8 @@
 "use client";
 
+import {
+  ArrowUpRight,
+} from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,9 +10,8 @@ import styles from "./ZagariExperience.module.css";
 
 const cards = [
   {
-    id: "01",
     image:
-      "/assets/amenities/bar-piscina.png",
+      "/assets/amenities/element-aire-mirador.webp",
     title:
       "Descubrir",
     subtitle:
@@ -17,40 +19,40 @@ const cards = [
     className:
       "cardOne",
   },
+
   {
-    id: "02",
     image:
-      "/assets/amenities/biohuerto-mandarina.png",
+      "/assets/amenities/element-tierra-biohuerto-mandarina.webp",
     title:
       "Conectar",
     subtitle:
-      "Experiencias",
+      "Origen",
     className:
       "cardTwo",
   },
+
   {
-    id: "03",
     image:
-      "/assets/amenities/camping.png",
+      "/assets/amenities/element-agua-piscina-borde-infinito.webp",
     title:
       "Disfrutar",
     subtitle:
-      "Momentos",
+      "Bienestar",
     className:
       "cardThree",
   },
+
   {
-    id: "04",
     image:
-      "/assets/amenities/portico.png",
+      "/assets/amenities/element-fuego-camping.webp",
     title:
       "Vivir",
     subtitle:
-      "Zagari",
+      "Experiencias",
     className:
       "cardFour",
   },
-];
+] as const;
 
 export default function ZagariExperience() {
   return (
@@ -100,30 +102,6 @@ export default function ZagariExperience() {
               desconectarte de la rutina y
               reconectar con lo esencial.
             </p>
-
-            <Link
-              href="#amenidades"
-              className={styles.button}
-            >
-              <span
-                className={
-                  styles.buttonInner
-                }
-              >
-                <span>
-                  Descubrir Zagari
-                </span>
-
-                <span
-                  className={
-                    styles.buttonArrow
-                  }
-                  aria-hidden="true"
-                >
-                  ↗
-                </span>
-              </span>
-            </Link>
           </div>
         </div>
 
@@ -140,69 +118,61 @@ export default function ZagariExperience() {
             aria-hidden="true"
           />
 
-          {cards.map(
-            (card) => (
-              <article
-                key={card.id}
-                className={`${styles.card} ${
-                  styles[card.className]
-                }`}
+          {cards.map((card) => (
+            <article
+              key={card.title}
+              className={`${styles.card} ${
+                styles[card.className]
+              }`}
+            >
+              <div
+                className={
+                  styles.imageWrap
+                }
               >
+                <Image
+                  src={card.image}
+                  alt={`${card.title} en Zagari Resort Club`}
+                  fill
+                  sizes="
+                    (max-width: 767px) 92vw,
+                    (max-width: 1100px) 40vw,
+                    27vw
+                  "
+                  className={
+                    styles.image
+                  }
+                />
+
                 <div
                   className={
-                    styles.imageWrap
+                    styles.imageOverlay
+                  }
+                  aria-hidden="true"
+                />
+
+                <div
+                  className={
+                    styles.cardMeta
                   }
                 >
-                  <Image
-                    src={card.image}
-                    alt={`${card.title} en Zagari Resort`}
-                    fill
-                    sizes="
-                      (max-width: 767px) 92vw,
-                      (max-width: 1100px) 40vw,
-                      27vw
-                    "
-                    className={styles.image}
-                  />
-
                   <div
                     className={
-                      styles.imageOverlay
-                    }
-                    aria-hidden="true"
-                  />
-
-                  <div
-                    className={
-                      styles.cardMeta
+                      styles.cardCopy
                     }
                   >
-                    <span
-                      className={
-                        styles.cardNumber
-                      }
-                    >
-                      {card.id}
-                    </span>
+                    <small>
+                      {card.subtitle}
+                    </small>
 
-                    <div
-                      className={
-                        styles.cardCopy
-                      }
-                    >
-                      <small>
-                        {card.subtitle}
-                      </small>
-
-                      <strong>
-                        {card.title}
-                      </strong>
-                    </div>
+                    <strong>
+                      {card.title}
+                    </strong>
                   </div>
                 </div>
-              </article>
-            )
-          )}
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
