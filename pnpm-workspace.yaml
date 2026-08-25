@@ -1,6 +1,9 @@
 allowBuilds:
   sharp: true
   unrs-resolver: true
+  esbuild: true
+  wrangler: true
+
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
