@@ -36,10 +36,10 @@ const leftNavigation = [
     label: "Proyecto",
     href: "/proyecto",
   },
-  {
-    label: "Lotes",
-    href: "/lotes",
-  },
+  // {
+  //   label: "Lotes",
+  //   href: "/lotes",
+  // },
 ] as const;
 
 const rightNavigation = [
