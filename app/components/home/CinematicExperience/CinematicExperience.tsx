@@ -68,7 +68,7 @@ const experiences: ExperienceItem[] = [
       "Espacios abiertos y recorridos naturales para contemplar el paisaje, respirar con calma y disfrutar de una conexión auténtica con San Ramón.",
 
     image:
-      "/assets/concept/aire.png",
+      "/assets/amenities/element-aire-mirador.webp",
 
     alt:
       "Mirador natural de Zagari Resort Club representando el elemento aire",
@@ -101,7 +101,7 @@ const experiences: ExperienceItem[] = [
       "Ambientes cálidos y sociales creados para compartir, celebrar y disfrutar noches especiales con familia y amigos.",
 
     image:
-      "/assets/concept/fuego.png",
+      "/assets/amenities/element-fuego-camping.webp",
 
     alt:
       "Zona social con fuego de Zagari Resort Club",
@@ -134,7 +134,7 @@ const experiences: ExperienceItem[] = [
       "La arquitectura, los jardines y los espacios de aventura se integran al paisaje para conservar la esencia natural del proyecto.",
 
     image:
-      "/assets/concept/tierra.png",
+      "/assets/amenities/element-tierra-diosa-de-elementos.webp",
 
     alt:
       "Naturaleza y espacios de aventura de Zagari Resort Club",
@@ -167,7 +167,7 @@ const experiences: ExperienceItem[] = [
       "Piscinas y espacios de relajación diseñados para refrescarte, recuperar energía y disfrutar cada momento.",
 
     image:
-      "/assets/concept/agua.png",
+      "/assets/amenities/element-agua-bar-piscina.webp",
 
     alt:
       "Piscina y zona de bienestar de Zagari Resort Club",

@@ -38,7 +38,7 @@ const elements: ElementItem[] = [
     description:
       "Miradores, senderos y espacios abiertos conectan cada momento con los paisajes de San Ramón. Un entorno creado para detenerte, respirar y recuperar la calma.",
     image:
-      "/assets/concept/aire.png",
+      "/assets/amenities/element-aire-domo.webp",
     alt:
       "Mirador rodeado de naturaleza que representa el elemento aire en Zagari Resort Club",
     theme: "air",
@@ -54,7 +54,7 @@ const elements: ElementItem[] = [
     description:
       "El fuego representa la energía de compartir. Espacios cálidos, noches bajo las estrellas y experiencias creadas para reconectar con quienes más importan.",
     image:
-      "/assets/concept/fuego.png",
+      "/assets/amenities/element-fuego-camping.webp",
     alt:
       "Espacio de reunión alrededor del fuego en Zagari Resort Club",
     theme: "fire",
@@ -70,7 +70,7 @@ const elements: ElementItem[] = [
     description:
       "La tierra representa pertenencia, equilibrio y crecimiento. La arquitectura de Zagari se integra al paisaje respetando la identidad natural del entorno.",
     image:
-      "/assets/concept/tierra.png",
+      "/assets/amenities/element-tierra-diosa-de-elementos.webp",
     alt:
       "Diosa de los Elementos representando la tierra en Zagari Resort Club",
     theme: "earth",
@@ -86,7 +86,7 @@ const elements: ElementItem[] = [
     description:
       "Piscinas y espacios de contemplación invitan a renovar el cuerpo, despejar la mente y disfrutar el presente en contacto permanente con la naturaleza.",
     image:
-      "/assets/concept/agua.png",
+      "/assets/amenities/element-agua-lago.webp",
     alt:
       "Piscina y zona social representando el agua en Zagari Resort Club",
     theme: "water",
