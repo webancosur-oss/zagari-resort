@@ -12,14 +12,10 @@
   --zagari-line: rgba(43, 56, 39, 0.1);
 
   position: relative;
-
   width: 100%;
-
   overflow: hidden;
 
-  padding:
-    clamp(80px, 8vw, 135px)
-    0;
+  padding: clamp(80px, 8vw, 135px) 0;
 
   background:
     radial-gradient(
@@ -32,12 +28,16 @@
   color: var(--zagari-dark);
 }
 
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
 .container {
-  width:
-    min(
-      calc(100% - 64px),
-      1440px
-    );
+  width: min(
+    calc(100% - 64px),
+    1440px
+  );
 
   margin: 0 auto;
 }
@@ -56,24 +56,24 @@
 
   align-items: end;
 
-  gap:
-    clamp(
-      50px,
-      7vw,
-      110px
-    );
+  gap: clamp(
+    50px,
+    7vw,
+    110px
+  );
 
-  margin-bottom:
-    clamp(
-      38px,
-      5vw,
-      64px
-    );
+  margin-bottom: clamp(
+    38px,
+    5vw,
+    64px
+  );
 }
+
 
 .headerTitle {
   max-width: 900px;
 }
+
 
 .eyebrow {
   display: flex;
@@ -89,10 +89,12 @@
   line-height: 1;
 
   letter-spacing: 0.18em;
+
   text-transform: uppercase;
 
   color: var(--zagari-green);
 }
+
 
 .eyebrow::before {
   content: "";
@@ -100,20 +102,21 @@
   width: 33px;
   height: 1px;
 
-  background: var(--zagari-green);
+  background:
+    var(--zagari-green);
 }
+
 
 .header h2 {
   margin: 0;
 
   max-width: 860px;
 
-  font-size:
-    clamp(
-      44px,
-      5.5vw,
-      78px
-    );
+  font-size: clamp(
+    44px,
+    5.5vw,
+    78px
+  );
 
   font-weight: 400;
 
@@ -124,9 +127,12 @@
   color: var(--zagari-dark);
 }
 
+
 .header h2 span {
-  color: var(--zagari-soft);
+  color:
+    var(--zagari-soft);
 }
+
 
 .headerCopy {
   display: flex;
@@ -138,6 +144,7 @@
 
   padding-bottom: 3px;
 }
+
 
 .headerCopy p {
   margin: 0;
@@ -157,41 +164,6 @@
     );
 }
 
-.mapsTextLink {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 10px;
-
-  padding-bottom: 4px;
-
-  border-bottom:
-    1px solid
-    rgba(41, 53, 38, 0.25);
-
-  text-decoration: none;
-
-  font-size: 11px;
-  font-weight: 650;
-
-  color: var(--zagari-dark);
-
-  transition:
-    border-color 180ms ease,
-    color 180ms ease;
-}
-
-.mapsTextLink span {
-  font-size: 15px;
-}
-
-.mapsTextLink:hover {
-  color: var(--zagari-green);
-
-  border-color:
-    var(--zagari-green);
-}
-
 
 /* =========================================================
    MAP SECTION
@@ -199,7 +171,6 @@
 
 .mapSection {
   width: 100%;
-
   overflow: hidden;
 
   border:
@@ -212,13 +183,18 @@
 
   box-shadow:
     0 24px 60px
-      rgba(
-        33,
-        44,
-        30,
-        0.07
-      );
+    rgba(
+      33,
+      44,
+      30,
+      0.07
+    );
 }
+
+
+/* =========================================================
+   MAP FRAME
+========================================================= */
 
 .mapFrame {
   position: relative;
@@ -226,11 +202,9 @@
   width: 100%;
 
   /*
-    La imagen original:
-    1053 x 709.
-    Conservamos su proporción.
-  */
-
+   * Imagen original:
+   * 1053 x 709
+   */
   aspect-ratio: 1053 / 709;
 
   overflow: hidden;
@@ -238,7 +212,11 @@
   background: #193025;
 }
 
+
 .mapImage {
+  width: 100%;
+  height: 100%;
+
   object-fit: cover;
   object-position: center;
 
@@ -257,9 +235,10 @@
     );
 }
 
-.mapSection:hover
-.mapImage {
-  transform: scale(1.008);
+
+.mapSection:hover .mapImage {
+  transform:
+    scale(1.008);
 }
 
 
@@ -284,19 +263,24 @@
     var(--zagari-line);
 }
 
+
 .mapFooter > div {
   display: flex;
+
   align-items: center;
 
   gap: 16px;
 }
 
+
 .mapFooter > div > span {
   font-size: 12px;
   font-weight: 650;
 
-  color: var(--zagari-dark);
+  color:
+    var(--zagari-dark);
 }
+
 
 .mapFooter p {
   position: relative;
@@ -315,6 +299,7 @@
       0.5
     );
 }
+
 
 .mapFooter p::before {
   content: "";
@@ -341,6 +326,7 @@
 
 .mapsButton {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
@@ -371,20 +357,23 @@
     transform 200ms ease;
 }
 
+
 .mapsButton span {
   font-size: 14px;
 }
+
 
 .mapsButton:hover {
   transform:
     translateY(-1px);
 
-  background: #465b40;
+  background:
+    #465b40;
 }
 
 
 /* =========================================================
-   NEARBY
+   NEARBY SECTION
 ========================================================= */
 
 .nearbySection {
@@ -395,6 +384,7 @@
       130px
     );
 }
+
 
 .nearbyHeader {
   display: grid;
@@ -415,9 +405,8 @@
   margin-bottom: 30px;
 }
 
-.nearbyHeader
-> div
-> span {
+
+.nearbyHeader > div > span {
   display: block;
 
   margin-bottom: 9px;
@@ -432,6 +421,7 @@
   color:
     var(--zagari-green);
 }
+
 
 .nearbyHeader h3 {
   margin: 0;
@@ -451,14 +441,18 @@
 
   letter-spacing: -0.043em;
 
-  color: var(--zagari-dark);
+  color:
+    var(--zagari-dark);
 }
+
 
 .nearbyHeader h3 em {
   font-style: normal;
 
-  color: var(--zagari-soft);
+  color:
+    var(--zagari-soft);
 }
+
 
 .nearbyHeader > p {
   margin: 0;
@@ -480,7 +474,7 @@
 
 
 /* =========================================================
-   PLACE GRID
+   PLACES GRID
 ========================================================= */
 
 .placesGrid {
@@ -504,6 +498,7 @@
   min-width: 0;
 }
 
+
 .placeImage {
   position: relative;
 
@@ -520,7 +515,11 @@
   isolation: isolate;
 }
 
+
 .placePhoto {
+  width: 100%;
+  height: 100%;
+
   object-fit: cover;
 
   transition:
@@ -534,10 +533,12 @@
     );
 }
 
-.placeCard:hover
-.placePhoto {
-  transform: scale(1.045);
+
+.placeCard:hover .placePhoto {
+  transform:
+    scale(1.045);
 }
+
 
 .placeShade {
   position: absolute;
@@ -562,6 +563,7 @@
     );
 }
 
+
 .placeContent {
   position: absolute;
 
@@ -575,6 +577,7 @@
     17px
     18px;
 }
+
 
 .placeContent span {
   display: block;
@@ -596,6 +599,7 @@
       0.62
     );
 }
+
 
 .placeContent h4 {
   margin: 0;
@@ -619,6 +623,8 @@
 
 /* =========================================================
    LEAD SECTION
+   Solo estructura exterior.
+   El formulario tiene su propio CSS.
 ========================================================= */
 
 .leadSection {
@@ -659,9 +665,15 @@
   color: #fff;
 }
 
+
+/* =========================================================
+   LEAD INTRO
+========================================================= */
+
 .leadIntro {
   max-width: 430px;
 }
+
 
 .leadIntro > span {
   display: block;
@@ -684,6 +696,7 @@
     );
 }
 
+
 .leadIntro h3 {
   margin:
     0
@@ -704,6 +717,7 @@
   letter-spacing: -0.035em;
 }
 
+
 .leadIntro p {
   margin: 0;
 
@@ -718,271 +732,6 @@
       255,
       0.57
     );
-}
-
-
-/* =========================================================
-   FORM
-========================================================= */
-
-.form {
-  display: grid;
-
-  grid-template-columns:
-    1fr
-    1fr
-    1fr
-    auto;
-
-  align-items: end;
-
-  gap: 10px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-
-  gap: 6px;
-}
-
-.field label {
-  font-size: 9px;
-  font-weight: 600;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.64
-    );
-}
-
-.field label span {
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.35
-    );
-}
-
-.field input {
-  width: 100%;
-
-  min-width: 0;
-  min-height: 47px;
-
-  padding:
-    0
-    14px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.12
-    );
-
-  border-radius: 11px;
-
-  outline: none;
-
-  font: inherit;
-
-  font-size: 11px;
-
-  color: #fff;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.07
-    );
-
-  transition:
-    border-color 180ms ease,
-    background 180ms ease;
-}
-
-.field input::placeholder {
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.32
-    );
-}
-
-.field input:focus {
-  border-color:
-    rgba(
-      213,
-      229,
-      205,
-      0.55
-    );
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-}
-
-
-/* =========================================================
-   SUBMIT
-========================================================= */
-
-.submit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 10px;
-
-  min-height: 47px;
-
-  padding:
-    0
-    18px;
-
-  border: 0;
-
-  border-radius: 11px;
-
-  cursor: pointer;
-
-  white-space: nowrap;
-
-  font-size: 10px;
-  font-weight: 650;
-
-  color:
-    var(--zagari-dark);
-
-  background: #e1eadc;
-
-  transition:
-    transform 180ms ease,
-    background 180ms ease;
-}
-
-.submit span {
-  font-size: 14px;
-}
-
-.submit:hover:not(:disabled) {
-  transform:
-    translateY(-1px);
-
-  background: #fff;
-}
-
-.submit:disabled {
-  cursor: wait;
-
-  opacity: 0.6;
-}
-
-.error {
-  grid-column:
-    1 / -1;
-
-  margin: 2px 0 0;
-
-  font-size: 9px;
-
-  color: #ffc4c4;
-}
-
-
-/* =========================================================
-   SUCCESS
-========================================================= */
-
-.success {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
-
-  min-height: 60px;
-
-  padding:
-    15px
-    18px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-
-  border-radius: 13px;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.06
-    );
-}
-
-.success strong {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.success p {
-  flex: 1;
-
-  margin: 0;
-
-  font-size: 10px;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.55
-    );
-}
-
-.success button {
-  padding:
-    9px
-    12px;
-
-  border:
-    0;
-
-  border-radius: 999px;
-
-  cursor: pointer;
-
-  font-size: 9px;
-
-  color:
-    var(--zagari-dark);
-
-  background: #e1eadc;
 }
 
 
@@ -1011,11 +760,7 @@
    1025px - 1280px
 ========================================================= */
 
-@media (
-  min-width: 1025px
-) and (
-  max-width: 1280px
-) {
+@media (min-width: 1025px) and (max-width: 1280px) {
   .container {
     width:
       min(
@@ -1039,23 +784,6 @@
   .leadSection {
     gap: 40px;
   }
-
-  .form {
-    grid-template-columns:
-      repeat(
-        3,
-        minmax(0, 1fr)
-      );
-  }
-
-  .submit {
-    grid-column:
-      1 / -1;
-
-    width: max-content;
-
-    min-width: 210px;
-  }
 }
 
 
@@ -1064,11 +792,7 @@
    769px - 1024px
 ========================================================= */
 
-@media (
-  min-width: 769px
-) and (
-  max-width: 1024px
-) {
+@media (min-width: 769px) and (max-width: 1024px) {
   .section {
     padding:
       82px
@@ -1151,18 +875,6 @@
   .leadIntro {
     max-width: 550px;
   }
-
-  .form {
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0, 1fr)
-      );
-  }
-
-  .submit {
-    min-height: 47px;
-  }
 }
 
 
@@ -1171,11 +883,7 @@
    601px - 768px
 ========================================================= */
 
-@media (
-  min-width: 601px
-) and (
-  max-width: 768px
-) {
+@media (min-width: 601px) and (max-width: 768px) {
   .section {
     padding:
       72px
@@ -1184,9 +892,7 @@
 
   .container {
     width:
-      calc(
-        100% - 36px
-      );
+      calc(100% - 36px);
   }
 
   .header {
@@ -1255,18 +961,6 @@
 
     border-radius: 20px;
   }
-
-  .form {
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(0, 1fr)
-      );
-  }
-
-  .submit {
-    min-height: 47px;
-  }
 }
 
 
@@ -1287,7 +981,9 @@
   }
 
 
-  /* HEADER */
+  /* -------------------------------------------------------
+     HEADER
+  ------------------------------------------------------- */
 
   .header {
     display: block;
@@ -1336,12 +1032,10 @@
     line-height: 1.65;
   }
 
-  .mapsTextLink {
-    font-size: 10px;
-  }
 
-
-  /* MAP */
+  /* -------------------------------------------------------
+     MAP
+  ------------------------------------------------------- */
 
   .mapSection {
     border-left: 0;
@@ -1360,25 +1054,22 @@
   }
 
   .mapFrame {
-    /*
-      Se muestra TODO el mapa.
-      No hacemos 800px de ancho
-      ni scroll lateral.
-    */
-
     width: 100%;
 
+    /*
+     * Se muestra el mapa completo.
+     */
     aspect-ratio:
       1053 / 709;
   }
 
   .mapImage {
     object-fit: cover;
+
     object-position: center;
   }
 
-  .mapSection:hover
-  .mapImage {
+  .mapSection:hover .mapImage {
     transform: none;
   }
 
@@ -1423,7 +1114,9 @@
   }
 
 
-  /* NEARBY */
+  /* -------------------------------------------------------
+     NEARBY
+  ------------------------------------------------------- */
 
   .nearbySection {
     margin-top: 66px;
@@ -1439,9 +1132,7 @@
     margin-bottom: 21px;
   }
 
-  .nearbyHeader
-  > div
-  > span {
+  .nearbyHeader > div > span {
     font-size: 8px;
   }
 
@@ -1469,7 +1160,9 @@
   }
 
 
-  /* CARDS PEQUEÑAS */
+  /* -------------------------------------------------------
+     PLACE CARDS
+  ------------------------------------------------------- */
 
   .placesGrid {
     grid-template-columns:
@@ -1511,7 +1204,12 @@
   }
 
 
-  /* LEAD */
+  /* -------------------------------------------------------
+     LEAD
+     
+     El formulario interno se controla
+     desde LeadForm.module.css.
+  ------------------------------------------------------- */
 
   .leadSection {
     display: block;
@@ -1540,40 +1238,6 @@
 
   .leadIntro p {
     font-size: 10px;
-  }
-
-  .form {
-    grid-template-columns: 1fr;
-
-    gap: 10px;
-
-    margin-top: 26px;
-  }
-
-  .field input {
-    min-height: 48px;
-
-    font-size: 11px;
-  }
-
-  .submit {
-    width: 100%;
-
-    min-height: 49px;
-
-    margin-top: 2px;
-  }
-
-  .success {
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    margin-top: 25px;
-  }
-
-  .success button {
-    width: 100%;
   }
 }
 
@@ -1638,17 +1302,15 @@
 
 
 /* =========================================================
-   TOUCH
+   TOUCH DEVICES
 ========================================================= */
 
 @media (hover: none) {
-  .placeCard:hover
-  .placePhoto {
+  .placeCard:hover .placePhoto {
     transform: none;
   }
 
-  .mapsButton:hover,
-  .submit:hover:not(:disabled) {
+  .mapsButton:hover {
     transform: none;
   }
 }
@@ -1658,11 +1320,7 @@
    ACCESSIBILITY
 ========================================================= */
 
-.mapsTextLink:focus-visible,
-.mapsButton:focus-visible,
-.field input:focus-visible,
-.submit:focus-visible,
-.success button:focus-visible {
+.mapsButton:focus-visible {
   outline:
     2px solid
     #8da085;
@@ -1675,16 +1333,10 @@
    REDUCED MOTION
 ========================================================= */
 
-@media (
-  prefers-reduced-motion:
-  reduce
-) {
+@media (prefers-reduced-motion: reduce) {
   .mapImage,
   .placePhoto,
-  .mapsButton,
-  .mapsTextLink,
-  .submit,
-  .field input {
+  .mapsButton {
     transition: none;
   }
 }

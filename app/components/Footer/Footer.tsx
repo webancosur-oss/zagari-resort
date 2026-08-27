@@ -440,7 +440,7 @@ export default function Footer() {
             <div
               className={styles.legal}
             >
-              <Link href="/politica-de-privacidad">
+              <Link href="/politicas/politica-de-privacidad">
                 Política de privacidad
               </Link>
 

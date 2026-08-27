@@ -1,7 +1,3 @@
-/* =========================================================
-   BASE
-========================================================= */
-
 .section {
   --ink: #183428;
   --line: rgba(32, 64, 44, 0.12);
@@ -251,102 +247,6 @@
   border-radius: 50%;
   background: rgba(61, 101, 73, 0.08);
   color: #496a53;
-}
-
-.formSection {
-  margin-top: 36px;
-  padding-top: 27px;
-  border-top: 1px solid var(--line);
-}
-
-.formHeading > span {
-  color: #294c38;
-  font-size: 11.5px;
-}
-
-.formHeading p {
-  max-width: 390px;
-  margin: 5px 0 0;
-  color: #7c8981;
-  font-size: 10px;
-}
-
-.form {
-  margin-top: 19px;
-  display: grid;
-  gap: 17px;
-}
-
-.formRow {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.field {
-  display: grid;
-  gap: 4px;
-}
-
-.field > span {
-  color: #607267;
-  font-size: 9px;
-}
-
-.field input {
-  width: 100%;
-  min-width: 0;
-  min-height: 38px;
-  padding: 0 0 7px;
-  border: 0;
-  border-bottom: 1px solid #cad6cd;
-  border-radius: 0;
-  outline: none;
-  background: transparent;
-  color: #263e31;
-  font: inherit;
-  font-size: 11.5px;
-}
-
-.field input:focus {
-  border-bottom-color: #3d7650;
-}
-
-.formFooter {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 13px;
-}
-
-.submitButton {
-  min-height: 42px;
-  padding: 0 17px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  border: 1px solid #38664a;
-  border-radius: 999px;
-  background: transparent;
-  color: #315e42;
-  cursor: pointer;
-  font: inherit;
-  font-size: 9.5px;
-}
-
-.formFooter small {
-  max-width: 180px;
-  color: #929b95;
-  font-size: 8px;
-}
-
-.success {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #3d8154;
-  font-size: 9px;
 }
 
 /* =========================================================
@@ -950,18 +850,6 @@
     width: 100%;
   }
 
-  .formRow {
-    grid-template-columns: 1fr;
-  }
-
-  .formFooter {
-    display: grid;
-  }
-
-  .submitButton {
-    width: 100%;
-  }
-
   /* MOBILE MAP = bottom sheet */
   .overlay {
     padding: 0;
@@ -1143,240 +1031,10 @@
   }
 }
 /* =========================================================
-   RESPONSIVE FINAL — DESKTOP / TABLET / MOBILE
+   CONTENT
 ========================================================= */
 
 .content { min-width: 0; }
-
-/* Formulario */
-.formSection {
-  position: relative;
-  width: 100%;
-  margin-top: 34px;
-  padding: 28px;
-  overflow: hidden;
-  border: 1px solid rgba(35, 69, 49, 0.10);
-  border-radius: 24px;
-  background: linear-gradient(145deg, #fbf8ef 0%, #f8f5ec 58%, #f1f7ed 100%);
-  box-shadow: 0 18px 48px rgba(31, 62, 43, 0.06);
-}
-
-.formSection::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 26px;
-  right: 26px;
-  height: 2px;
-  background: linear-gradient(90deg, #d71b73 0 25%, #f1d221 25% 50%, #20a75d 50% 75%, #25a8d8 75% 100%);
-}
-
-.formHeading {
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(35, 69, 49, 0.11);
-}
-
-.formHeading > span {
-  display: block;
-  margin-bottom: 7px;
-  color: #17643e;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.formHeading p {
-  max-width: 420px;
-  margin: 0;
-  color: #738178;
-  font-size: 10px;
-  line-height: 1.6;
-}
-
-.form {
-  width: 100%;
-  margin-top: 20px;
-  display: grid;
-  gap: 16px;
-}
-
-.formRow {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.field {
-  min-width: 0;
-  display: grid;
-  gap: 7px;
-}
-
-.field > span {
-  color: #52685a;
-  font-size: 8px;
-  font-weight: 650;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-.field input {
-  width: 100%;
-  min-width: 0;
-  height: 50px;
-  min-height: 50px;
-  padding: 0 15px;
-  border: 1px solid rgba(35, 69, 49, 0.13);
-  border-radius: 13px;
-  outline: none;
-  background: rgba(255,255,255,.92);
-  color: #263f32;
-  font: inherit;
-  font-size: 11px;
-  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
-}
-
-.field input::placeholder { color: rgba(48,72,57,.34); }
-.field input:focus {
-  border-color: rgba(26,157,80,.50);
-  background: #fff;
-  box-shadow: 0 0 0 4px rgba(26,157,80,.065);
-}
-
-.formFooter {
-  width: 100%;
-  display: grid;
-  gap: 9px;
-}
-
-.submitButton {
-  width: 100%;
-  min-height: 52px;
-  padding: 0 18px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  border: 0;
-  border-radius: 13px;
-  background: linear-gradient(90deg, #21bc66 0%, #12a653 100%);
-  color: #fff;
-  box-shadow: 0 13px 28px rgba(18,156,78,.16);
-  cursor: pointer;
-  font: inherit;
-  font-size: 9px;
-  font-weight: 750;
-  text-transform: uppercase;
-}
-
-.formFooter small {
-  max-width: none;
-  color: rgba(57,78,64,.45);
-  font-size: 7.5px;
-  line-height: 1.45;
-  text-align: center;
-}
-
-.success {
-  min-height: 38px;
-  padding: 9px 11px;
-  border: 1px solid rgba(32,158,81,.14);
-  border-radius: 10px;
-  background: rgba(32,158,81,.06);
-}
-
-/* =========================================================
-   CONSENTIMIENTO DE DATOS
-========================================================= */
-
-.privacyConsent {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  cursor: pointer;
-  user-select: none;
-}
-
-.privacyConsent input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.privacyCheckbox {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
-  margin-top: 1px;
-  display: grid;
-  place-items: center;
-  border: 1px solid #159d52;
-  border-radius: 5px;
-  background: #159d52;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
-  transition:
-    background 160ms ease,
-    border-color 160ms ease,
-    color 160ms ease,
-    box-shadow 160ms ease;
-}
-
-.privacyConsent input:not(:checked) + .privacyCheckbox {
-  border-color: rgba(35, 69, 49, 0.24);
-  background: #fff;
-  color: transparent;
-}
-
-.privacyConsent input:focus-visible + .privacyCheckbox {
-  box-shadow: 0 0 0 4px rgba(21, 157, 82, 0.12);
-}
-
-.privacyText {
-  max-width: 100%;
-  color: rgba(45, 67, 53, 0.58);
-  font-size: 8px;
-  line-height: 1.55;
-}
-
-.privacyText a {
-  color: #17643e;
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-}
-
-@media (max-width: 1080px) {
-  .privacyText {
-    font-size: 8.5px;
-  }
-}
-
-@media (max-width: 700px) {
-  .privacyConsent {
-    gap: 9px;
-  }
-
-  .privacyCheckbox {
-    width: 19px;
-    height: 19px;
-    flex-basis: 19px;
-  }
-
-  .privacyText {
-    font-size: 9px;
-    line-height: 1.5;
-  }
-}
 
 /* Desktop grande */
 @media (min-width: 1281px) {
@@ -1398,7 +1056,6 @@
     gap: 42px;
   }
   .visual { min-height: 650px; }
-  .formSection { padding: 24px; }
 }
 
 /* Tablet */
@@ -1420,8 +1077,6 @@
   .content { width: min(760px,100%); margin-inline: auto; }
   .content h3, .description { max-width: 600px; }
   .availabilityButton { width: min(100%,430px); }
-  .formSection { padding: 30px; }
-  .field input { height: 52px; }
 }
 
 /* Mobile */
@@ -1453,20 +1108,6 @@
   .content h3 { max-width: 360px; font-size: clamp(25px,7.4vw,31px); }
   .description { font-size: 11.5px; }
   .availabilityButton { width: 100%; min-height: 62px; }
-  .formSection {
-    margin-top: 29px;
-    padding: 25px 15px 16px;
-    border-radius: 20px;
-  }
-  .formSection::before { left: 15px; right: 15px; }
-  .formRow { grid-template-columns: 1fr; gap: 15px; }
-  .field input {
-    height: 51px;
-    min-height: 51px;
-    padding-inline: 14px;
-    font-size: 11px;
-  }
-  .submitButton { min-height: 54px; }
 }
 
 @media (max-width: 430px) {
@@ -1474,8 +1115,6 @@
   .section { padding: 50px 0; }
   .visual { aspect-ratio: .82; border-radius: 4px 4px 36px 4px; }
   .photoCaption p { max-width: 220px; font-size: 11px; }
-  .formSection { padding-inline: 12px; }
-  .field input { padding-inline: 12px; }
   .availabilityButton {
     grid-template-columns: 40px minmax(0,1fr) 34px;
     gap: 9px;

@@ -651,7 +651,7 @@ export default function Navbar() {
                   }
                 >
                   <span>
-                    Solicitar información
+                    Agendar visita
                   </span>
 
                   <span

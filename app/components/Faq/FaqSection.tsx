@@ -157,8 +157,7 @@ export default function FaqSection() {
               }
             >
               <span>
-                ¿Prefieres
-                conversar?
+                ¿Prefieres conversar?
               </span>
 
               <div

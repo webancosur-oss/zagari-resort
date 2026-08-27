@@ -35,6 +35,7 @@
     );
 }
 
+
 /* ==========================================================
    BACKGROUND
 ========================================================== */
@@ -120,6 +121,7 @@
   pointer-events: none;
 }
 
+
 /* ==========================================================
    CONTACT SECTION
 ========================================================== */
@@ -164,6 +166,7 @@
   align-items: center;
 }
 
+
 /* ==========================================================
    LEFT CONTENT
 ========================================================== */
@@ -171,6 +174,7 @@
 .content {
   max-width: 650px;
 }
+
 
 /* ==========================================================
    EYEBROW
@@ -235,6 +239,7 @@
     );
 }
 
+
 /* ==========================================================
    TITLE
 ========================================================== */
@@ -278,6 +283,7 @@
   font-weight: 500;
 }
 
+
 /* ==========================================================
    DESCRIPTION
 ========================================================== */
@@ -315,6 +321,7 @@
   line-height: 1.75;
 }
 
+
 /* ==========================================================
    QUICK ACTIONS
 ========================================================== */
@@ -338,10 +345,6 @@
 
   gap: 10px;
 }
-
-/* ==========================================================
-   PRIMARY ACTION
-========================================================== */
 
 .primaryAction {
   min-height: 48px;
@@ -439,6 +442,7 @@
     translateX(2px);
 }
 
+
 /* ==========================================================
    SECONDARY ACTION
 ========================================================== */
@@ -513,6 +517,7 @@
       0.08
     );
 }
+
 
 /* ==========================================================
    INFO GRID
@@ -656,6 +661,7 @@
   font-size: 0.66rem;
 }
 
+
 /* ==========================================================
    EXPERIENCE
 ========================================================== */
@@ -721,752 +727,6 @@
   line-height: 1.5;
 }
 
-/* ==========================================================
-   FORM CARD
-========================================================== */
-
-.formWrapper {
-  position: relative;
-
-  padding:
-    clamp(
-      30px,
-      3vw,
-      46px
-    );
-
-  overflow: hidden;
-
-  border-radius: 30px;
-
-  color:
-    var(--ink);
-
-  background:
-    var(--paper);
-
-  box-shadow:
-    0
-    35px
-    100px
-    rgba(
-      0,
-      0,
-      0,
-      0.28
-    );
-}
-
-/* Zagari accent */
-
-.formWrapper::before {
-  content: "";
-
-  position: absolute;
-
-  left: 35px;
-  right: 35px;
-  top: 0;
-
-  height: 2px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--zagari-pink),
-      var(--zagari-orange),
-      var(--zagari-yellow),
-      var(--zagari-green),
-      var(--zagari-cyan),
-      var(--zagari-blue)
-    );
-}
-
-.formWrapper::after {
-  content: "";
-
-  position: absolute;
-
-  top: -160px;
-  right: -160px;
-
-  width: 340px;
-  height: 340px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(
-        31,
-        174,
-        91,
-        0.08
-      ),
-      transparent 68%
-    );
-
-  pointer-events: none;
-}
-
-/* ==========================================================
-   FORM HEADER
-========================================================== */
-
-.formHeader {
-  position: relative;
-
-  z-index: 2;
-
-  padding-bottom: 27px;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content:
-    space-between;
-
-  gap: 30px;
-
-  border-bottom:
-    1px solid
-    rgba(
-      13,
-      53,
-      31,
-      0.1
-    );
-}
-
-.formEyebrow {
-  display: block;
-
-  margin-bottom: 10px;
-
-  color:
-    var(--zagari-green-dark);
-
-  font-size: 0.55rem;
-
-  font-weight: 750;
-
-  letter-spacing: 0.16em;
-
-  text-transform: uppercase;
-}
-
-.formHeader h2 {
-  max-width: 360px;
-
-  margin: 0;
-
-  font-size:
-    clamp(
-      1.9rem,
-      3vw,
-      2.6rem
-    );
-
-  font-weight: 400;
-
-  line-height: 1.06;
-
-  letter-spacing: -0.045em;
-}
-
-.formNumber {
-  color:
-    rgba(
-      12,
-      67,
-      38,
-      0.11
-    );
-
-  font-size: 4rem;
-
-  font-weight: 500;
-
-  line-height: 0.8;
-
-  letter-spacing: -0.07em;
-}
-
-/* ==========================================================
-   FORM
-========================================================== */
-
-.form {
-  position: relative;
-
-  z-index: 2;
-
-  margin-top: 28px;
-
-  display: grid;
-
-  gap: 22px;
-}
-
-.field {
-  display: grid;
-
-  gap: 8px;
-}
-
-.fieldRow {
-  display: grid;
-
-  grid-template-columns:
-    repeat(
-      2,
-      minmax(0, 1fr)
-    );
-
-  gap: 12px;
-}
-
-.field label,
-.interestField legend {
-  color:
-    rgba(
-      14,
-      42,
-      25,
-      0.58
-    );
-
-  font-size: 0.55rem;
-
-  font-weight: 700;
-
-  letter-spacing: 0.075em;
-
-  text-transform: uppercase;
-}
-
-/* ==========================================================
-   INPUT
-========================================================== */
-
-.field input,
-.field textarea {
-  width: 100%;
-
-  border:
-    1px solid
-    rgba(
-      16,
-      58,
-      34,
-      0.11
-    );
-
-  border-radius: 13px;
-
-  outline: none;
-
-  color:
-    var(--ink);
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.7
-    );
-
-
-  font-size: 0.84rem;
-
-  transition:
-    border-color 250ms ease,
-    box-shadow 250ms ease,
-    background 250ms ease;
-}
-
-.field input {
-  min-height: 51px;
-
-  padding-inline: 15px;
-}
-
-.field textarea {
-  min-height: 112px;
-
-  padding: 15px;
-
-  resize: vertical;
-}
-
-.field input::placeholder,
-.field textarea::placeholder {
-  color:
-    rgba(
-      16,
-      41,
-      25,
-      0.3
-    );
-}
-
-.field input:focus,
-.field textarea:focus {
-  border-color:
-    rgba(
-      24,
-      169,
-      89,
-      0.55
-    );
-
-  background: #ffffff;
-
-  box-shadow:
-    0
-    0
-    0
-    4px
-    rgba(
-      24,
-      169,
-      89,
-      0.07
-    );
-}
-
-/* ==========================================================
-   INPUT WITH ICON
-========================================================== */
-
-.inputWithIcon {
-  position: relative;
-
-  display: flex;
-
-  align-items: center;
-}
-
-.inputWithIcon svg {
-  position: absolute;
-
-  z-index: 2;
-
-  left: 15px;
-
-  color:
-    rgba(
-      16,
-      65,
-      36,
-      0.42
-    );
-
-  pointer-events: none;
-}
-
-.inputWithIcon input {
-  padding-left: 43px;
-}
-
-/* ==========================================================
-   INTEREST
-========================================================== */
-
-.interestField {
-  min-width: 0;
-
-  margin: 0;
-
-  padding: 0;
-
-  border: 0;
-}
-
-.interestField legend {
-  margin-bottom: 11px;
-}
-
-.interests {
-  display: flex;
-
-  flex-wrap: wrap;
-
-  gap: 7px;
-}
-
-.interestButton {
-  min-height: 37px;
-
-  padding-inline: 13px;
-
-  display: inline-flex;
-
-  align-items: center;
-
-  gap: 6px;
-
-  border:
-    1px solid
-    rgba(
-      14,
-      56,
-      32,
-      0.11
-    );
-
-  border-radius: 999px;
-
-  color:
-    rgba(
-      13,
-      42,
-      24,
-      0.54
-    );
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.5
-    );
-
-
-  font-size: 0.57rem;
-
-  font-weight: 650;
-
-  cursor: pointer;
-
-  transition:
-    border-color 250ms ease,
-    color 250ms ease,
-    background 250ms ease,
-    transform 250ms ease;
-}
-
-.interestButton:hover {
-  transform:
-    translateY(-1px);
-
-  border-color:
-    rgba(
-      24,
-      169,
-      89,
-      0.3
-    );
-
-  color:
-    var(--zagari-green-dark);
-}
-
-.interestButtonActive {
-  border-color:
-    rgba(
-      24,
-      169,
-      89,
-      0.22
-    );
-
-  color:
-    #ffffff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #35c46e,
-      #169e4f
-    );
-}
-
-/* ==========================================================
-   PRIVACY
-========================================================== */
-
-.privacy {
-  position: relative;
-
-  display: grid;
-
-  grid-template-columns:
-    19px
-    minmax(0, 1fr);
-
-  align-items: flex-start;
-
-  gap: 10px;
-
-  color:
-    rgba(
-      13,
-      42,
-      24,
-      0.48
-    );
-
-  font-size: 0.64rem;
-
-  line-height: 1.45;
-
-  cursor: pointer;
-}
-
-.privacy input {
-  position: absolute;
-
-  opacity: 0;
-
-  pointer-events: none;
-}
-
-.customCheckbox {
-  width: 18px;
-  height: 18px;
-
-  display: grid;
-
-  place-items: center;
-
-  border:
-    1px solid
-    rgba(
-      13,
-      60,
-      33,
-      0.18
-    );
-
-  border-radius: 5px;
-
-  color: transparent;
-
-  background: #ffffff;
-
-  transition:
-    background 250ms ease,
-    border-color 250ms ease,
-    color 250ms ease;
-}
-
-.privacy input:checked
-+ .customCheckbox {
-  color: #ffffff;
-
-  border-color:
-    var(--zagari-green);
-
-  background:
-    var(--zagari-green);
-}
-
-.privacy a {
-  color:
-    var(--zagari-green-dark);
-
-  font-weight: 650;
-}
-
-/* ==========================================================
-   SUBMIT
-========================================================== */
-
-.submitButton {
-  width: 100%;
-
-  min-height: 58px;
-
-  padding:
-    6px
-    7px
-    6px
-    20px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content:
-    space-between;
-
-  border: 0;
-
-  border-radius: 14px;
-
-  color: #ffffff;
-
-  background:
-    linear-gradient(
-      135deg,
-      #31c469,
-      #13954a
-    );
-
-
-  cursor: pointer;
-
-  box-shadow:
-    0
-    12px
-    30px
-    rgba(
-      18,
-      143,
-      67,
-      0.22
-    );
-
-  transition:
-    transform 300ms ease,
-    box-shadow 300ms ease,
-    opacity 300ms ease;
-}
-
-.submitButton > span:first-child {
-  font-size: 0.62rem;
-
-  font-weight: 750;
-
-  letter-spacing: 0.065em;
-
-  text-transform: uppercase;
-}
-
-.submitIcon {
-  width: 43px;
-  height: 43px;
-
-  display: grid;
-
-  place-items: center;
-
-  border-radius: 11px;
-
-  color:
-    var(--zagari-green-dark);
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.94
-    );
-
-  transition:
-    transform 300ms ease;
-}
-
-.submitButton:hover:not(:disabled) {
-  transform:
-    translateY(-2px);
-
-  box-shadow:
-    0
-    15px
-    36px
-    rgba(
-      18,
-      143,
-      67,
-      0.29
-    );
-}
-
-.submitButton:hover:not(:disabled)
-.submitIcon {
-  transform:
-    translateX(3px);
-}
-
-.submitButton:disabled {
-  opacity: 0.65;
-
-  cursor: wait;
-}
-
-/* ==========================================================
-   SUCCESS
-========================================================== */
-
-.success {
-  padding: 13px;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 11px;
-
-  border:
-    1px solid
-    rgba(
-      27,
-      157,
-      75,
-      0.15
-    );
-
-  border-radius: 12px;
-
-  background:
-    rgba(
-      30,
-      168,
-      81,
-      0.07
-    );
-}
-
-.successIcon {
-  width: 27px;
-  height: 27px;
-
-  display: grid;
-
-  place-items: center;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-
-  color: #ffffff;
-
-  background:
-    var(--zagari-green);
-}
-
-.success strong {
-  color:
-    var(--zagari-green-dark);
-
-  font-size: 0.72rem;
-}
-
-.success p {
-  margin:
-    4px
-    0
-    0;
-
-  color:
-    rgba(
-      16,
-      46,
-      28,
-      0.5
-    );
-
-  font-size: 0.63rem;
-
-  line-height: 1.45;
-}
 
 /* ==========================================================
    VISIT SECTION
@@ -1712,6 +972,7 @@
   font-size: 0.56rem;
 }
 
+
 /* ==========================================================
    LAPTOP
 ========================================================== */
@@ -1757,6 +1018,7 @@
       35px;
   }
 }
+
 
 /* ==========================================================
    TABLET
@@ -1835,6 +1097,7 @@
       1fr;
   }
 }
+
 
 /* ==========================================================
    MOBILE
@@ -1922,80 +1185,6 @@
     margin-top: 15px;
   }
 
-  /* =========================
-     FORM
-  ========================== */
-
-  .formWrapper {
-    padding:
-      27px
-      17px
-      19px;
-
-    border-radius: 22px;
-  }
-
-  .formWrapper::before {
-    left: 20px;
-    right: 20px;
-  }
-
-  .formHeader {
-    padding-bottom: 21px;
-  }
-
-  .formHeader h2 {
-    font-size: 1.9rem;
-  }
-
-  .formNumber {
-    font-size: 3rem;
-  }
-
-  .form {
-    margin-top: 22px;
-
-    gap: 18px;
-  }
-
-  .fieldRow {
-    grid-template-columns:
-      1fr;
-
-    gap: 18px;
-  }
-
-  .field input {
-    min-height: 50px;
-  }
-
-  .interests {
-    gap: 6px;
-  }
-
-  .interestButton {
-    min-height: 35px;
-
-    padding-inline: 11px;
-
-    font-size: 0.53rem;
-  }
-
-  .submitButton {
-    min-height: 55px;
-
-    border-radius: 13px;
-  }
-
-  .submitIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* =========================
-     VISIT
-  ========================== */
-
   .visitSection {
     padding:
       0
@@ -2028,6 +1217,7 @@
   }
 }
 
+
 /* ==========================================================
    SMALL MOBILE
 ========================================================== */
@@ -2043,26 +1233,11 @@
     font-size: 14vw;
   }
 
-  .formWrapper {
-    padding-inline: 14px;
-  }
-
-  .formHeader h2 {
-    font-size: 1.7rem;
-  }
-
-  .formNumber {
-    display: none;
-  }
-
-  .privacy {
-    font-size: 0.59rem;
-  }
-
   .visitSection {
     padding-inline: 12px;
   }
 }
+
 
 /* ==========================================================
    REDUCED MOTION
@@ -2075,9 +1250,6 @@
   .primaryAction,
   .primaryActionIcon,
   .secondaryAction,
-  .interestButton,
-  .submitButton,
-  .submitIcon,
   .visitButton {
     transition: none;
   }

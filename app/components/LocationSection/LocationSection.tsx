@@ -1,12 +1,15 @@
 "use client";
 
 import Image from "next/image";
+
 import {
-  FormEvent,
-  useState,
-} from "react";
+  MapPin,
+} from "@phosphor-icons/react";
 
 import styles from "./LocationSection.module.css";
+import LeadForm from "./components/LeadFormLocation";
+
+
 
 /* =========================================================
    TIPOS
@@ -19,11 +22,6 @@ type NearbyPlace = {
   image: string;
 };
 
-type LeadForm = {
-  nombre: string;
-  telefono: string;
-  email: string;
-};
 
 /* =========================================================
    CONFIGURACIÓN
@@ -32,214 +30,106 @@ type LeadForm = {
 const GOOGLE_MAPS_URL =
   "https://maps.app.goo.gl/p8EkgxDp4M3pmgkv5";
 
+
+/* =========================================================
+   LUGARES CERCANOS
+========================================================= */
+
 const nearbyPlaces: NearbyPlace[] = [
   {
     id: "plaza-san-ramon",
-    name: "Plaza San Ramón",
-    label: "Referencia cercana",
+
+    name:
+      "Plaza San Ramón",
+
+    label:
+      "Referencia cercana",
+
     image:
       "/assets/location/attractions/plaza-san-ramon.jpg",
   },
+
   {
     id: "ingreso-chincana",
-    name: "Ingreso a Chincana",
-    label: "Ingreso a Chincana",
+
+    name:
+      "Ingreso a Chincana",
+
+    label:
+      "Ingreso a Chincana",
+
     image:
       "/assets/location/attractions/ingreso-chincana.png",
   },
+
   {
     id: "mirador-mishasho",
-    name: "Mirador El Mishasho",
-    label: "Naturaleza",
+
+    name:
+      "Mirador El Mishasho",
+
+    label:
+      "Naturaleza",
+
     image:
       "/assets/location/attractions/mirador-mishasho.jpg",
   },
+
   {
     id: "fundo-selenita",
-    name: "Fundo Selenita",
-    label: "Referencia cercana",
+
+    name:
+      "Fundo Selenita",
+
+    label:
+      "Referencia cercana",
+
     image:
       "/assets/location/attractions/fundo-selenita.jpg",
   },
+
   {
     id: "iglesia",
-    name: "Iglesia Chincana",
-    label: "Referencia local",
+
+    name:
+      "Iglesia Chincana",
+
+    label:
+      "Referencia local",
+
     image:
       "/assets/location/attractions/iglesia-chincana.jpg",
   },
-
 ];
+
 
 /* =========================================================
    COMPONENTE
 ========================================================= */
 
 export default function LocationSection() {
-  const [formData, setFormData] =
-    useState<LeadForm>({
-      nombre: "",
-      telefono: "",
-      email: "",
-    });
-
-  const [isSending, setIsSending] =
-    useState(false);
-
-  const [sent, setSent] =
-    useState(false);
-
-  const [error, setError] =
-    useState("");
-
-  /* =======================================================
-     INPUT
-  ======================================================= */
-
-  const updateField = (
-    field: keyof LeadForm,
-    value: string,
-  ) => {
-    setFormData((current) => ({
-      ...current,
-      [field]: value,
-    }));
-
-    if (error) {
-      setError("");
-    }
-  };
-
-  /* =======================================================
-     SUBMIT
-  ======================================================= */
-
-  const handleSubmit = async (
-    event: FormEvent<HTMLFormElement>,
-  ) => {
-    event.preventDefault();
-
-    if (isSending) return;
-
-    const nombre =
-      formData.nombre.trim();
-
-    const telefono =
-      formData.telefono.replace(
-        /\D/g,
-        "",
-      );
-
-    const email =
-      formData.email
-        .trim()
-        .toLowerCase();
-
-    if (!nombre) {
-      setError(
-        "Ingresa tu nombre.",
-      );
-      return;
-    }
-
-    if (telefono.length < 9) {
-      setError(
-        "Ingresa un número válido.",
-      );
-      return;
-    }
-
-    if (
-      email &&
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-        email,
-      )
-    ) {
-      setError(
-        "Ingresa un correo válido.",
-      );
-      return;
-    }
-
-    try {
-      setIsSending(true);
-      setError("");
-
-      const response =
-        await fetch(
-          "/api/leads",
-          {
-            method: "POST",
-
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-
-            body: JSON.stringify({
-              nombre,
-              telefono,
-              email,
-              dni: "",
-
-              campaña:
-                "Zagari Resort Club",
-
-              anuncio:
-                "Sección ubicación Zagari",
-
-              comentario:
-                "Cliente interesado en conocer Zagari Resort Club.",
-
-              msj_client:
-                JSON.stringify({
-                  interes:
-                    "Zagari Resort Club",
-
-                  origen:
-                    "Sección ubicación",
-
-                  ruta:
-                    window.location
-                      .pathname,
-                }),
-            }),
-          },
-        );
-
-      if (!response.ok) {
-        throw new Error();
-      }
-
-      setSent(true);
-
-      setFormData({
-        nombre: "",
-        telefono: "",
-        email: "",
-      });
-    } catch {
-      setError(
-        "No pudimos enviar tus datos. Inténtalo nuevamente.",
-      );
-    } finally {
-      setIsSending(false);
-    }
-  };
-
   return (
     <section
-      className={styles.section}
+      className={
+        styles.section
+      }
       id="ubicacion"
       aria-labelledby="location-title"
     >
-      <div className={styles.container}>
+      <div
+        className={
+          styles.container
+        }
+      >
+
         {/* =================================================
             HEADER
-        ================================================== */}
+        ================================================= */}
 
         <header
-          className={styles.header}
+          className={
+            styles.header
+          }
         >
           <div
             className={
@@ -254,7 +144,9 @@ export default function LocationSection() {
               Ubicación
             </span>
 
-            <h2 id="location-title">
+            <h2
+              id="location-title"
+            >
               Tu escape comienza
               <span>
                 {" "}
@@ -279,9 +171,10 @@ export default function LocationSection() {
           </div>
         </header>
 
+
         {/* =================================================
             MAPA
-        ================================================== */}
+        ================================================= */}
 
         <div
           className={
@@ -350,9 +243,10 @@ export default function LocationSection() {
           </div>
         </div>
 
+
         {/* =================================================
             LUGARES CERCANOS
-        ================================================== */}
+        ================================================= */}
 
         <section
           className={
@@ -370,7 +264,9 @@ export default function LocationSection() {
                 El entorno
               </span>
 
-              <h3 id="nearby-title">
+              <h3
+                id="nearby-title"
+              >
                 Descubre lo que
                 tienes
                 <em>
@@ -399,7 +295,9 @@ export default function LocationSection() {
             {nearbyPlaces.map(
               (place) => (
                 <article
-                  key={place.id}
+                  key={
+                    place.id
+                  }
                   className={
                     styles.placeCard
                   }
@@ -458,14 +356,16 @@ export default function LocationSection() {
           </div>
         </section>
 
+
         {/* =================================================
             LEAD
-        ================================================== */}
+        ================================================= */}
 
         <section
           className={
             styles.leadSection
           }
+          aria-labelledby="location-lead-title"
         >
           <div
             className={
@@ -476,7 +376,9 @@ export default function LocationSection() {
               Vive Zagari
             </span>
 
-            <h3>
+            <h3
+              id="location-lead-title"
+            >
               ¿Quieres conocerlo
               en persona?
             </h3>
@@ -488,174 +390,16 @@ export default function LocationSection() {
             </p>
           </div>
 
-          {sent ? (
-            <div
-              className={
-                styles.success
-              }
-            >
-              <strong>
-                Datos enviados
-              </strong>
+          {/* =================================================
+              FORMULARIO SEPARADO
+          ================================================= */}
 
-              <p>
-                Nos pondremos en
-                contacto contigo
-                pronto.
-              </p>
-
-              <button
-                type="button"
-                onClick={() =>
-                  setSent(false)
-                }
-              >
-                Nueva consulta
-              </button>
-            </div>
-          ) : (
-            <form
-              className={
-                styles.form
-              }
-              onSubmit={
-                handleSubmit
-              }
-            >
-              <div
-                className={
-                  styles.field
-                }
-              >
-                <label
-                  htmlFor="zagari-nombre"
-                >
-                  Nombre
-                </label>
-
-                <input
-                  id="zagari-nombre"
-                  type="text"
-                  autoComplete="name"
-                  placeholder="Tu nombre"
-                  value={
-                    formData.nombre
-                  }
-                  onChange={(
-                    event,
-                  ) =>
-                    updateField(
-                      "nombre",
-                      event.target
-                        .value,
-                    )
-                  }
-                />
-              </div>
-
-              <div
-                className={
-                  styles.field
-                }
-              >
-                <label
-                  htmlFor="zagari-telefono"
-                >
-                  WhatsApp
-                </label>
-
-                <input
-                  id="zagari-telefono"
-                  type="tel"
-                  inputMode="numeric"
-                  autoComplete="tel"
-                  placeholder="999 999 999"
-                  maxLength={15}
-                  value={
-                    formData.telefono
-                  }
-                  onChange={(
-                    event,
-                  ) =>
-                    updateField(
-                      "telefono",
-                      event.target
-                        .value,
-                    )
-                  }
-                />
-              </div>
-
-              <div
-                className={
-                  styles.field
-                }
-              >
-                <label
-                  htmlFor="zagari-email"
-                >
-                  Correo
-                  <span>
-                    {" "}
-                    opcional
-                  </span>
-                </label>
-
-                <input
-                  id="zagari-email"
-                  type="email"
-                  autoComplete="email"
-                  placeholder="correo@ejemplo.com"
-                  value={
-                    formData.email
-                  }
-                  onChange={(
-                    event,
-                  ) =>
-                    updateField(
-                      "email",
-                      event.target
-                        .value,
-                    )
-                  }
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={
-                  isSending
-                }
-                className={
-                  styles.submit
-                }
-              >
-                {isSending
-                  ? "Enviando..."
-                  : "Quiero conocer Zagari"}
-
-                {!isSending && (
-                  <span
-                    aria-hidden="true"
-                  >
-                    →
-                  </span>
-                )}
-              </button>
-
-              {error && (
-                <p
-                  className={
-                    styles.error
-                  }
-                  role="alert"
-                >
-                  {error}
-                </p>
-              )}
-            </form>
-          )}
+          <LeadForm
+            source="Sección ubicación Zagari"
+            component="LocationSection - LeadForm"
+          />
         </section>
+
       </div>
     </section>
   );
