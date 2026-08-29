@@ -20,6 +20,7 @@ const policies: PolicyDocument[] = [
     href: "/politicas/politica-de-privacidad",
   },
   {
+     
     id: 2,
     title: "Política de Cookies",
     description:

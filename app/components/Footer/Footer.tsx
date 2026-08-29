@@ -79,17 +79,17 @@ const exploreLinks = [
 const socials = [
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/zagariresortclub/",
     icon: InstagramLogo,
   },
   {
     label: "Facebook",
-    href: "#",
+    href: "https://www.facebook.com/zagariresortclub",
     icon: FacebookLogo,
   },
   {
     label: "TikTok",
-    href: "#",
+    href: "https://www.tiktok.com/@zagariresortclub",
     icon: TiktokLogo,
   },
 ] as const;
@@ -442,10 +442,6 @@ export default function Footer() {
             >
               <Link href="/politicas/politica-de-privacidad">
                 Política de privacidad
-              </Link>
-
-              <Link href="/terminos-y-condiciones">
-                Términos y condiciones
               </Link>
             </div>
           </div>
