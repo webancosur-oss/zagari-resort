@@ -37,71 +37,77 @@ const GOOGLE_MAPS_URL =
 
 const nearbyPlaces: NearbyPlace[] = [
   {
+    id: "catarata-agua-flor",
+    name: "Catarata Agua Flor",
+    label: "Naturaleza",
+    image:
+      "/assets/location/attractions/catarata_agua_flor.png",
+  },
+
+  {
+    id: "catarta-tirol",
+    name: "Catarata Tirol",
+    label: "Naturaleza",
+    image:
+      "/assets/location/attractions/catarta_tirol.png",
+  },
+
+  {
+    id: "fundo-la-fortuna",
+    name: "Fundo La Fortuna",
+    label: "Referencia cercana",
+    image:
+      "/assets/location/attractions/fundo_la_fortuna.png",
+  },
+
+  {
+    id: "mirador-los-antis",
+    name: "Mirador Los Antis",
+    label: "Naturaleza",
+    image:
+      "/assets/location/attractions/mirados_los_antis.png",
+  },
+
+  {
     id: "plaza-san-ramon",
-
-    name:
-      "Plaza San Ramón",
-
-    label:
-      "Referencia cercana",
-
+    name: "Plaza San Ramón",
+    label: "Referencia cercana",
     image:
       "/assets/location/attractions/plaza-san-ramon.jpg",
   },
 
   {
     id: "ingreso-chincana",
-
-    name:
-      "Ingreso a Chincana",
-
-    label:
-      "Ingreso a Chincana",
-
+    name: "Ingreso a Chincana",
+    label: "Ingreso a Chincana",
     image:
       "/assets/location/attractions/ingreso-chincana.png",
   },
 
   {
     id: "mirador-mishasho",
-
-    name:
-      "Mirador El Mishasho",
-
-    label:
-      "Naturaleza",
-
+    name: "Mirador El Mishasho",
+    label: "Naturaleza",
     image:
       "/assets/location/attractions/mirador-mishasho.jpg",
   },
 
   {
     id: "fundo-selenita",
-
-    name:
-      "Fundo Selenita",
-
-    label:
-      "Referencia cercana",
-
+    name: "Fundo Selenita",
+    label: "Referencia cercana",
     image:
       "/assets/location/attractions/fundo-selenita.jpg",
   },
 
   {
     id: "iglesia",
-
-    name:
-      "Iglesia Chincana",
-
-    label:
-      "Referencia local",
-
+    name: "Iglesia Chincana",
+    label: "Referencia local",
     image:
       "/assets/location/attractions/iglesia-chincana.jpg",
   },
 ];
-
 
 /* =========================================================
    COMPONENTE
